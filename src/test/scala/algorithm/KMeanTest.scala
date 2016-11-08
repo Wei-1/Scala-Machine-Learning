@@ -14,12 +14,12 @@ class KMeanSuite extends FunSuite {
     )
 
     val kmean = new KMean()
-    test("KMean Test : Initialization"){
+    test("KMean Test : Initialization") {
         val result = kmean.cluster(Array(Array(1.0),Array(-1.0)), 2, 100)
         assert(arrayequal(result.map(_.toDouble), Array(1,0)))
     }
 
-    test("KMean Test : Clustering"){
+    test("KMean Test : Clustering") {
         val result = kmean.cluster(data, 2, 100)
         assert(arrayequal(result.map(_.toDouble), Array(1,1,0,0)))
     }

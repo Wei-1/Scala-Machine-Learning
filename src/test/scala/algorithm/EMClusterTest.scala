@@ -16,12 +16,12 @@ class EMClusterSuite extends FunSuite {
     )
 
     val em = new EMCluster()
-    test("EMCluster Test : Initialization"){
+    test("EMCluster Test : Initialization") {
         val result = em.cluster(Array(Array(1.0),Array(-1.0)), 2, 100)
         assert(arrayequal(result.map(_.toDouble), Array(1,0)))
     }
 
-    test("EMCluster Test : Clustering"){
+    test("EMCluster Test : Clustering") {
         val result = em.cluster(data, 2, 100)
         assert(arrayequal(result.map(_.toDouble), Array(1,1,1,0,0,0)))
     }
