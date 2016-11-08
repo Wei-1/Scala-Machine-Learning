@@ -7,9 +7,11 @@ import ght.mi.algorithm.EMCluster
 
 class EMClusterSuite extends FunSuite {
     val data = Array(
-        Array(1.0,2.0),
         Array(2.0,2.0),
-        Array(1.0,0.1),
+        Array(1.0,2.0),
+        Array(0.0,2.0),
+        Array(2.0,0.0),
+        Array(1.0,0.0),
         Array(0.0,0.0)
     )
 
@@ -21,6 +23,6 @@ class EMClusterSuite extends FunSuite {
 
     test("EMCluster Test : Clustering"){
         val result = em.cluster(data, 2, 100)
-        assert(arrayequal(result.map(_.toDouble), Array(1,0,1,0)))
+        assert(arrayequal(result.map(_.toDouble), Array(1,1,1,0,0,0)))
     }
 }

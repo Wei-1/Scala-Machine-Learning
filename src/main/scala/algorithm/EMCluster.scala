@@ -44,7 +44,7 @@ class EMCluster() {
                 }.reduce(_ & _)) i = iter
             else gaussians = tempgaussians
         }
-        println(groupdata.map(_._2).mkString(","))
+        // println(groupdata.map(_._2).mkString(","))
         return groupdata.map(_._2)
     }
 }
