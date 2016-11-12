@@ -24,6 +24,8 @@ Neural Network
 
 DBSCAN
 
+HDBSCAN
+
 K-Means
 
 EM Cluster
