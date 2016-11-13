@@ -14,11 +14,11 @@ class KMean() {
         iter: Int                   // Iteration limit
     ): Array[Int] = {     // Return centers
         centers = data.zipWithIndex
-            .groupBy { l => l._2 % k }
+            .groupBy { l => l._2 % k + 1 }
             .map { l =>
                 val datasize = l._2.size
-                matrixaccumulate(l._2.map(_._1)).map(_/datasize)
-            }.zipWithIndex.toArray
+                (matrixaccumulate(l._2.map(_._1)).map(_/datasize), l._1)
+            }.toArray
         var i = 0
         while (i < iter) {
             groupdata = data.map { d =>

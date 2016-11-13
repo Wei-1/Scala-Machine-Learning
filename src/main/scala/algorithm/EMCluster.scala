@@ -14,14 +14,14 @@ class EMCluster() {
         iter: Int                   // Iteration limit
     ): Array[Int] = { // Return gaussians
         gaussians = data.zipWithIndex
-            .groupBy { l => l._2 % k }
+            .groupBy { l => l._2 % k + 1 }
             .map { l =>
                 val c = l._2.size
                 val tempdata = l._2.map(_._1)
                 val m = matrixaccumulate(tempdata).map(_/c)
                 val s = covariance(tempdata)
-                (c, m, s)
-            }.zipWithIndex.toArray
+                ((c, m, s), l._1)
+            }.toArray
         var i = 0
         while (i < iter) {
             groupdata = data.map { d =>
@@ -35,8 +35,8 @@ class EMCluster() {
                     val tempdata = l._2.map(_._1)
                     val m = matrixaccumulate(tempdata).map(_/c)
                     val s = covariance(tempdata)
-                    (c, m, s)
-                }.zipWithIndex
+                    ((c, m, s), l._1)
+                }
             if (gaussians.size == tempgaussians.size &&
                 gaussians.zip(tempgaussians).map { l =>
                     if (l._1._2 == l._2._2) arrayequal(l._1._1._2, l._2._1._2)
