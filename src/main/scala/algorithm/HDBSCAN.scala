@@ -32,22 +32,29 @@ class HDBSCAN() {
         grouplimit: Int,
         corelimit: Int
     ): Array[Int] = {
-        // val corelimit = 3
         val n = data.size;
         val m = data.head.size;
-        var distMatrix = Array.fill(n)(Array.fill(n)(0.0))
+        var distMatrix3 = Array.fill(n*(n-1)/2)(0.0)
+        def setM3(x: Int, y: Int, v: Double) {
+            if (x < y) distMatrix3(x*n + y - ((Math.pow(x, 2) + 3*x)/2).toInt - 1) = v
+            else if (y < x) distMatrix3(y*n + x - ((Math.pow(y, 2) + 3*y)/2).toInt - 1) = v
+        }
+        def getM3xy(x: Int, y: Int): Double = {
+            if (x < y) return distMatrix3(x*n + y - ((Math.pow(x, 2) + 3*x)/2).toInt - 1)
+            else if (y < x) return distMatrix3(y*n + x - ((Math.pow(y, 2) + 3*y)/2).toInt - 1)
+            else return 0.0
+        }
+        def getM3x(x: Int): Array[Double] = (for (i <- 0 to n-1) yield getM3xy(i, x)).toArray
+        
         for (i <- 0 to n-2) {
             for (j <- i+1 to n-1) {
-                distMatrix(i)(j) = distArr(data(i), data(j))
-                distMatrix(j)(i) = distArr(data(i), data(j))
+                setM3(i, j, distArr(data(i), data(j)))
             }
         }
-        for (i <- 0 to n-1) distMatrix(i)(i) = distMatrix(i).sortBy(l => l).lift(corelimit).get
+        for (i <- 0 to n-1) setM3(i, i, getM3x(i).sortBy(l => l).lift(corelimit).get)
         for (i <- 0 to n-2) {
             for (j <- i+1 to n-1) {
-                val temp = distMatrix(i)(j)
-                distMatrix(i)(j) = Math.max(Math.max(distMatrix(i)(i), distMatrix(j)(j)), temp)
-                distMatrix(j)(i) = Math.max(Math.max(distMatrix(i)(i), distMatrix(j)(j)), temp)
+                setM3(i, j, Math.max(Math.max(getM3xy(i, i), getM3xy(j, j)), getM3xy(i, j)))
             }
         }
         var undone = Map(0 -> 0.0)
@@ -58,7 +65,7 @@ class HDBSCAN() {
             undone -= node
             for (i <- 0 to n-1) {
                 if (i != node) {
-                    val v = distMatrix(node)(i)
+                    val v = getM3xy(node, i)
                     if (undone.contains(i) && v < undone(i)) {
                         undone += (i -> v)
                         tree += (i -> (node, v))
