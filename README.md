@@ -22,6 +22,8 @@ Neural Network
 
 ### Clustering :
 
+Hierarchical
+
 DBSCAN
 
 HDBSCAN
