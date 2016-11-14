@@ -29,8 +29,7 @@ class Hierarchical() {
     // --- Hierarchical ---
     def cluster(                    // Hierarchical
         data: Array[Array[Double]], // Data Array(xi)
-        grouplimit: Int,
-        corelimit: Int
+        grouplimit: Int
     ): Array[Int] = {
         val n = data.size;
         val m = data.head.size;

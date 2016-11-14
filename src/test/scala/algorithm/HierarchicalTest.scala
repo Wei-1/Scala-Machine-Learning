@@ -17,12 +17,12 @@ class HierarchicalSuite extends FunSuite {
 
     val hi = new Hierarchical()
     test("Hierarchical Test : Initialization") {
-        val result = hi.cluster(Array(Array(1.0),Array(-1.0)), 2, 1)
+        val result = hi.cluster(Array(Array(1.0),Array(-1.0)), 2)
         assert(arrayequal(result.map(_.toDouble), Array(1,2)))
     }
 
     test("Hierarchical Test : Clustering") {
-        val result = hi.cluster(data, 2, 3)
+        val result = hi.cluster(data, 2)
         assert(arrayequal(result.map(_.toDouble),
             Array(1,1,1,1,1,1,2,2,2,2,2,2)))
     }
