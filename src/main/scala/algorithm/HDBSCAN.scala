@@ -34,7 +34,7 @@ class HDBSCAN() {
     ): Array[Int] = {
         val n = data.size;
         val m = data.head.size;
-        var distMatrix3 = Array.fill(n*(n-1)/2)(0.0)
+        var distMatrix3 = new Array[Double](n*(n-1)/2)
         def setM3(x: Int, y: Int, v: Double) {
             if (x < y) distMatrix3(x*n + y - ((Math.pow(x, 2) + 3*x)/2).toInt - 1) = v
             else if (y < x) distMatrix3(y*n + x - ((Math.pow(y, 2) + 3*y)/2).toInt - 1) = v
