@@ -10,7 +10,6 @@ class Perceptron() {
 
     private def dot(x:Array[Double], y:Array[Double]): Double =
         arraymultiply(x, y).sum
-    // train(Array((1,Array(1,2)),(1,Array(2,3)),(-1,Array(2,1)),(-1,Array(3,2))), 1.5, 100)
     private def dualtrain(
         data: Array[(Int, Array[Double])],
         lambda: Double,
@@ -18,7 +17,7 @@ class Perceptron() {
     ): Array[Double] = {
         val trainingdatasize = data.size
         val featurenumber = data.head._2.size
-        var w = Array.fill[Double](featurenumber)(0.0)
+        var w = new Array[Double](featurenumber)
         var t = 1
         var cost = -1L
         var i = 0
@@ -39,6 +38,7 @@ class Perceptron() {
         return w
     }
 
+    // train(Array((1,Array(1,2)),(1,Array(2,3)),(-1,Array(2,1)),(-1,Array(3,2))), 1.5, 100)
     def train(
         data: Array[(Int, Array[Double])],  // Data Array(yi, xi)
         lambda: Double,                     // Cost of two groups

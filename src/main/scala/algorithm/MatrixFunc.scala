@@ -65,7 +65,7 @@ package object MatrixFunc {
         val featuresize = data.head.size
         val avg = matrixaccumulate(data).map(_/datasize)
         val dataminus = data.map(d => arrayminus(d, avg))
-        var cov = Array.fill(featuresize)(Array.fill(featuresize)(0.0))
+        var cov = Array.ofDim[Double](featuresize, featuresize)
         dataminus.map { d =>
             for (i <- 0 to featuresize-1) {
                 for (j <- 0 to featuresize-1) {
@@ -85,7 +85,7 @@ package object MatrixFunc {
         val datasize = data.size
         val featuresize = data.head.size
         if (datasize > row + 1 && featuresize > column + 1) {
-            var submat = Array.fill(datasize-1)(Array.fill(featuresize-1)(0.0))
+            var submat = Array.ofDim[Double](datasize-1, featuresize-1)
             for (i <- 0 to datasize-2) {
                 for (j <- 0 to featuresize-2) {
                     val ii = if (i >= row) i + 1 else i
@@ -143,7 +143,7 @@ package object MatrixFunc {
         val datasize = data.size
         val featuresize = data.head.size
         var newdata = data.clone
-        var resultdata = Array.fill(featuresize)(Array.fill(featuresize)(0.0))
+        var resultdata = Array.ofDim[Double](featuresize, featuresize)
         for (i <- 0 to featuresize-1) {
             resultdata(i)(i) = 1.0
         }
@@ -217,7 +217,7 @@ package object MatrixFunc {
         val columnmatch = x.head.size
         val rowmatch = y.size
         val columns = y.head.size
-        var m = Array.fill(rows)(Array.fill(columns)(0.0));
+        var m = Array.ofDim[Double](rows, columns)
         if (columnmatch == rowmatch) {
             for (i <- 0 to rows-1) {
                 for (j <- 0 to columns-1) {

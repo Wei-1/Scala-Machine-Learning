@@ -34,11 +34,11 @@ class LinearSVM() {
     ): Array[Double] = {                        // Return weighting
         // - Feature Initialization
         val n = data.head._2.size               // Features numbers
-        var w = Array.fill[Double](n)(0.0)      // Initial weighting
+        var w = new Array[Double](n)            // Initial weighting
         val l = data.size                       // Data length
-        var alpha = Array.fill[Double](l)(0.0)  // Alpha SV pointer
+        var alpha = new Array[Double](l)        // Alpha SV pointer
         var index = (0 to l-1).toArray          // Initialize index
-        var QD = Array.fill[Double](l)(0.0)     // QD // TODO
+        var QD = new Array[Double](l)           // QD // TODO
         val diag = cost.map(l=>l._1->0.5/l._2)  // Diag
         for (i <- 0 to l-1){
             val (yi, xi) = data(i)
