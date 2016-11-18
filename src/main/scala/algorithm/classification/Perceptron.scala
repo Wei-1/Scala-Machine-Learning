@@ -22,7 +22,7 @@ class Perceptron() {
         var cost = -1L
         var i = 0
         while (i < limit){
-            for (j <- 0 to trainingdatasize-1){
+            for (j <- 0 until trainingdatasize){
                 val (yi, xi) = data(j)
                 if (yi*xi.zip(w).map(l => l._1*l._2).sum < 1) w = w.map(_*(1-1/t)).zip(xi.map(_*yi/lambda/t)).map(l => l._1+l._2)
                 else w = w.map(_*(1-1/t))
@@ -31,7 +31,6 @@ class Perceptron() {
             val c = data.map(l => 1-l._2.zip(w).map(ll => ll._1 * ll._2).sum).map(l => if (l < 0) 0 else l).sum
             val tmpcost = Math.round((w.map(l => l*l).sum+lambda*c)*10000)
             i += 1
-            println("[INFO] "+i+": "+tmpcost)
             if (cost == tmpcost) i = limit
             else cost = tmpcost
         }

@@ -37,10 +37,10 @@ class LinearSVM() {
         var w = new Array[Double](n)            // Initial weighting
         val l = data.size                       // Data length
         var alpha = new Array[Double](l)        // Alpha SV pointer
-        var index = (0 to l-1).toArray          // Initialize index
+        var index = (0 until l).toArray          // Initialize index
         var QD = new Array[Double](l)           // QD // TODO
         val diag = cost.map(l=>l._1->0.5/l._2)  // Diag
-        for (i <- 0 to l-1){
+        for (i <- 0 until l){
             val (yi, xi) = data(i)
             QD(i) = diag(yi)+xi.map(Math.pow(_,2)).sum // Initialize QD
         }
@@ -53,7 +53,7 @@ class LinearSVM() {
             iter += 1
             var PG_max_new = -INF   // Projected Gradient maximum new
             var PG_min_new =  INF   // Projected Gradient minimum new
-            for (i <- 0 to l-1){    // Randomize Saturation Direction
+            for (i <- 0 until l){    // Randomize Saturation Direction
                 var j = r.nextInt % (l - i)
                 if (j < 0) j += (l - i)
                 val temp = index(i)             // Random SWAP i <-> i+j

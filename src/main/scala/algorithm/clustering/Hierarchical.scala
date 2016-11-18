@@ -45,17 +45,17 @@ class Hierarchical() {
         }
         
         for (i <- 0 to n-2) {
-            for (j <- i+1 to n-1) {
+            for (j <- i+1 until n) {
                 setM3(i, j, distArr(data(i), data(j)))
             }
         }
         var undone = Map(0 -> 0.0)
-        undone ++= (1 to n-1).map((_, Double.MaxValue))
+        undone ++= (1 until n).map((_, Double.MaxValue))
         var tree = Map[Int, (Int, Double)]()
         while (!undone.isEmpty) {
             val node = undone.minBy(_._2)._1
             undone -= node
-            for (i <- 0 to n-1) {
+            for (i <- 0 until n) {
                 if (i != node) {
                     val v = getM3xy(node, i)
                     if (undone.contains(i) && v < undone(i)) {
@@ -66,9 +66,9 @@ class Hierarchical() {
             }
         }
         splittree = tree.toArray.sortBy(_._2._2).dropRight(grouplimit-1).map(l => (l._1, l._2._1))
-        treecheck = (0 to n-1).map((_, -1)).toMap
+        treecheck = (0 until n).map((_, -1)).toMap
         var c = 1
-        for (i <- 0 to n-1) {
+        for (i <- 0 until n) {
             if (treecheck(i) < 0) {
                 treecheck += (i -> c)
                 cascade(i, c)

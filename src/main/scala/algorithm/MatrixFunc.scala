@@ -67,8 +67,8 @@ package object MatrixFunc {
         val dataminus = data.map(d => arrayminus(d, avg))
         var cov = Array.ofDim[Double](featuresize, featuresize)
         dataminus.map { d =>
-            for (i <- 0 to featuresize-1) {
-                for (j <- 0 to featuresize-1) {
+            for (i <- 0 until featuresize) {
+                for (j <- 0 until featuresize) {
                     cov(i)(j) = cov(i)(j) + d(i) * d(j)
                 }
             }
@@ -124,7 +124,7 @@ package object MatrixFunc {
             val arr = newdata(i)
             val arrhead = arr(i)
             det *= arrhead
-            for (j <- i+1 to datasize-1) {
+            for (j <- i+1 until datasize) {
                 val newhead = newdata(j)(i)
                 if (newhead != 0) {
                     newdata(j) = arrayminus(newdata(j),
@@ -144,10 +144,10 @@ package object MatrixFunc {
         val featuresize = data.head.size
         var newdata = data.clone
         var resultdata = Array.ofDim[Double](featuresize, featuresize)
-        for (i <- 0 to featuresize-1) {
+        for (i <- 0 until featuresize) {
             resultdata(i)(i) = 1.0
         }
-        for (i <- 0 to featuresize-1) {
+        for (i <- 0 until featuresize) {
             if (newdata(i)(i) == 0) {
                 var j = i+1
                 while (j < datasize) {
@@ -166,7 +166,7 @@ package object MatrixFunc {
             val arr1 = newdata(i)
             val arrhead = if (Math.abs(arr1(i)) < 1E-12) 1E-12 else arr1(i)
             val arr2 = resultdata(i)
-            for (j <- 0 to datasize-1) {
+            for (j <- 0 until datasize) {
                 if (j == i) {
                     newdata(j) = newdata(j).map(_ / arrhead)
                     resultdata(j) = resultdata(j).map(_ / arrhead)
@@ -192,8 +192,8 @@ package object MatrixFunc {
         val d = arrayminus(x, m)
         val inv = inverse(s)
         var dist = 0.0
-        for (i <- 0 to featuresize-1) {
-            for (j <- 0 to featuresize-1) {
+        for (i <- 0 until featuresize) {
+            for (j <- 0 until featuresize) {
                 dist += d(i) * d(j) * inv(i)(j)
             }
         }
@@ -219,10 +219,10 @@ package object MatrixFunc {
         val columns = y.head.size
         var m = Array.ofDim[Double](rows, columns)
         if (columnmatch == rowmatch) {
-            for (i <- 0 to rows-1) {
-                for (j <- 0 to columns-1) {
+            for (i <- 0 until rows) {
+                for (j <- 0 until columns) {
                     var a = 0.0;
-                    for (k <- 0 to columnmatch-1) {
+                    for (k <- 0 until columnmatch) {
                         a += x(i)(k) * y(k)(j);
                     }
                     m(i)(j) = a;
