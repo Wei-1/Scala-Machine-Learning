@@ -28,6 +28,8 @@ DBSCAN
 
 HDBSCAN
 
+BIRCH
+
 K-Means
 
 EM Cluster
