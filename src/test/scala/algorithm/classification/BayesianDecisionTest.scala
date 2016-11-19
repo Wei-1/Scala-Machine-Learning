@@ -16,7 +16,7 @@ class BayesianDecisionSuite extends FunSuite {
         Array(2,0,8),
         Array(2,8,0)
     ).map(d => (d(0), d.drop(1).map(_.toDouble)))
-    val predictdata = Array(
+    val predictdata: Array[Array[Double]] = Array(
         Array(1,1),
         Array(3,3),
         Array(5,5),
@@ -25,7 +25,7 @@ class BayesianDecisionSuite extends FunSuite {
         Array(7,1),
         Array(3,5),
         Array(5,3)
-    ).map(_.map(_.toDouble))
+    )
 
     val bayesiandecision = new BayesianDecision()
     test("BayesianDecision Test : Initialization"){

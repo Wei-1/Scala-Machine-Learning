@@ -14,12 +14,12 @@ class LinearSVMSuite extends FunSuite {
         Array(1,6,5),
         Array(1,7,4)
     ).map(d => (d(0), d.drop(1).map(_.toDouble)))
-    val predictdata = Array(
+    val predictdata: Array[Array[Double]] = Array(
         Array(0,4),
         Array(1,4),
         Array(8,5),
         Array(9,5)
-    ).map(_.map(_.toDouble))
+    )
     val cost = Map(-1 -> 1.0, 1 -> 1.0)
     val limit = 1000
     val err = 1e-1

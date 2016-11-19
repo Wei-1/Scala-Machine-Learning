@@ -13,8 +13,8 @@ class LinearSVM() {
     def clear() = projector = Array[(Int, Int, Array[Double], Array[Double])]()
 
     // Sub Variables & Functions
-    private val INF = 1.0/0           // Infinite
-    private val r = scala.util.Random // Random Seed
+    private val INF = 1.0/0             // Infinite
+    private val rng = scala.util.Random // Random Seed
     private def dot(x:Array[Double], y:Array[Double]): Double =
         arraymultiply(x, y).sum
 
@@ -54,7 +54,7 @@ class LinearSVM() {
             var PG_max_new = -INF   // Projected Gradient maximum new
             var PG_min_new =  INF   // Projected Gradient minimum new
             for (i <- 0 until l){    // Randomize Saturation Direction
-                var j = r.nextInt % (l - i)
+                var j = rng.nextInt % (l - i)
                 if (j < 0) j += (l - i)
                 val temp = index(i)             // Random SWAP i <-> i+j
                 index(i) = index(i+j)

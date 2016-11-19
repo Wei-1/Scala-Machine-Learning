@@ -14,12 +14,12 @@ class KNNSuite extends FunSuite {
         Array(1,6,5),
         Array(1,7,4)
     ).map(d => (d(0), d.drop(1).map(_.toDouble)))
-    val predictdata = Array(
+    val predictdata: Array[Array[Double]] = Array(
         Array(0,4),
         Array(1,4),
         Array(8,5),
         Array(9,5)
-    ).map(_.map(_.toDouble))
+    )
 
     test("KNN Test : Initialization"){
         val test = new KNN()

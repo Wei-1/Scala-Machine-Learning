@@ -41,11 +41,11 @@ class NeuralNetwork(val layer_neurons: Array[Int]) {
         input_column = x.head.size;
         output_column = y.head.size;
         syns = Array.fill(layer_number+1){ Array[Array[Double]]() };
-        syns(0) = matrixrandom(input_column, layer_neurons(0));
+        syns(0) = matrixrandom(input_column, layer_neurons(0), -1, 1);
         for (i <- 0 to layer_number-2) {
-            syns(i+1) = matrixrandom(layer_neurons(i), layer_neurons(i+1));
+            syns(i+1) = matrixrandom(layer_neurons(i), layer_neurons(i+1), -1, 1);
         }
-        syns(layer_number) = matrixrandom(layer_neurons(layer_number-1), output_column);
+        syns(layer_number) = matrixrandom(layer_neurons(layer_number-1), output_column, -1, 1);
     }
 
     def iterate() {

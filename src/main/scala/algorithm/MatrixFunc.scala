@@ -28,8 +28,8 @@ package object MatrixFunc {
         x.zip(y).map{case (a1, a2) => a1.zip(a2).map{l => l._1 - l._2}}
     def matrixmultiply(x: Array[Array[Double]], y: Array[Array[Double]]): Array[Array[Double]] =
         x.zip(y).map{case (a1, a2) => a1.zip(a2).map{l => l._1 * l._2}}
-    def matrixrandom(x: Int, y: Int): Array[Array[Double]] =
-        Array.fill(x)(Array.fill(y)(scala.util.Random.nextDouble()*2-1))
+    def matrixrandom(x: Int, y: Int, min_v: Double, max_v: Double): Array[Array[Double]] =
+        Array.fill(x)(Array.fill(y)(scala.util.Random.nextDouble()*(max_v-min_v)+min_v))
 
     // normalize(Array(Array(1,1),Array(2,2)))
     def normalize(

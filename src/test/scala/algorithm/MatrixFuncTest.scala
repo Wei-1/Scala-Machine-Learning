@@ -7,13 +7,13 @@ import ght.mi.algorithm.MatrixFunc._
 class MatrixFuncSuite extends FunSuite {
     def rint4(x: Double): Double = Math.rint(x * 10000) / 10000
     def arrrint4(x: Array[Double]): Array[Double] = x.map(rint4(_))
-    val data = Array(
+    val data: Array[Array[Double]] = Array(
         Array(1,2,1),
         Array(2,1,6),
         Array(1,2,6),
         Array(0,3,1),
         Array(1,3,1)
-    ).map(_.map(_.toDouble))
+    )
     val datasize = data.size
     val featuresize = data.head.size
 
