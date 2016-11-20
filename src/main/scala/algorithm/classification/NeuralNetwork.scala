@@ -31,6 +31,8 @@ class NeuralNetwork(val layer_neurons: Array[Int]) {
         x.map(arr => arr.map(n => neuron(n, forward)))
     }
 
+    def clear() = syns = Array[Array[Array[Double]]]()
+
     def input(x: Array[Array[Double]], y: Array[Array[Double]]) {
         X = x
         Y = y
@@ -72,9 +74,5 @@ class NeuralNetwork(val layer_neurons: Array[Int]) {
             layer_result = neuralLayer(matrixdot(layer_result, syns(i)), true)
         }
         return layer_result
-    }
-
-    def clear() {
-        syns = Array[Array[Array[Double]]]()
     }
 }
