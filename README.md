@@ -8,7 +8,7 @@ A very light weight Scala machine learning library that provide some basic ML fo
 
 ### Classification :
 
-Bayesian Decision
+Naive Bayesian Decision
 
 K-Nearest Neighborhood
 
@@ -35,6 +35,10 @@ K-Means
 EM Cluster
 
 Density Peak Cluster
+
+### Deep Learning:
+
+Restricted Boltzmann Machine
 
 ## Test
 
