@@ -11,8 +11,8 @@ import ght.mi.algorithm.MatrixFunc._
 // dbscan.cluster(data, 2)
 
 class Point(arr: Array[Double], ct: Int) {
-    val a = arr;
-    var c = ct;
+    val a = arr
+    var c = ct
 }
 
 class DBSCAN() {
@@ -27,7 +27,7 @@ class DBSCAN() {
             val p2 = groupdata(i)
             if (p2.c < 0) {
                 if (distPoint(p1, p2) < distLimit) {
-                    groupdata(i).c = c;
+                    groupdata(i).c = c
                     cascade(p2, c)
                 }
             }

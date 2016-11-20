@@ -46,7 +46,7 @@ class DensityPeakCluster() {
             (l._2, l._1._1, l._1._2, l._1._3)
         }.sortBy(l => l._2).reverse
         var groupdata = Array[(Int, Int, Int)]()
-        var group = 0;
+        var group = 0
         for (l <- densitydelta) {
             if (l._2 > densityf && l._3 > deltaf) {
                 group += 1

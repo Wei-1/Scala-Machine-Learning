@@ -28,7 +28,7 @@ class BayesianDecisionSuite extends FunSuite {
     )
 
     val bayesiandecision = new BayesianDecision()
-    test("BayesianDecision Test : Initialization"){
+    test("BayesianDecision Test : Initialization") {
         val groupcnt = bayesiandecision.groupcnt
         val groupavg = bayesiandecision.groupavg
         val groupcov = bayesiandecision.groupcov
@@ -37,17 +37,17 @@ class BayesianDecisionSuite extends FunSuite {
         assert(groupcov.isEmpty)
     }
 
-    test("BayesianDecision Test : Train"){
+    test("BayesianDecision Test : Train") {
         val trainresult = bayesiandecision.train(traindata)
         assert(trainresult(0) == trainresult(1))
     }
 
-    test("BayesianDecision Test : Predict"){
+    test("BayesianDecision Test : Predict") {
         val result = bayesiandecision.predict(predictdata)
         assert(arrayequal(result.map(_.toDouble), Array(1,1,1,1,2,2,2,2)))
     }
 
-    test("BayesianDecision Test : Clear"){
+    test("BayesianDecision Test : Clear") {
         bayesiandecision.clear()
         val groupcnt = bayesiandecision.groupcnt
         val groupavg = bayesiandecision.groupavg

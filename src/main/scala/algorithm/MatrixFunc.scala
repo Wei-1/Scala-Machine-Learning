@@ -172,7 +172,7 @@ package object MatrixFunc {
                     resultdata(j) = resultdata(j).map(_ / arrhead)
                 } else {
                     val newhead = newdata(j)(i)
-                    if (newhead != 0){
+                    if (newhead != 0) {
                         newdata(j) = arrayminus(newdata(j), arr1.map(_ * newhead / arrhead))
                         resultdata(j) = arrayminus(resultdata(j), arr2.map(_ * newhead / arrhead))
                     }
@@ -221,15 +221,15 @@ package object MatrixFunc {
         if (columnmatch == rowmatch) {
             for (i <- 0 until rows) {
                 for (j <- 0 until columns) {
-                    var a = 0.0;
+                    var a = 0.0
                     for (k <- 0 until columnmatch) {
-                        a += x(i)(k) * y(k)(j);
+                        a += x(i)(k) * y(k)(j)
                     }
-                    m(i)(j) = a;
+                    m(i)(j) = a
                 }
             }
         }
-        return m;
+        return m
     }
 }
 

@@ -24,24 +24,24 @@ class LinearSVMSuite extends FunSuite {
     val limit = 1000
     val err = 1e-1
 
-    test("LinearSVM Test : Initialization"){
+    test("LinearSVM Test : Initialization") {
         val test = new LinearSVM()
         assert(test.projector.isEmpty)
     }
 
     val linearsvm = new LinearSVM()
-    test("LinearSVM Test : Train"){
+    test("LinearSVM Test : Train") {
         linearsvm.train(traindata, cost, limit, err)
         assert(linearsvm.projector(0)._1 == -1)
         assert(linearsvm.projector(0)._2 == 1)
     }
 
-    test("LinearSVM Test : Predict"){
+    test("LinearSVM Test : Predict") {
         val result = linearsvm.predict(predictdata)
         assert(arrayequal(result.map(_.toDouble), Array(-1,-1,1,1)))
     }
     
-    test("LinearSVM Test : Clear"){
+    test("LinearSVM Test : Clear") {
         linearsvm.clear()
         assert(linearsvm.projector.isEmpty)
     }

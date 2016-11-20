@@ -31,24 +31,7 @@ class Hierarchical() {
         data: Array[Array[Double]], // Data Array(xi)
         grouplimit: Int
     ): Array[Int] = {
-        val n = data.size;
-        val m = data.head.size;
-        var distMatrix3 = new Array[Double](n*(n-1)/2)
-        def setM3(x: Int, y: Int, v: Double) {
-            if (x < y) distMatrix3(x*n + y - ((Math.pow(x, 2) + 3*x)/2).toInt - 1) = v
-            else if (y < x) distMatrix3(y*n + x - ((Math.pow(y, 2) + 3*y)/2).toInt - 1) = v
-        }
-        def getM3xy(x: Int, y: Int): Double = {
-            if (x < y) return distMatrix3(x*n + y - ((Math.pow(x, 2) + 3*x)/2).toInt - 1)
-            else if (y < x) return distMatrix3(y*n + x - ((Math.pow(y, 2) + 3*y)/2).toInt - 1)
-            else return 0.0
-        }
-        
-        for (i <- 0 to n-2) {
-            for (j <- i+1 until n) {
-                setM3(i, j, distArr(data(i), data(j)))
-            }
-        }
+        val n = data.size
         var undone = Map(0 -> 0.0)
         undone ++= (1 until n).map((_, Double.MaxValue))
         var tree = Map[Int, (Int, Double)]()
@@ -56,9 +39,9 @@ class Hierarchical() {
             val node = undone.minBy(_._2)._1
             undone -= node
             for (i <- 0 until n) {
-                if (i != node) {
-                    val v = getM3xy(node, i)
-                    if (undone.contains(i) && v < undone(i)) {
+                if (i != node && undone.contains(i)) {
+                    val v = distArr(data(node), data(i))
+                    if (v < undone(i)) {
                         undone += (i -> v)
                         tree += (i -> (node, v))
                     }

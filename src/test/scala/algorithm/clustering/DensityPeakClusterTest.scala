@@ -14,7 +14,7 @@ class DensityPeakClusterSuite extends FunSuite {
         Array(0.0,0.0)
     )
 
-    test("DensityPeakCluster Test : Initialization"){
+    test("DensityPeakCluster Test : Initialization") {
         val test = new DensityPeakCluster()
         assert(test.dddata.isEmpty)
     }
@@ -22,22 +22,22 @@ class DensityPeakClusterSuite extends FunSuite {
     val densitypeakcluster = new DensityPeakCluster()
     densitypeakcluster.density(data)
     val dddata = densitypeakcluster.dddata
-    test("DensityPeakCluster Test : Density Link"){
+    test("DensityPeakCluster Test : Density Link") {
         assert(dddata(0)._3 == -1)
     }
 
-    test("DensityPeakCluster Test : Clustering"){
+    test("DensityPeakCluster Test : Clustering") {
         val result = densitypeakcluster.cluster(0.8, 1.1)
         assert(arrayequal(result.map(_.toDouble), Array(1,1,2,2)))
     }
 
-    test("BayesianDecision Test : Clear"){
+    test("BayesianDecision Test : Clear") {
         densitypeakcluster.clear()
         val result = densitypeakcluster.dddata
         assert(result.isEmpty)
     }
 
-    test("DensityPeakCluster Test : Import DDData"){
+    test("DensityPeakCluster Test : Import DDData") {
         densitypeakcluster.importdd(dddata)
         val result = densitypeakcluster.dddata
         assert(result(0)._3 == -1)

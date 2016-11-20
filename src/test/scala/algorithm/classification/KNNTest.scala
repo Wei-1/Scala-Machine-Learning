@@ -21,23 +21,23 @@ class KNNSuite extends FunSuite {
         Array(9,5)
     )
 
-    test("KNN Test : Initialization"){
+    test("KNN Test : Initialization") {
         val test = new KNN()
         assert(test.referencepoints.isEmpty)
     }
 
     val knn = new KNN()
-    test("KNN Test : Train"){
+    test("KNN Test : Train") {
         knn.train(traindata)
         assert(arrayequal(knn.referencepoints(0)._2, Array(2,5)))
     }
     
-    test("KNN Test : Predict"){
+    test("KNN Test : Predict") {
         val result = knn.predict(predictdata, 3)
         assert(arrayequal(result.map(_.toDouble), Array(-1,-1,1,1)))
     }
     
-    test("KNN Test : Clear"){
+    test("KNN Test : Clear") {
         knn.clear()
         assert(knn.referencepoints.isEmpty)
     }

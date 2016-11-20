@@ -21,8 +21,8 @@ class Perceptron() {
         var t = 1
         var cost = -1L
         var i = 0
-        while (i < limit){
-            for (j <- 0 until trainingdatasize){
+        while (i < limit) {
+            for (j <- 0 until trainingdatasize) {
                 val (yi, xi) = data(j)
                 if (yi*xi.zip(w).map(l => l._1*l._2).sum < 1) w = w.map(_*(1-1/t)).zip(xi.map(_*yi/lambda/t)).map(l => l._1+l._2)
                 else w = w.map(_*(1-1/t))
@@ -46,7 +46,7 @@ class Perceptron() {
         val groupdata = data.groupBy(_._1).map(l => (l._1, l._2.map(_._2)))
         groupdata.map{group1 =>
             groupdata.map{group2 =>
-                if (group1._1 < group2._1){
+                if (group1._1 < group2._1) {
                     val n = group1._2.size + group2._2.size
                     val m = matrixaccumulate(group1._2 ++ group2._2).map(_/n)
                     val w = dualtrain(
@@ -67,7 +67,8 @@ class Perceptron() {
     ): Array[Int] = {
         return data.map{d =>
             projector.map(p =>
-                if (dot(arrayminus(d, p._3), p._4) < 0) p._1 else p._2
+                if (dot(arrayminus(d, p._3), p._4) < 0) p._1
+                else p._2
             ).groupBy(l => l).mapValues(_.size).maxBy(_._2)._1
         }
     }

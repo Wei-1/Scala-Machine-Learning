@@ -20,7 +20,7 @@ class LinearRegression() {
         }
         centers.map{center1 =>
             centers.map{center2 =>
-                if (center1._1 < center2._1){
+                if (center1._1 < center2._1) {
                     val m = arraysum(center1._2, center2._2).map(_/2)
                     var w = arrayminus(center2._2, center1._2)
                     if (w.sum > 1) w = w.map(_ / w.sum)

@@ -42,7 +42,7 @@ class BayesianDecision() {
         data: Array[Array[Double]]
     ): Array[Int] = {
         val n = groupavg.size
-        if (n == 0){
+        if (n == 0) {
             return Array[Int]()
         }else{
             return data.map { d =>

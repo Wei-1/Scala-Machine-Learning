@@ -21,24 +21,24 @@ class LinearRegressionSuite extends FunSuite {
         Array(9,5)
     )
 
-    test("LinearRegression Test : Initialization"){
+    test("LinearRegression Test : Initialization") {
         val test = new LinearRegression()
         assert(test.projector.isEmpty)
     }
 
     val linearregression = new LinearRegression()
-    test("LinearRegression Test : Train"){
+    test("LinearRegression Test : Train") {
         linearregression.train(traindata)
         assert(linearregression.projector(0)._1 == -1)
         assert(linearregression.projector(0)._2 == 1)
     }
     
-    test("LinearRegression Test : Predict"){
+    test("LinearRegression Test : Predict") {
         val result = linearregression.predict(predictdata)
         assert(arrayequal(result.map(_.toDouble), Array(-1,-1,1,1)))
     }
     
-    test("LinearRegression Test : Clear"){
+    test("LinearRegression Test : Clear") {
         linearregression.clear()
         assert(linearregression.projector.isEmpty)
     }
