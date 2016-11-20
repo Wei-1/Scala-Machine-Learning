@@ -36,7 +36,7 @@ EM Cluster
 
 Density Peak Cluster
 
-### Deep Learning:
+### Deep Learning :
 
 Restricted Boltzmann Machine
 
