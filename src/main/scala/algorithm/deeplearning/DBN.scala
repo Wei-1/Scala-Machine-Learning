@@ -1,4 +1,4 @@
-// Wei Chen - DBN - Deep Believe Network
+// Wei Chen - DBN - Deep Belief Network
 // 2016-11-23
 
 package ght.mi.algorithm

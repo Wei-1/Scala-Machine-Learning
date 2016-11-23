@@ -40,6 +40,8 @@ Density Peak Cluster
 
 Restricted Boltzmann Machine
 
+Deep Belief Network
+
 ## Test
 
     sbt test

@@ -1,4 +1,4 @@
-// Wei Chen - Deep Believe Network Test
+// Wei Chen - Deep Belief Network Test
 // 2016-11-23
 
 import org.scalatest.FunSuite
