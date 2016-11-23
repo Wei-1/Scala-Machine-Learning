@@ -51,5 +51,6 @@ class NeuralNetworkSuite extends FunSuite {
         assert(result(0)(0) > 0.5)
         assert(result(0)(1) < 0.5)
         assert(result(1)(0) < 0.5)
-        assert(result(1)(1) > 0.5)    }
+        assert(result(1)(1) > 0.5)
+    }
 }
