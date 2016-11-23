@@ -6,9 +6,6 @@ import ght.mi.algorithm.MatrixFunc._
 import ght.mi.algorithm.RBM
 
 class RBMSuite extends FunSuite {
-    val learning_rate: Double = 0.1
-    val limit: Int = 100
-    val k: Int = 1
     
     val traindata_X: Array[Array[Double]] = Array(
         Array(1, 1, 0, 0, 1, 0, 1, 0),
@@ -24,6 +21,10 @@ class RBMSuite extends FunSuite {
         Array(0, 0, 1, 1, 0, 0, 0, 0)
     )
 
+    val learning_rate: Double = 0.1
+    val limit: Int = 100
+    val k: Int = 1
+    
     val visible_n: Int = traindata_X.head.size
     val hidden_n: Int = 3
 
@@ -36,23 +37,15 @@ class RBMSuite extends FunSuite {
 
     val rbm = new RBM(visible_n, hidden_n)
     test("RBM Test : Train") {
-        for (epoch <- 0 until limit) {
-            for (i <- 0 until traindata_X.size) {
-                rbm.train(traindata_X(i), learning_rate, k)
-            }
-        }
+        rbm.train(traindata_X, learning_rate, k, limit)
         assert(!arrayequal(rbm.hbias, new Array[Double](hidden_n)))
         assert(!arrayequal(rbm.vbias, new Array[Double](visible_n)))
         assert(!rbm.syns.isEmpty)
     }
 
     test("RBM Test : Reconstruct") {
-        val result: Array[Array[Double]] = Array.ofDim[Double](testdata_X.size, visible_n)
-        for (i <- 0 until testdata_X.size) {
-            val h: Array[Double] = new Array[Double](hidden_n)
-            rbm.construct(testdata_X(i), h)
-            rbm.reconstruct(h, result(i))
-        }
+        val h = rbm.forward(testdata_X)
+        val result = rbm.reconstruct(h)
         assert(result(0)(4) > 0.5)
         assert(result(0)(5) < 0.5)
         assert(result(1)(4) < 0.5)

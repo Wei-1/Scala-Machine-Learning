@@ -31,7 +31,7 @@ class DensityPeakClusterSuite extends FunSuite {
         assert(arrayequal(result.map(_.toDouble), Array(1,1,2,2)))
     }
 
-    test("BayesianDecision Test : Clear") {
+    test("DensityPeakCluster Test : Clear") {
         densitypeakcluster.clear()
         val result = densitypeakcluster.dddata
         assert(result.isEmpty)
