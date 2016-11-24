@@ -12,6 +12,8 @@ Naive Bayesian Decision
 
 K-Nearest Neighborhood
 
+Gaussian Process Classification
+
 Linear Regression
 
 Linear Support Vector Machine
