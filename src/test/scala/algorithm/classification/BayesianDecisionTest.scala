@@ -6,16 +6,16 @@ import ght.mi.algorithm.MatrixFunc._
 import ght.mi.algorithm.BayesianDecision
 
 class BayesianDecisionSuite extends FunSuite {
-    val traindata = Array(
-        Array(1,2,2),
-        Array(1,6,6),
-        Array(1,0,0),
-        Array(1,8,8),
-        Array(2,2,6),
-        Array(2,6,2),
-        Array(2,0,8),
-        Array(2,8,0)
-    ).map(d => (d(0), d.drop(1).map(_.toDouble)))
+    val traindata: Array[(Int, Array[Double])] = Array(
+        (1, Array(2,2)),
+        (1, Array(6,6)),
+        (1, Array(0,0)),
+        (1, Array(8,8)),
+        (2, Array(2,6)),
+        (2, Array(6,2)),
+        (2, Array(0,8)),
+        (2, Array(8,0)))
+
     val predictdata: Array[Array[Double]] = Array(
         Array(1,1),
         Array(3,3),
@@ -24,8 +24,7 @@ class BayesianDecisionSuite extends FunSuite {
         Array(1,7),
         Array(7,1),
         Array(3,5),
-        Array(5,3)
-    )
+        Array(5,3))
 
     val bayesiandecision = new BayesianDecision()
     test("BayesianDecision Test : Initialization") {
