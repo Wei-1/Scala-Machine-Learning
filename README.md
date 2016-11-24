@@ -18,6 +18,8 @@ Linear Support Vector Machine
 
 Perceptron
 
+Decision Tree
+
 Neural Network
 
 ### Clustering :
