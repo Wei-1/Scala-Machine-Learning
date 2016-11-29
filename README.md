@@ -22,6 +22,8 @@ Perceptron
 
 Decision Tree
 
+Random Forest
+
 Neural Network
 
 ### Clustering :

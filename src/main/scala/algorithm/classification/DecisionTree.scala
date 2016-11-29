@@ -2,7 +2,6 @@
 // 2016-11-24
 
 package ght.mi.algorithm
-import ght.mi.algorithm.MatrixFunc._
 
 class DecisionNode(col: Int, v: Double, tnode: DecisionNode , fnode: DecisionNode, r: Map[Int, Int]) {
     val column: Int = col
