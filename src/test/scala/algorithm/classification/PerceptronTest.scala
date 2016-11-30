@@ -20,7 +20,7 @@ class PerceptronSuite extends FunSuite {
         Array(8,5),
         Array(9,5))
     
-    val lambda = 1.5
+    val learning_rate = 0.5
     val limit = 1000
 
     test("Perceptron Test : Initialization") {
@@ -30,9 +30,8 @@ class PerceptronSuite extends FunSuite {
 
     val perceptron = new Perceptron()
     test("Perceptron Test : Train") {
-        perceptron.train(traindata, lambda, limit)
-        assert(perceptron.projector(0)._1 == -1)
-        assert(perceptron.projector(0)._2 == 1)
+        perceptron.train(traindata, learning_rate, limit)
+        assert(!perceptron.projector.isEmpty)
     }
 
     test("Perceptron Test : Predict") {

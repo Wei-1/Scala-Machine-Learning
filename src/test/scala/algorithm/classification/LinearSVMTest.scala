@@ -32,8 +32,7 @@ class LinearSVMSuite extends FunSuite {
     val linearsvm = new LinearSVM()
     test("LinearSVM Test : Train") {
         linearsvm.train(traindata, cost, limit, err)
-        assert(linearsvm.projector(0)._1 == -1)
-        assert(linearsvm.projector(0)._2 == 1)
+        assert(!linearsvm.projector.isEmpty)
     }
 
     test("LinearSVM Test : Predict") {
