@@ -6,6 +6,11 @@ import ght.mi.algorithm.MatrixFunc._
 
 class BIRCH() {
     var centers = Array[(Int, Array[Double], Array[Double])]()
+    def clear() = centers = Array[(Int, Array[Double], Array[Double])]()
+    def notzero(x: Double): Double =
+        if (x >= 0 && x < 1e-20) 1e-20
+        else if (x < 0 && x > -1e-20) -1e-20
+        else x
     // --- Start BIRCH Function ---
     def cluster(                    // BIRCH
         data: Array[Array[Double]], // Data Array(xi)
@@ -25,12 +30,11 @@ class BIRCH() {
                     val m = c._2.map(_ / c._1)
                     val xyz2 = arrayminussquare(m, d)
                     val varr = c._2.zip(c._3).map { l =>
-                        val v = l._2 - Math.pow(l._1, 2) / c._1
-                        if (v < 1e-20) 1e-20
-                        else v
+                        notzero(l._2 - Math.pow(l._1, 2) / c._1)
                     }
-                    val r = Math.sqrt(1 / xyz2.zip(varr).map(l => l._1 / l._2).sum)
+                    val r = Math.sqrt(1 / notzero(xyz2.zip(varr).map(l => l._1 / l._2).sum))
                     val temp_len = Math.sqrt(xyz2.sum) * (1 - r)
+                    // println(d.mkString(",") + "  " + varr.mkString(",") + "  " + temp_len)
                     if (temp_len < len) {
                         i = ci
                         len = temp_len
@@ -46,9 +50,5 @@ class BIRCH() {
                 }
             }
         }
-    }
-    // --- Clear Centers ---
-    def clear() {
-        centers = Array[(Int, Array[Double], Array[Double])]()
     }
 }

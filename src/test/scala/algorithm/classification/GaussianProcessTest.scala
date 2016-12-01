@@ -2,38 +2,35 @@
 // 2016-11-24
 
 import org.scalatest.FunSuite
+import ght.mi.TestData._
 import ght.mi.algorithm.MatrixFunc._
 import ght.mi.algorithm.GaussianProcess
 
 class GaussianProcessSuite extends FunSuite {
-    val traindata: Array[(Int, Array[Double])] = Array(
-        (-1, Array(2,5)),
-        (-1, Array(3,4)),
-        (-1, Array(4,5)),
-        (1, Array(5,4)),
-        (1, Array(6,5)),
-        (1, Array(7,4)))
-
-    val predictdata: Array[Array[Double]] = Array(
-        Array(0,4),
-        Array(1,4),
-        Array(8,5),
-        Array(9,5))
-
-    test("GaussianProcess Test : Initialization") {
-        val test = new GaussianProcess()
-        assert(test.pointGroups.isEmpty)
-    }
 
     val gp = new GaussianProcess()
-    test("GaussianProcess Test : Train") {
-        gp.train(traindata)
+    test("GaussianProcess Test : Initialization") {
+        assert(gp.pointGroups.isEmpty)
+    }
+
+    test("GaussianProcess Test : Linear Train") {
+        gp.train(LABELED_LINEAR_DATA)
         assert(gp.pointGroups.size == 2)
     }
     
-    test("GaussianProcess Test : Predict") {
-        val result = gp.predict(predictdata, 3)
-        assert(arrayequal(result.map(_.toDouble), Array(-1,-1,1,1)))
+    test("GaussianProcess Test : Linear Predict") {
+        val result = gp.predict(UNLABELED_LINEAR_DATA, 3)
+        assert(arrayequal(result, LABEL_LINEAR_DATA))
+    }
+
+    test("GaussianProcess Test : Nonlinear Train") {
+        gp.train(LABELED_NONLINEAR_DATA)
+        assert(gp.pointGroups.size == 2)
+    }
+    
+    test("GaussianProcess Test : Nonlinear Predict") {
+        val result = gp.predict(UNLABELED_NONLINEAR_DATA, 3)
+        assert(arrayequal(result, LABEL_NONLINEAR_DATA))
     }
     
     test("GaussianProcess Test : Clear") {

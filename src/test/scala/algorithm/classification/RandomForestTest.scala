@@ -2,38 +2,35 @@
 // 2016-11-29
 
 import org.scalatest.FunSuite
+import ght.mi.TestData._
 import ght.mi.algorithm.MatrixFunc._
 import ght.mi.algorithm.RandomForest
 
 class RandomForestSuite extends FunSuite {
-    val traindata: Array[(Int, Array[Double])] = Array(
-        (-1, Array(2,5)),
-        (-1, Array(3,4)),
-        (-1, Array(4,5)),
-        (1, Array(5,4)),
-        (1, Array(6,5)),
-        (1, Array(7,4)))
-
-    val predictdata: Array[Array[Double]] = Array(
-        Array(0,4),
-        Array(1,4),
-        Array(8,5),
-        Array(9,5))
-
-    test("RandomForest Test : Initialization") {
-        val test = new RandomForest()
-        assert(test.trees.isEmpty)
-    }
 
     val rf = new RandomForest()
-    test("RandomForest Test : Train") {
-        rf.train(traindata, 5, 4)
+    test("RandomForest Test : Initialization") {
+        assert(rf.trees.isEmpty)
+    }
+
+    test("RandomForest Test : Linear Train") {
+        rf.train(LABELED_LINEAR_DATA, 5, 4)
         assert(!rf.trees.isEmpty)
     }
 
-    test("RandomForest Test : Predict") {
-        val result = rf.predict(predictdata)
-        assert(arrayequal(result.map(_.toDouble), Array(-1,-1,1,1)))
+    test("RandomForest Test : Linear Predict") {
+        val result = rf.predict(UNLABELED_LINEAR_DATA)
+        assert(arrayequal(result, LABEL_LINEAR_DATA))
+    }
+
+    test("RandomForest Test : Nonlinear Train") {
+        rf.train(LABELED_NONLINEAR_DATA, 5, 4)
+        assert(!rf.trees.isEmpty)
+    }
+
+    test("RandomForest Test : Nonlinear Predict - WRONG") {
+        val result = rf.predict(UNLABELED_NONLINEAR_DATA)
+        assert(!arrayequal(result, LABEL_NONLINEAR_DATA))
     }
     
     test("RandomForest Test : Clear") {

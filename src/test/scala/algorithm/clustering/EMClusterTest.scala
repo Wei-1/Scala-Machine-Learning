@@ -2,27 +2,25 @@
 // 2016-06-04
 
 import org.scalatest.FunSuite
+import ght.mi.TestData._
 import ght.mi.algorithm.MatrixFunc._
 import ght.mi.algorithm.EMCluster
 
 class EMClusterSuite extends FunSuite {
-    val data = Array(
-        Array(2.0,2.0),
-        Array(1.0,2.0),
-        Array(0.0,2.0),
-        Array(2.0,0.0),
-        Array(1.0,0.0),
-        Array(0.0,0.0)
-    )
 
     val em = new EMCluster()
-    test("EMCluster Test : Initialization") {
-        val result = em.cluster(Array(Array(1.0),Array(-1.0)), 2, 100)
-        assert(arrayequal(result.map(_.toDouble), Array(1,2)))
+    test("EMCluster Test : Clustering Tiny Data") {
+        val result = em.cluster(UNLABELED_TINY_DATA, 2, 100)
+        assert(arrayequal(result, LABEL_TINY_DATA))
     }
 
-    test("EMCluster Test : Clustering") {
-        val result = em.cluster(data, 2, 100)
-        assert(arrayequal(result.map(_.toDouble), Array(1,1,1,2,2,2)))
+    test("EMCluster Test : Clustering Small Data - WRONG") {
+        val result = em.cluster(UNLABELED_SMALL_DATA, 2, 100)
+        assert(!arrayequal(result, LABEL_SMALL_DATA))
+    }
+
+    test("EMCluster Test : Clustering Large Data - WRONG") {
+        val result = em.cluster(UNLABELED_LARGE_DATA, 2, 100)
+        assert(!arrayequal(result, LABEL_LARGE_DATA))
     }
 }

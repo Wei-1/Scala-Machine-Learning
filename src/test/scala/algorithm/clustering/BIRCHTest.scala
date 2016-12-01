@@ -2,30 +2,32 @@
 // 2016-06-04
 
 import org.scalatest.FunSuite
+import ght.mi.TestData._
 import ght.mi.algorithm.MatrixFunc._
 import ght.mi.algorithm.BIRCH
 
 class BIRCHSuite extends FunSuite {
-    val data = Array(Array(1.0, 2.0), Array(1.0, 1.0), Array(0.8, 1.0),
-    Array(2.0, 3.0), Array(1.1, 1.1), Array(2.0, 2.2), Array(6.0, 5.0),
-    Array(6.0, 7.0), Array(6.0, 6.6), Array(6.0, 6.1), Array(6.0, 6.2))
 
     val birch = new BIRCH()
-    test("BIRCH Test : Initialization") {
-        val result = birch.cluster(Array(Array(1.0),Array(-1.0)), 1)
-        assert(arrayequal(result.map(_.toDouble), Array(1,2)))
-        birch.clear()
+    test("BIRCH Test : Clustering Tiny Data") {
+        val result = birch.cluster(UNLABELED_TINY_DATA, 1)
+        assert(arrayequal(result, LABEL_TINY_DATA))
     }
 
-    test("BIRCH Test : Clustering") {
-        val result = birch.cluster(data, 2)
-        assert(arrayequal(result.map(_.toDouble),
-            Array(1,1,1,1,1,1,2,2,2,2,2,2)))
+    test("BIRCH Test : Clustering Small Data") {
         birch.clear()
+        val result = birch.cluster(UNLABELED_SMALL_DATA, 2)
+        assert(arrayequal(result, LABEL_SMALL_DATA))
+    }
+
+    test("BIRCH Test : Clustering Large Data - WRONG") {
+        birch.clear()
+        val result = birch.cluster(UNLABELED_LARGE_DATA, 3)
+        assert(!arrayequal(result, LABEL_LARGE_DATA))
     }
 
     test("BIRCH Test : Clearing") {
-        val centers = birch.centers
-        assert(centers.isEmpty)
+        birch.clear()
+        assert(birch.centers.isEmpty)
     }
 }

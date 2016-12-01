@@ -2,37 +2,15 @@
 // 2016-11-06
 
 import org.scalatest.FunSuite
+import ght.mi.TestData._
 import ght.mi.algorithm.MatrixFunc._
 import ght.mi.algorithm.NeuralNetwork
 
 class NeuralNetworkSuite extends FunSuite {
 
-    val traindata_X: Array[Array[Double]] = Array(
-        Array(1, 1, 0, 0, 1, 0, 1, 0),
-        Array(1, 0, 0, 0, 1, 0, 1, 0),
-        Array(1, 1, 0, 0, 1, 0, 1, 0),
-        Array(0, 0, 1, 1, 0, 1, 1, 0),
-        Array(0, 0, 1, 0, 0, 1, 1, 0),
-        Array(0, 0, 1, 1, 0, 1, 1, 0)
-    )
-
-    val traindata_Y: Array[Array[Double]] = Array(
-        Array(1, 0),
-        Array(1, 0),
-        Array(1, 0),
-        Array(0, 1),
-        Array(0, 1),
-        Array(0, 1)
-    )
-
-    val testdata_X: Array[Array[Double]] = Array(
-        Array(1, 1, 0, 0, 0, 0, 0, 0),
-        Array(0, 0, 1, 1, 0, 0, 0, 0)
-    )
-
     val layer_neurons = Array(5, 4)
-    val input_column = traindata_X.head.size
-    val output_column = traindata_Y.head.size
+    val input_column = UNLABELED_LARGE_HIGH_DIM_DATA.head.size
+    val output_column = TARGET_LARGE_HIGH_DIM_DATA.head.size
     val limit = 1000
 
     val nn = new NeuralNetwork(layer_neurons, input_column, output_column)
@@ -42,15 +20,12 @@ class NeuralNetworkSuite extends FunSuite {
     }
 
     test("NeuralNetwork Test : Train") {
-        nn.train(traindata_X, traindata_Y, limit)
+        nn.train(UNLABELED_LARGE_HIGH_DIM_DATA, TARGET_LARGE_HIGH_DIM_DATA, limit)
         assert(!nn.syns.isEmpty)
     }
 
     test("NeuralNetwork Test : Predict") {
-        val result = nn.predict(testdata_X)
-        assert(result(0)(0) > 0.5)
-        assert(result(0)(1) < 0.5)
-        assert(result(1)(0) < 0.5)
-        assert(result(1)(1) > 0.5)
+        val result = nn.predict(UNLABELED_SMALL_HIGH_DIM_DATA)
+        assert(matrixsimilar(result, TARGET_SMALL_HIGH_DIM_DATA, 0.2))
     }
 }

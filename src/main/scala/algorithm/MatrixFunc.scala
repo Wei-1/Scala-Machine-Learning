@@ -5,8 +5,12 @@ package ght.mi.algorithm
 package object MatrixFunc {
 
     // Array Functions
+    def arraysimilar(x: Array[Double], y: Array[Double], err: Double): Boolean =
+        x.zip(y).forall(l => Math.abs(l._1 - l._2) < err)
+    def arrayequal(x: Array[Int], y: Array[Int]): Boolean =
+        x.zip(y).forall(l => l._1 == l._2)
     def arrayequal(x: Array[Double], y: Array[Double]): Boolean =
-        x.zip(y).map(l => l._1 == l._2).reduce(_ & _)
+        x.zip(y).forall(l => l._1 == l._2)
     def arraysum(x: Array[Double], y: Array[Double]): Array[Double] =
         (x.zip(y).map(l => l._1 + l._2))
     def arrayminus(x: Array[Double], y: Array[Double]): Array[Double] =
@@ -18,8 +22,10 @@ package object MatrixFunc {
     def arraydevide(x: Array[Double], y: Array[Double]): Array[Double] =
         (x.zip(y).map(l => if (l._2 == 0) 0 else l._1 / l._2))
     // Matrix Functions
+    def matrixsimilar(x: Array[Array[Double]], y: Array[Array[Double]], err: Double): Boolean =
+        x.zip(y).forall(l => l._1.zip(l._2).forall(ll => Math.abs(ll._1 - ll._2) < err))
     def matrixequal(x: Array[Array[Double]], y: Array[Array[Double]]): Boolean =
-        x.zip(y).map(l => l._1.zip(l._2).map(ll => ll._1 == ll._2).reduce(_ & _)).reduce(_ & _)
+        x.zip(y).forall(l => l._1.zip(l._2).forall(ll => ll._1 == ll._2))
     def matrixaccumulate(x: Array[Array[Double]]): Array[Double] =
         x.reduceLeft((x, y) => (x.zip(y).map(l => l._1 + l._2)))
     def matrixsum(x: Array[Array[Double]], y: Array[Array[Double]]): Array[Array[Double]] =
