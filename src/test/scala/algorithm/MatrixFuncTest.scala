@@ -17,9 +17,15 @@ class MatrixFuncSuite extends FunSuite {
     val datasize = data.size
     val featuresize = data.head.size
 
+    test("MatrixFunc Test : Array Similarity") {
+        assert(!arraysimilar(data(0), data(1), 2))
+        assert(arraysimilar(data(0), Array(2.0,3.0,2.0), 2))
+    }
+
     test("MatrixFunc Test : Array Equality") {
         assert(!arrayequal(data(0), data(1)))
         assert(arrayequal(data(0), Array(1.0,2.0,1.0)))
+        assert(arrayequal(Array(1,2), Array(1,2)))
     }
 
     test("MatrixFunc Test : Array Sum") {
@@ -41,6 +47,12 @@ class MatrixFuncSuite extends FunSuite {
     test("MatrixFunc Test : Array Devision") {
         assert(arrayequal(arraydevide(data(0),data(1)), Array(0.5,2.0,1.0/6.0)))
         assert(arrayequal(arraydevide(data(2),data(3)), Array(0.0,2.0/3.0,6.0)))
+    }
+
+    test("MatrixFunc Test : Matrix Similarity") {
+        val temp1 = Array(Array(0.1, 0.2), Array(0.0, 1.0))
+        val temp2 = Array(Array(0.6, 0.7), Array(0.5, 1.5))
+        assert(matrixsimilar(temp1, temp2, 1))
     }
 
     test("MatrixFunc Test : Matrix Equality") {

@@ -2,33 +2,11 @@
 // 2016-11-23
 
 import org.scalatest.FunSuite
+import ght.mi.TestData._
 import ght.mi.algorithm.MatrixFunc._
 import ght.mi.algorithm.DBN
 
 class DBNSuite extends FunSuite {
-
-    val traindata_X: Array[Array[Double]] = Array(
-        Array(1, 1, 0, 0, 1, 0, 1, 0),
-        Array(1, 0, 0, 0, 1, 0, 1, 0),
-        Array(1, 1, 0, 0, 1, 0, 1, 0),
-        Array(0, 0, 1, 1, 0, 1, 1, 0),
-        Array(0, 0, 1, 0, 0, 1, 1, 0),
-        Array(0, 0, 1, 1, 0, 1, 1, 0)
-    )
-
-    val traindata_Y: Array[Array[Double]] = Array(
-        Array(1, 0),
-        Array(1, 0),
-        Array(1, 0),
-        Array(0, 1),
-        Array(0, 1),
-        Array(0, 1)
-    )
-
-    val testdata_X: Array[Array[Double]] = Array(
-        Array(1, 1, 0, 0, 0, 0, 0, 0),
-        Array(0, 0, 1, 1, 0, 0, 0, 0)
-    )
 
     val learning_rate: Double = 0.1
     val limit: Int = 100
@@ -36,8 +14,8 @@ class DBNSuite extends FunSuite {
 
     val layer_rbms = Array(5, 3)
     val layer_nns = Array(3)
-    val input_column = traindata_X.head.size
-    val output_column = traindata_Y.head.size
+    val input_column = UNLABELED_LARGE_HIGH_DIM_DATA.head.size
+    val output_column = TARGET_LARGE_HIGH_DIM_DATA.head.size
 
     test("DBN Test : Initialization") {
         val test = new DBN(layer_rbms, layer_nns, input_column, output_column)
@@ -51,12 +29,12 @@ class DBNSuite extends FunSuite {
 
     val dbn = new DBN(layer_rbms, layer_nns, input_column, output_column)
     test("DBN Test : Train") {
-        dbn.train(traindata_X, traindata_Y, learning_rate, k, limit)
+        dbn.train(UNLABELED_LARGE_HIGH_DIM_DATA, TARGET_LARGE_HIGH_DIM_DATA, learning_rate, k, limit)
         assert(!dbn.nn.syns.isEmpty)
     }
 
     test("DBN Test : Predict") {
-        val result = dbn.predict(testdata_X)
+        val result = dbn.predict(UNLABELED_SMALL_HIGH_DIM_DATA)
         assert(result(0)(0) > 0.5)
         assert(result(0)(1) < 0.5)
         assert(result(1)(0) < 0.5)

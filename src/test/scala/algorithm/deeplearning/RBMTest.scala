@@ -2,30 +2,17 @@
 // 2016-11-20
 
 import org.scalatest.FunSuite
+import ght.mi.TestData._
 import ght.mi.algorithm.MatrixFunc._
 import ght.mi.algorithm.RBM
 
 class RBMSuite extends FunSuite {
-    
-    val traindata_X: Array[Array[Double]] = Array(
-        Array(1, 1, 0, 0, 1, 0, 1, 0),
-        Array(1, 0, 0, 0, 1, 0, 1, 0),
-        Array(1, 1, 0, 0, 1, 0, 1, 0),
-        Array(0, 0, 1, 1, 0, 1, 1, 0),
-        Array(0, 0, 1, 0, 0, 1, 1, 0),
-        Array(0, 0, 1, 1, 0, 1, 1, 0)
-    )
-
-    val testdata_X: Array[Array[Double]] = Array(
-        Array(1, 1, 0, 0, 0, 0, 0, 0),
-        Array(0, 0, 1, 1, 0, 0, 0, 0)
-    )
 
     val learning_rate: Double = 0.1
     val limit: Int = 100
     val k: Int = 1
     
-    val visible_n: Int = traindata_X.head.size
+    val visible_n: Int = UNLABELED_LARGE_HIGH_DIM_DATA.head.size
     val hidden_n: Int = 3
 
     test("RBM Test : Initialization") {
@@ -37,19 +24,16 @@ class RBMSuite extends FunSuite {
 
     val rbm = new RBM(visible_n, hidden_n)
     test("RBM Test : Train") {
-        rbm.train(traindata_X, learning_rate, k, limit)
+        rbm.train(UNLABELED_LARGE_HIGH_DIM_DATA, learning_rate, k, limit)
         assert(!arrayequal(rbm.hbias, new Array[Double](hidden_n)))
         assert(!arrayequal(rbm.vbias, new Array[Double](visible_n)))
         assert(!rbm.syns.isEmpty)
     }
 
     test("RBM Test : Reconstruct") {
-        val h = rbm.forward(testdata_X)
+        val h = rbm.forward(UNLABELED_SMALL_HIGH_DIM_DATA)
         val result = rbm.reconstruct(h)
-        assert(result(0)(4) > 0.5)
-        assert(result(0)(5) < 0.5)
-        assert(result(1)(4) < 0.5)
-        assert(result(1)(5) > 0.5)
+        assert(matrixsimilar(result, SIMULATE_SMALL_HIGH_DIM_DATA, 0.4))
     }
     
     test("RBM Test : Clear") {

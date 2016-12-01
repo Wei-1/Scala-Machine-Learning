@@ -59,6 +59,9 @@ package object TestData {
     val TARGET_SMALL_HIGH_DIM_DATA: Array[Array[Double]] = Array(
         Array(1, 0),
         Array(0, 1))
+    val SIMULATE_SMALL_HIGH_DIM_DATA: Array[Array[Double]] = Array(
+        Array(1, 1, 0, 0, 1, 0, 1, 0),
+        Array(0, 0, 1, 1, 0, 1, 1, 0))
     // Clustering Data
     // Tiny Clustered Data
     val UNLABELED_TINY_DATA: Array[Array[Double]] = Array(
