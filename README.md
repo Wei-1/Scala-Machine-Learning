@@ -1,4 +1,8 @@
-# Light Weight Scala Machine Learning Library
+# Scala Machine Learning
+
+![Build Status](https://travis-ci.org/Wei-1/Scala-Machine-Learning.svg?branch=master)
+
+## Light Weight Scala Machine Learning Library
 
 A very light weight Scala machine learning library that provide some basic ML for learning ML in Scala.
 
