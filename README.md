@@ -1,6 +1,6 @@
 # Scala Machine Learning
 
-![Build Status](https://travis-ci.org/Wei-1/Scala-Machine-Learning.svg?branch=master)
+[![Build Status](https://travis-ci.org/Wei-1/Scala-Machine-Learning.svg?branch=master)](https://travis-ci.org/Wei-1/Scala-Machine-Learning)
 
 ## Light Weight Scala Machine Learning Library
 
