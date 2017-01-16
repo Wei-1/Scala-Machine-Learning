@@ -4,38 +4,45 @@
 package ght.mi.algorithm
 package object MatrixFunc {
 
+    val equalfunc = (v: (Double, Double)) => v._1 == v._2
+    val sumfunc = (v: (Double, Double)) => v._1 + v._2
+    val minusfunc = (v: (Double, Double)) => v._1 - v._2
+    val minus2func = (v: (Double, Double)) => Math.pow(v._1 - v._2, 2)
+    val multifunc = (v: (Double, Double)) => v._1 * v._2
     // Array Functions
     def arraysimilar(x: Array[Double], y: Array[Double], err: Double): Boolean =
         x.zip(y).forall(l => Math.abs(l._1 - l._2) < err)
     def arrayequal(x: Array[Int], y: Array[Int]): Boolean =
         x.zip(y).forall(l => l._1 == l._2)
     def arrayequal(x: Array[Double], y: Array[Double]): Boolean =
-        x.zip(y).forall(l => l._1 == l._2)
+        x.zip(y).forall(equalfunc)
     def arraysum(x: Array[Double], y: Array[Double]): Array[Double] =
-        (x.zip(y).map(l => l._1 + l._2))
+        (x.zip(y).map(sumfunc))
     def arrayminus(x: Array[Double], y: Array[Double]): Array[Double] =
-        (x.zip(y).map(l => l._1 - l._2))
+        (x.zip(y).map(minusfunc))
     def arrayminussquare(x: Array[Double], y: Array[Double]): Array[Double] =
-        (x.zip(y).map(l => Math.pow(l._1 - l._2, 2)))
+        (x.zip(y).map(minus2func))
     def arraymultiply(x: Array[Double], y: Array[Double]): Array[Double] =
-        (x.zip(y).map(l => l._1 * l._2))
+        (x.zip(y).map(multifunc))
     def arraydevide(x: Array[Double], y: Array[Double]): Array[Double] =
         (x.zip(y).map(l => if (l._2 == 0) 0 else l._1 / l._2))
+    def arrayrandom(x: Int, min_v: Double, max_v: Double): Array[Double] =
+        Array.fill(x)(scala.util.Random.nextDouble()*(max_v-min_v)+min_v)
     // Matrix Functions
     def matrixsimilar(x: Array[Array[Double]], y: Array[Array[Double]], err: Double): Boolean =
         x.zip(y).forall(l => l._1.zip(l._2).forall(ll => Math.abs(ll._1 - ll._2) < err))
     def matrixequal(x: Array[Array[Double]], y: Array[Array[Double]]): Boolean =
-        x.zip(y).forall(l => l._1.zip(l._2).forall(ll => ll._1 == ll._2))
+        x.zip(y).forall(l => l._1.zip(l._2).forall(equalfunc))
     def matrixaccumulate(x: Array[Array[Double]]): Array[Double] =
-        x.reduceLeft((x, y) => (x.zip(y).map(l => l._1 + l._2)))
+        x.reduceLeft((x, y) => (x.zip(y).map(sumfunc)))
     def matrixsum(x: Array[Array[Double]], y: Array[Array[Double]]): Array[Array[Double]] =
-        x.zip(y).map{case (a1, a2) => a1.zip(a2).map{l => l._1 + l._2}}
+        x.zip(y).map { case (a1, a2) => a1.zip(a2).map(sumfunc) }
     def matrixminus(x: Array[Array[Double]], y: Array[Array[Double]]): Array[Array[Double]] =
-        x.zip(y).map{case (a1, a2) => a1.zip(a2).map{l => l._1 - l._2}}
+        x.zip(y).map { case (a1, a2) => a1.zip(a2).map{minusfunc} }
     def matrixmultiply(x: Array[Array[Double]], y: Array[Array[Double]]): Array[Array[Double]] =
-        x.zip(y).map{case (a1, a2) => a1.zip(a2).map{l => l._1 * l._2}}
+        x.zip(y).map { case (a1, a2) => a1.zip(a2).map(multifunc) }
     def matrixrandom(x: Int, y: Int, min_v: Double, max_v: Double): Array[Array[Double]] =
-        Array.fill(x)(Array.fill(y)(scala.util.Random.nextDouble()*(max_v-min_v)+min_v))
+        Array.fill(x)(arrayrandom(y, min_v, max_v))
 
     // normalize(Array(Array(1,1),Array(2,2)))
     def normalize(
