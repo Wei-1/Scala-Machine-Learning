@@ -14,7 +14,7 @@ A very light weight Scala machine learning library that provide some basic ML fo
 
 Naive Bayesian Decision
 
-K-Nearest Neighborhood
+K-Nearest Neighborhood (KNN)
 
 Gaussian Process Classification
 
@@ -48,9 +48,11 @@ Density Peak Cluster
 
 ### Deep Learning :
 
-Restricted Boltzmann Machine
+Restricted Boltzmann Machine (RBM)
 
-Deep Belief Network
+Deep Belief Network (DBN)
+
+Long Short-Term Memory (LSTM)
 
 ## Test
 
