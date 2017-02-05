@@ -25,17 +25,22 @@ class LSTMSuite extends FunSuite {
         val y_list = Array(Array(-0.5), Array(0.2), Array(0.1), Array(-0.5))
         val x_list = matrixrandom(4, x_dim, -1, 1)
         val limit = 100
-        var loss = 0.0
+        var loss = x_dim.toDouble
 
-        for (cur_iter <- 0 to limit) {
-            for (ind <- 0 until y_length) {
-                lstm_net.x_list_add(x_list(ind))
+        var cur_iter = 0
+        while (cur_iter < limit) {
+            cur_iter += 1
+            lstm_net.set_x_list(x_list)
+            val newloss = lstm_net.set_y_list(y_list, loss_func, diff_func)
+            if (newloss > loss * 2) {
+                cur_iter = 0
+                lstm_param.clear_wb()
+                // Console.err.println("[log] RESET PARAM")
+            } else {
+                lstm_param.apply_diff(learning_rate)
             }
-            loss = lstm_net.y_list_is(y_list, loss_func, diff_func)
-            // if (cur_iter % (limit / 10) == 0)
-            //     println("iter: " + cur_iter + "  \tloss: " + loss)
-            lstm_param.apply_diff(learning_rate)
-            lstm_net.x_list_clear()
+            lstm_net.clear()
+            loss = newloss
         }
 
         assert(loss < 0.001)
@@ -66,15 +71,20 @@ class LSTMSuite extends FunSuite {
         val limit = 1000
         var loss = 1.0
 
-        for (cur_iter <- 0 to limit) {
-            for (ind <- 0 until y_length) {
-                lstm_net.x_list_add(x_list(ind))
+        var cur_iter = 0
+        while (cur_iter < limit) {
+            cur_iter += 1
+            lstm_net.set_x_list(x_list)
+            val newloss = lstm_net.set_y_list(y_list, loss_func, diff_func)
+            if (newloss > loss * 2) {
+                cur_iter = 0
+                lstm_param.clear_wb()
+                // Console.err.println("[log] RESET PARAM")
+            } else {
+                lstm_param.apply_diff(learning_rate)
             }
-            loss = lstm_net.y_list_is(y_list, loss_func, diff_func)
-            // if (cur_iter % (limit / 10) == 0)
-            //     println("iter: " + cur_iter + "  \tloss: " + loss)
-            lstm_param.apply_diff(0.1)
-            lstm_net.x_list_clear()
+            lstm_net.clear()
+            loss = newloss
         }
         assert(loss < 0.05)
     }

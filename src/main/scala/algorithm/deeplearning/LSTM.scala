@@ -50,21 +50,31 @@ class LstmParam(val mem_cell_ct: Int, val x_dim: Int) {
         }
         clear_diff()
     }
+
+    def clear_wb() {
+        wg = matrixrandom(mem_cell_ct, concat_len, -0.1, 0.1)
+        wi = matrixrandom(mem_cell_ct, concat_len, -0.1, 0.1)
+        wf = matrixrandom(mem_cell_ct, concat_len, -0.1, 0.1)
+        wo = matrixrandom(mem_cell_ct, concat_len, -0.1, 0.1)
+        bg = arrayrandom(mem_cell_ct, -0.1, 0.1)
+        bi = arrayrandom(mem_cell_ct, -0.1, 0.1)
+        bf = arrayrandom(mem_cell_ct, -0.1, 0.1)
+        bo = arrayrandom(mem_cell_ct, -0.1, 0.1)
+        clear_diff()
+    }
 }
 
-class LstmState(val mem_cell_ct: Int, val x_dim: Int) {
-    var g = new Array[Double](mem_cell_ct)
-    var i = new Array[Double](mem_cell_ct)
-    var f = new Array[Double](mem_cell_ct)
-    var o = new Array[Double](mem_cell_ct)
-    var s = new Array[Double](mem_cell_ct)
-    var h = new Array[Double](mem_cell_ct)
-    var bottom_diff_h = new Array[Double](mem_cell_ct)
-    var bottom_diff_s = new Array[Double](mem_cell_ct)
-    var bottom_diff_x = new Array[Double](x_dim)
-}
+class LstmNode(val param: LstmParam) {
+    var g = new Array[Double](param.mem_cell_ct)
+    var i = new Array[Double](param.mem_cell_ct)
+    var f = new Array[Double](param.mem_cell_ct)
+    var o = new Array[Double](param.mem_cell_ct)
+    var s = new Array[Double](param.mem_cell_ct)
+    var h = new Array[Double](param.mem_cell_ct)
+    var bottom_diff_h = new Array[Double](param.mem_cell_ct)
+    var bottom_diff_s = new Array[Double](param.mem_cell_ct)
+    var bottom_diff_x = new Array[Double](param.x_dim)
 
-class LstmNode(val param: LstmParam, val state: LstmState) {
     val mem_cell_ct = param.mem_cell_ct
     val x_dim = param.x_dim
     val concat_len = param.concat_len
@@ -92,29 +102,29 @@ class LstmNode(val param: LstmParam, val state: LstmState) {
     def outer_arr(a1: Array[Double], a2: Array[Double]): Array[Array[Double]] =
         return a1.map(a => a2.map(_ * a))
 
-    def bottom_data_is(x: Array[Double], s_prev_in: Array[Double], h_prev_in: Array[Double]) {
+    def set_bottom_data(x: Array[Double], s_prev_in: Array[Double], h_prev_in: Array[Double]) {
         s_prev = s_prev_in
         h_prev = h_prev_in
         xc = x ++ h_prev_in
-        state.g = tanh_arr(dot_wxb(param.wg, xc, param.bg))
-        state.i = sigmoid_arr(dot_wxb(param.wi, xc, param.bi))
-        state.f = sigmoid_arr(dot_wxb(param.wf, xc, param.bf))
-        state.o = sigmoid_arr(dot_wxb(param.wo, xc, param.bo))
-        state.s = arraysum(arraymultiply(state.g, state.i), arraymultiply(s_prev_in, state.f))
-        state.h = arraymultiply(state.s, state.o)
+        g = tanh_arr(dot_wxb(param.wg, xc, param.bg))
+        i = sigmoid_arr(dot_wxb(param.wi, xc, param.bi))
+        f = sigmoid_arr(dot_wxb(param.wf, xc, param.bf))
+        o = sigmoid_arr(dot_wxb(param.wo, xc, param.bo))
+        s = arraysum(arraymultiply(g, i), arraymultiply(s_prev_in, f))
+        h = arraymultiply(s, o)
     }
 
-    def top_diff_is(top_diff_h: Array[Double], top_diff_s: Array[Double]) {
-        val d_s = arraysum(arraymultiply(state.o, top_diff_h), top_diff_s)
-        val d_o = arraymultiply(state.s, top_diff_h)
-        val d_i = arraymultiply(state.g, d_s)
-        val d_g = arraymultiply(state.i, d_s)
+    def set_top_diff(top_diff_h: Array[Double], top_diff_s: Array[Double]) {
+        val d_s = arraysum(arraymultiply(o, top_diff_h), top_diff_s)
+        val d_o = arraymultiply(s, top_diff_h)
+        val d_i = arraymultiply(g, d_s)
+        val d_g = arraymultiply(i, d_s)
         val d_f = arraymultiply(s_prev, d_s)
 
-        val d_i_input = diff_arr(state.i, d_i)
-        val d_f_input = diff_arr(state.f, d_f)
-        val d_o_input = diff_arr(state.o, d_o)
-        val d_g_input = state.g.zip(d_g).map { case (a, d) => (1 - Math.pow(a, 2)) * d }
+        val d_i_input = diff_arr(i, d_i)
+        val d_f_input = diff_arr(f, d_f)
+        val d_o_input = diff_arr(o, d_o)
+        val d_g_input = g.zip(d_g).map { case (a, d) => (1 - Math.pow(a, 2)) * d }
 
         param.wi_diff = matrixsum(param.wi_diff, outer_arr(d_i_input, xc))
         param.wf_diff = matrixsum(param.wf_diff, outer_arr(d_f_input, xc))
@@ -132,9 +142,9 @@ class LstmNode(val param: LstmParam, val state: LstmState) {
             dot_wd(param.wg, d_g_input)))
 
         val (b_d_x, b_d_h) = dxc.splitAt(x_dim)
-        state.bottom_diff_x = b_d_x
-        state.bottom_diff_h = b_d_h
-        state.bottom_diff_s = arraymultiply(d_s, state.f)
+        bottom_diff_x = b_d_x
+        bottom_diff_h = b_d_h
+        bottom_diff_s = arraymultiply(d_s, f)
     }
 }
 
@@ -142,26 +152,26 @@ class LstmNetwork(val param: LstmParam) {
     var node_list = Array[LstmNode]()
     var x_list = Array[Array[Double]]()
 
-    def y_list_is(y_list: Array[Array[Double]], loss_func: (Array[Double], Array[Double]) => Double, diff_func: (Array[Double], Array[Double]) => Array[Double]): Double = {
+    def set_y_list(y_list: Array[Array[Double]], loss_func: (Array[Double], Array[Double]) => Double, diff_func: (Array[Double], Array[Double]) => Array[Double]): Double = {
         if (y_list.size == x_list.size) {
             var idx = x_list.size - 1
-            var h = node_list(idx).state.h
+            var h = node_list(idx).h
             var y = y_list(idx)
 
             var loss = loss_func(h, y)
             var diff_h = diff_func(h, y)
             var diff_s = new Array[Double](param.mem_cell_ct)
-            node_list(idx).top_diff_is(diff_h, diff_s)
+            node_list(idx).set_top_diff(diff_h, diff_s)
             idx -= 1
 
             while (idx >= 0) {
-                h = node_list(idx).state.h
+                h = node_list(idx).h
                 y = y_list(idx)
-                val p1_state = node_list(idx + 1).state
+                val p1_node = node_list(idx + 1)
                 loss += loss_func(h, y)
-                diff_h = arraysum(diff_func(h, y), p1_state.bottom_diff_h)
-                diff_s = p1_state.bottom_diff_s
-                node_list(idx).top_diff_is(diff_h, diff_s)
+                diff_h = arraysum(diff_func(h, y), p1_node.bottom_diff_h)
+                diff_s = p1_node.bottom_diff_s
+                node_list(idx).set_top_diff(diff_h, diff_s)
                 idx -= 1
             }
 
@@ -173,27 +183,22 @@ class LstmNetwork(val param: LstmParam) {
         }
     }
 
-    def x_list_clear() {
-        x_list = Array[Array[Double]]()
+    def set_x_list(input_x_list: Array[Array[Double]]) {
+        x_list = input_x_list
+        var s_prev = new Array[Double](param.mem_cell_ct)
+        var h_prev = new Array[Double](param.mem_cell_ct)
+        for (idx <- 0 until x_list.size) {
+            val x = x_list(idx)
+            val node = new LstmNode(param)
+            node.set_bottom_data(x, s_prev, h_prev)
+            node_list :+= node
+            s_prev = node.s
+            h_prev = node.h
+        }
     }
 
-    def x_list_add(x: Array[Double]) {
-        x_list :+= x
-        if (x_list.size > node_list.size) {
-            val state = new LstmState(param.mem_cell_ct, param.x_dim)
-            node_list :+= (new LstmNode(param, state))
-        }
-
-        val idx = x_list.size - 1
-        if (idx == 0) {
-            val s_prev = new Array[Double](param.mem_cell_ct)
-            val h_prev = new Array[Double](param.mem_cell_ct)
-            node_list(0).bottom_data_is(x, s_prev, h_prev)
-        } else {
-            val n1_state = node_list(idx - 1).state
-            val s_prev = n1_state.s
-            val h_prev = n1_state.h
-            node_list(idx).bottom_data_is(x, s_prev, h_prev)
-        }
+    def clear() {
+        node_list = Array[LstmNode]()
+        x_list = Array[Array[Double]]()
     }
 }
