@@ -5,10 +5,8 @@ package ght.mi.algorithm
 import ght.mi.algorithm.MatrixFunc._
 
 class NeuralNetwork(val layer_neurons: Array[Int], val input_column: Int, val output_column: Int) {
-    var X = Array[Array[Double]]()
-    var Y = Array[Array[Double]]()
     val layer_number = layer_neurons.size
-    var syns = Array.fill(layer_number+1)(Array[Array[Double]]())
+    val syns = Array.fill(layer_number+1)(Array[Array[Double]]())
 
     def clear() = {
         syns(0) = matrixrandom(input_column, layer_neurons(0), -1, 1)
@@ -28,7 +26,7 @@ class NeuralNetwork(val layer_neurons: Array[Int], val input_column: Int, val ou
         x.map(arr => arr.map(n => neuron(n, forward)))
     }
 
-    def iterate(x: Array[Array[Double]], y: Array[Array[Double]]) {
+    def iterate(x: Array[Array[Double]], y: Array[Array[Double]], lr: Double) {
         var layer_results = Array.fill(layer_number+2)(Array[Array[Double]]())
         layer_results(0) = x
         for (i <- 0 to layer_number) {
@@ -44,12 +42,12 @@ class NeuralNetwork(val layer_neurons: Array[Int], val input_column: Int, val ou
         }
 
         for (i <- layer_number to 0 by -1) {
-            syns(i) = matrixsum(syns(i), matrixdot(layer_results(i).transpose, layer_deltas(i)))
+            syns(i) = matrixsum(syns(i), matrixdot(layer_results(i).transpose, layer_deltas(i)).map(_.map(_ * lr)))
         }
     }
 
-    def train(x: Array[Array[Double]], y: Array[Array[Double]], iterate_limit: Int) =
-        for (i <- 1 to iterate_limit) iterate(x, y)
+    def train(x: Array[Array[Double]], y: Array[Array[Double]], iterate_limit: Int, lr: Double = 1) =
+        for (i <- 1 to iterate_limit) iterate(x, y, lr)
 
     def predict(x: Array[Array[Double]]): Array[Array[Double]] = {
         var layer_input = x

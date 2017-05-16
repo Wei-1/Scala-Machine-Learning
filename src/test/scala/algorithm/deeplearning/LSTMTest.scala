@@ -25,17 +25,17 @@ class LSTMSuite extends FunSuite {
         val y_list = Array(Array(-0.5), Array(0.2), Array(0.1), Array(-0.5))
         val x_list = matrixrandom(4, x_dim, -1, 1)
         val limit = 100
-        var loss = x_dim.toDouble
+        var loss = y_length.toDouble
 
         var cur_iter = 0
         while (cur_iter < limit) {
             cur_iter += 1
             lstm_net.set_x_list(x_list)
             val newloss = lstm_net.set_y_list(y_list, loss_func, diff_func)
-            if (newloss > loss * 2) {
+            if (newloss > loss * 2 && newloss > y_length) {
                 cur_iter = 0
                 lstm_param.clear_wb()
-                // Console.err.println("[log] RESET PARAM")
+                Console.err.println("[log] RESET PARAM: " + newloss)
             } else {
                 lstm_param.apply_diff(learning_rate)
             }
@@ -48,7 +48,7 @@ class LSTMSuite extends FunSuite {
 
     test("LSTM Test : 2x2 + Continous Exclusive OR") {
 
-        val mem_cell_ct = 20
+        val mem_cell_ct = 4
         val x_dim = 2
         val lstm_param = new LstmParam(mem_cell_ct, x_dim)
         val lstm_net = new LstmNetwork(lstm_param)
@@ -69,17 +69,17 @@ class LSTMSuite extends FunSuite {
         }
 
         val limit = 1000
-        var loss = 1.0
+        var loss = y_length.toDouble
 
         var cur_iter = 0
         while (cur_iter < limit) {
             cur_iter += 1
             lstm_net.set_x_list(x_list)
             val newloss = lstm_net.set_y_list(y_list, loss_func, diff_func)
-            if (newloss > loss * 2) {
+            if (newloss > loss * 2 && newloss > y_length) {
                 cur_iter = 0
                 lstm_param.clear_wb()
-                // Console.err.println("[log] RESET PARAM")
+                Console.err.println("[log] RESET PARAM: " + newloss)
             } else {
                 lstm_param.apply_diff(learning_rate)
             }
