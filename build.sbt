@@ -1,10 +1,10 @@
 name := "scala-ml"
 
-version := "1.0"
+version := "1.2"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.1"
 
-libraryDependencies += "org.scalactic" %% "scalactic" % "2.2.6"
-libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.6" % "test"
+libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.1"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.1" % "test"
 
 ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) }

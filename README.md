@@ -6,7 +6,7 @@
 
 A very light weight Scala machine learning library that provide some basic ML for learning ML in Scala.
 
-    Scala Dependency : 2.11
+    Scala Dependency : 2.12
 
 ## This package includes -
 
