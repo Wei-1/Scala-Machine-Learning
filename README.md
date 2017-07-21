@@ -20,15 +20,13 @@ Gaussian Process Classification
 
 Linear Regression
 
-Linear Support Vector Machine
+Linear Support Vector Machine (linear-SVM)
 
 Perceptron
 
 Decision Tree
 
 Random Forest
-
-Neural Network
 
 ### Clustering :
 
@@ -46,7 +44,9 @@ EM Cluster
 
 Density Peak Cluster
 
-### Deep Learning :
+### Neural Net & Deep Learning :
+
+Neural Network (NN)
 
 Restricted Boltzmann Machine (RBM)
 
