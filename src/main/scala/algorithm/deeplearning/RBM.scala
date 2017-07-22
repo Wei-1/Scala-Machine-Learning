@@ -2,7 +2,7 @@
 // 2016-11-20
 
 package ght.mi.algorithm
-import ght.mi.algorithm.MatrixFunc._
+import ght.mi.general.MatrixFunc._
 
 class RBM(val visible_n: Int, val hidden_n: Int) {
 

@@ -2,7 +2,7 @@
 // 2016-08-29
 
 package ght.mi.algorithm
-import ght.mi.algorithm.MatrixFunc._
+import ght.mi.general.MatrixFunc._
 
 class NeuralNetwork(val layer_neurons: Array[Int], val input_column: Int, val output_column: Int) {
     val layer_number = layer_neurons.size

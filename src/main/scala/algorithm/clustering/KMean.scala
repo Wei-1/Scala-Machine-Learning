@@ -2,7 +2,7 @@
 // 2015-12-18
 
 package ght.mi.algorithm
-import ght.mi.algorithm.MatrixFunc._
+import ght.mi.general.MatrixFunc._
 
 class KMean() {
     var centers = Array[(Array[Double], Int)]()

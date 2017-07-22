@@ -2,7 +2,7 @@
 // 2015-07-08
 
 package ght.mi.algorithm
-import ght.mi.algorithm.MatrixFunc._
+import ght.mi.general.MatrixFunc._
 
 class DensityPeakCluster() {
     // Density Delta Data

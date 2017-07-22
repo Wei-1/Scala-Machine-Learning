@@ -3,7 +3,7 @@
 
 package ght.mi.algorithm
 
-import ght.mi.algorithm.MatrixFunc._
+import ght.mi.general.MatrixFunc._
 
 class GaussianProcess() {
     var pointGroups = Map[Int, Array[Array[Double]]]()

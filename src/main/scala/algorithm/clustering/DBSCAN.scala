@@ -2,7 +2,7 @@
 // 2016-11-10
 
 package ght.mi.algorithm
-import ght.mi.algorithm.MatrixFunc._
+import ght.mi.general.MatrixFunc._
 
 // val data = Array(Array(1.0, 2.0), Array(1.0, 1.0), Array(0.8, 1.0),
 //     Array(2.0, 3.0), Array(1.1, 1.1), Array(2.0, 2.2), Array(6.0, 5.0),

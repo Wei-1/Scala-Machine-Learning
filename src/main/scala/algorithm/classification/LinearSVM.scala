@@ -2,7 +2,7 @@
 // 2015-12-09
 
 package ght.mi.algorithm
-import ght.mi.algorithm.MatrixFunc._
+import ght.mi.general.MatrixFunc._
 
 // LinearSVM = linear Support Vector Machine
 // This core function only support dual classification cus linear

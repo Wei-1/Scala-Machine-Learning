@@ -2,7 +2,7 @@
 // 2015-12-21
 
 package ght.mi.algorithm
-import ght.mi.algorithm.MatrixFunc._
+import ght.mi.general.MatrixFunc._
 
 class LinearRegression() {
     private def dot(x:Array[Double], y:Array[Double]): Double =

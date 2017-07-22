@@ -2,7 +2,7 @@
 // 2016-06-03
 
 import org.scalatest.FunSuite
-import ght.mi.algorithm.MatrixFunc._
+import ght.mi.general.MatrixFunc._
 
 class MatrixFuncSuite extends FunSuite {
     def rint4(x: Double): Double = Math.rint(x * 10000) / 10000

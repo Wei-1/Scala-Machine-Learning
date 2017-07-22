@@ -3,7 +3,7 @@
 
 import org.scalatest.FunSuite
 import ght.mi.TestData._
-import ght.mi.algorithm.MatrixFunc._
+import ght.mi.general.MatrixFunc._
 import ght.mi.algorithm.Hierarchical
 
 class HierarchicalSuite extends FunSuite {

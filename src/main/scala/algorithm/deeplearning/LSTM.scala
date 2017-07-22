@@ -1,7 +1,7 @@
 // Wei Chen - 2017-01-16
 package ght.mi.algorithm
 
-import ght.mi.algorithm.MatrixFunc._
+import ght.mi.general.MatrixFunc._
 
 class LstmParam(val mem_cell_ct: Int, val x_dim: Int) {
     val concat_len = x_dim + mem_cell_ct

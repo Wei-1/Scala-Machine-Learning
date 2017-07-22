@@ -2,7 +2,7 @@
 // 2016-11-07
 
 package ght.mi.algorithm
-import ght.mi.algorithm.MatrixFunc._
+import ght.mi.general.MatrixFunc._
 
 class EMCluster() {
     var gaussians = Array[((Int, Array[Double], Array[Array[Double]]), Int)]()

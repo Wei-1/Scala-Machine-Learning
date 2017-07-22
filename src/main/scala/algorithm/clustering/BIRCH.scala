@@ -2,7 +2,7 @@
 // 2016-11-18
 
 package ght.mi.algorithm
-import ght.mi.algorithm.MatrixFunc._
+import ght.mi.general.MatrixFunc._
 
 class BIRCH() {
     var centers = Array[(Int, Array[Double], Array[Double])]()
