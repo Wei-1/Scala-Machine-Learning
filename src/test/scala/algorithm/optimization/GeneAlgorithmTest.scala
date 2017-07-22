@@ -1,5 +1,5 @@
-// Wei Chen - Bayesian Decision Test
-// 2016-06-03
+// Wei Chen - Gene Algorithm Test
+// 2017-07-22
 
 import org.scalatest.FunSuite
 import ght.mi.general.MatrixFunc._
