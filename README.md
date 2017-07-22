@@ -54,6 +54,12 @@ Deep Belief Network (DBN)
 
 Long Short-Term Memory (LSTM)
 
+### Optimization :
+
+Gene Algorithm (GA)
+
+
+
 ## Test
 
     sbt test
