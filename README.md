@@ -58,7 +58,7 @@ Long Short-Term Memory (LSTM)
 
 Gene Algorithm (GA)
 
-
+Minimax
 
 ## Test
 
