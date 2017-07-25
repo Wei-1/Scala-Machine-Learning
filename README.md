@@ -76,7 +76,7 @@ A very light weight Scala machine learning library that provide some basic ML fo
 
 ### Feature Analysis :
 
-- [ ] Student-T Test
+- [x] Student-T Test
 
 - [ ] ANOVA
 
