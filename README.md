@@ -8,9 +8,9 @@ A very light weight Scala machine learning library that provide some basic ML fo
 
 ## Pre-Requisite
 
-. Scala 2.12
+- Scala 2.12
 
-. Sbt 0.13
+- Sbt 0.13
 
 ## This package includes -
 
