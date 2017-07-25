@@ -6,59 +6,91 @@
 
 A very light weight Scala machine learning library that provide some basic ML for learning ML in Scala.
 
-    Scala Dependency : 2.12
+## Pre-Requisite
+
+. Scala 2.12
+
+. Sbt 0.13
 
 ## This package includes -
 
 ### Classification :
 
-Naive Bayesian Decision
+- [x] Naive Bayesian Decision
 
-K-Nearest Neighborhood (KNN)
+- [x] K-Nearest Neighborhood (KNN)
 
-Gaussian Process Classification
+- [x] Gaussian Process Classification
 
-Linear Regression
+- [x] Linear Regression
 
-Linear Support Vector Machine (linear-SVM)
+- [x] Linear Support Vector Machine (linear-SVM)
 
-Perceptron
+- [x] Perceptron
 
-Decision Tree
+- [x] Decision Tree
 
-Random Forest
+- [x] Random Forest
 
 ### Clustering :
 
-Hierarchical
+- [x] Hierarchical
 
-DBSCAN
+- [x] DBSCAN
 
-HDBSCAN
+- [x] HDBSCAN
 
-BIRCH
+- [x] BIRCH
 
-K-Means
+- [x] K-Means
 
-EM Cluster
+- [x] EM Cluster
 
-Density Peak Cluster
+- [x] Density Peak Cluster
 
 ### Neural Net & Deep Learning :
 
-Neural Network (NN)
+- [x] Neural Network (NN)
 
-Restricted Boltzmann Machine (RBM)
+- [x] Restricted Boltzmann Machine (RBM)
 
-Deep Belief Network (DBN)
+- [x] Deep Belief Network (DBN)
 
-Long Short-Term Memory (LSTM)
+- [x] Long Short-Term Memory (LSTM)
 
 ### Optimization :
 
-Gene Algorithm (GA)
+- [x] Gene Algorithm (GA)
 
-Minimax
+- [x] Minimax
+
+### Reinforcement Learning :
+
+- [ ] Q-Learning
+
+- [ ] Deep Q-Learning (DQN)
+
+- [ ] Double DQN (D-DQN)
+
+- [ ] Asynchronous Advantage Actor-Critic (A3C)
+
+### Feature Analysis :
+
+- [ ] Student-T Test
+
+- [ ] ANOVA
+
+- [ ] MANOVA
+
+- [ ] Principal Component Analysis
+
+- [ ] Linear Discriminant Analysis
+
+- [ ] Quadratic Discriminant Analysis
+
+### Memory Searching Cognition
+
+- [ ] Neural Turing Machine
 
 ## Test
 
