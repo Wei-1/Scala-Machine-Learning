@@ -66,7 +66,7 @@ A very light weight Scala machine learning library that provide some basic ML fo
 
 ### Reinforcement Learning :
 
-- [ ] Q-Learning
+- [x] Q-Learning
 
 - [ ] Deep Q-Learning (DQN)
 

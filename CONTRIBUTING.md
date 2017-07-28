@@ -4,15 +4,13 @@
 
 2. Principal Component Analysis (PCA)
 
-3. Linear Discriminant Analysis (LDA), Quadratic Discriminant Analysis (QDA)
+3. ANOVA, MANOVA, Linear Discriminant Analysis (LDA), Quadratic Discriminant Analysis (QDA)
 
-4. Q-learning, Deep Q-Learning (DQN), Double DQN, Asynchronous Advantage Actor Critic (A3C)
+4. Deep Q-Learning (DQN), Double DQN, Asynchronous Advantage Actor Critic (A3C)
 
 5. Neural Turing Machine
 
 6. Image Analogies
-
-7. Student T-Test, ANOVA, MANOVA
 
 
 # CONTRIBUTION
