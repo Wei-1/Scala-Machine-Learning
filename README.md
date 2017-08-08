@@ -64,6 +64,8 @@ A very light weight Scala machine learning library that provide some basic ML fo
 
 - [x] Minimax
 
+- [x] Monte Carlo Tree Search
+
 ### Reinforcement Learning :
 
 - [x] Q-Learning
