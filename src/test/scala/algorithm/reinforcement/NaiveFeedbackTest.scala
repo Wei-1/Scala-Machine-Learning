@@ -1,11 +1,11 @@
-// Wei Chen - Q-Learning Test
+// Wei Chen - Naive Feedback Learning Test
 // 2017-07-28
 
 import org.scalatest.FunSuite
 import ght.mi.TestData._
-import ght.mi.algorithm.QLearning
+import ght.mi.algorithm.NaiveFeedback
 
-class QLearningSuite extends FunSuite {
+class NaiveFeedbackSuite extends FunSuite {
 
     val learning_rate = 0.1
     val scale = 1
@@ -17,17 +17,17 @@ class QLearningSuite extends FunSuite {
     val links = Map(0 -> Array(1, 2),
         1 -> Array(3, 4))
 
-    val ql = new QLearning(statenumber)
-    ql.addScores(scores)
-    ql.addLinks(links)
+    val nf = new NaiveFeedback(statenumber)
+    nf.addScores(scores)
+    nf.addLinks(links)
 
-    test("QLearning Test : Iterate") {
-        ql.iterate(limit, learning_rate, scale, epoch)
+    test("NaiveFeedback Test : Iterate") {
+        nf.iterate(limit, learning_rate, scale, epoch)
         assert(true)
     }
 
-    test("QLearning Test : Result") {
-        val result = ql.result(epoch)
+    test("NaiveFeedback Test : Result") {
+        val result = nf.result(epoch)
         assert(result.size == 3)
         assert(result.last.id == 4)
     }

@@ -1,14 +1,14 @@
-// Wei Chen - Q-Learning
+// Wei Chen - Naive Feedback Learning
 // 2017-07-28
 
 package ght.mi.algorithm
 
-class QState (val id: Int = -1) {
+class FState (val id: Int = -1) {
     var score: Double = 0.0
-    var links: Map[QState, Double] = Map[QState, Double]()
-    def setLinks(newlinks: Map[QState, Double]): Unit = links ++= newlinks
-    def best: QState = links.maxBy(_._2)._1
-    def explore(scale: Int = 3): QState = {
+    var links: Map[FState, Double] = Map[FState, Double]()
+    def setLinks(newlinks: Map[FState, Double]): Unit = links ++= newlinks
+    def best: FState = links.maxBy(_._2)._1
+    def explore(scale: Int = 3): FState = {
         val linksize = links.size
         val varr = links.toArray.map(_._2)
         val vavg = varr.sum / linksize
@@ -17,15 +17,15 @@ class QState (val id: Int = -1) {
         links.maxBy { case (_, v) => (v - vmin + vstd * scale + scale) * scala.util.Random.nextDouble }._1
     }
     def setScore(newscore: Double): Unit = score = newscore
-    def feedback(ns: QState, lr: Double): Unit = {
+    def feedback(ns: FState, lr: Double): Unit = {
         val gradient = (ns.score - score) * lr
         links += ns -> (links(ns) + gradient)
         score += gradient
     }
 }
 
-class QLearning(val statenumber: Int = 0) {
-    val states = (0 until statenumber).map(id => new QState(id)).toArray
+class NaiveFeedback(val statenumber: Int = 0) {
+    val states = (0 until statenumber).map(id => new FState(id)).toArray
     def addScores(scores: Map[Int, Double]): Unit = {
         scores.map { case (id, score) =>
             states(id).setScore(score)
@@ -39,7 +39,7 @@ class QLearning(val statenumber: Int = 0) {
     def iterate(number: Int = 1, lr: Double = 0.1, scale: Int = 3, epoch: Int = 100): Unit = {
         for (n <- 0 until number) {
             var curstate = states(0)
-            var arr: Array[QState] = Array(curstate)
+            var arr: Array[FState] = Array(curstate)
             var i = 0
             while (i < epoch && curstate.links.size > 0) {
                 i += 1
@@ -52,9 +52,9 @@ class QLearning(val statenumber: Int = 0) {
             // Console.err.println(arr.map(_.id).mkString(","))
         }
     }
-    def result(epoch: Int = 100): Array[QState] = {
+    def result(epoch: Int = 100): Array[FState] = {
         var curstate = states(0)
-        var arr: Array[QState] = Array(curstate)
+        var arr: Array[FState] = Array(curstate)
         var i = 0
         while (i < epoch && curstate.links.size > 0) {
             i += 1
