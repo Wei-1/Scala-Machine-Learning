@@ -22,13 +22,13 @@ class DBSCAN() {
     def distPoint(p1: Point, p2: Point): Double =
         Math.sqrt(arrayminussquare(p1.a, p2.a).sum)
     // --- Find all points in a Group ---
-    def cascade(p1: Point, c: Int) {
-        for (i <- 0 until groupdata.size) {
+    def cascade(p1: Point, c: Int, ind: Int = 0) {
+        for (i <- ind until groupdata.size) {
             val p2 = groupdata(i)
             if (p2.c < 0) {
                 if (distPoint(p1, p2) < distLimit) {
-                    groupdata(i).c = c
-                    cascade(p2, c)
+                    p2.c = c
+                    cascade(p2, c, ind)
                 }
             }
         }
@@ -44,8 +44,8 @@ class DBSCAN() {
         for (i <- 0 until groupdata.size) {
             val p1 = groupdata(i)
             if (p1.c < 0) {
-                groupdata(i).c = c
-                cascade(p1, c)
+                p1.c = c
+                cascade(p1, c, i)
                 c += 1
             }
         }
