@@ -82,7 +82,7 @@ A very light weight Scala machine learning library that provide some basic ML fo
 
 - [x] Student-T Test
 
-- [ ] ANOVA
+- [x] ANOVA
 
 - [ ] MANOVA
 
