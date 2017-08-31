@@ -72,7 +72,9 @@ A very light weight Scala machine learning library that provide some basic ML fo
 
 - [x] Q-Learning
 
-- [ ] Deep Q-Learning (DQN)
+- [x] Q-Neural Learning
+
+- [ ] Deep Q-Network (DQN)
 
 - [ ] Double DQN (D-DQN)
 
