@@ -26,6 +26,6 @@ class NeuralNetworkSuite extends FunSuite {
 
     test("NeuralNetwork Test : Predict") {
         val result = nn.predict(UNLABELED_SMALL_HIGH_DIM_DATA)
-        assert(matrixsimilar(result, TARGET_SMALL_HIGH_DIM_DATA, 0.3))
+        assert(matrixsimilar(result, TARGET_SMALL_HIGH_DIM_DATA, 0.5))
     }
 }
