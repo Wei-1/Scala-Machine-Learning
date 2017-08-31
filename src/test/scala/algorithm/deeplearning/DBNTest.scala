@@ -9,10 +9,10 @@ import ght.mi.algorithm.DBN
 class DBNSuite extends FunSuite {
 
     val learning_rate: Double = 0.1
-    val limit: Int = 100
+    val limit: Int = 200
     val k: Int = 1
 
-    val layer_rbms = Array(5, 3)
+    val layer_rbms = Array(5, 4)
     val layer_nns = Array(3)
     val input_column = UNLABELED_LARGE_HIGH_DIM_DATA.head.size
     val output_column = TARGET_LARGE_HIGH_DIM_DATA.head.size

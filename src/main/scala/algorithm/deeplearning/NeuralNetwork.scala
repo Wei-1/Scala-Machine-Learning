@@ -26,16 +26,22 @@ class NeuralNetwork(val layer_neurons: Array[Int], val input_column: Int, val ou
         x.map(arr => arr.map(n => neuron(n, forward)))
     }
 
+    private def linearBack(x: Array[Array[Double]]): Array[Array[Double]] = {
+        x.map(arr => arr.map(n => 1.0))
+    }
+
     def iterate(x: Array[Array[Double]], y: Array[Array[Double]], lr: Double) {
         var layer_results = Array.fill(layer_number+2)(Array[Array[Double]]())
         layer_results(0) = x
-        for (i <- 0 to layer_number) {
+        for (i <- 0 until layer_number) {
             layer_results(i+1) =  neuralLayer(matrixdot(layer_results(i), syns(i)), true)
         }
+        layer_results(layer_number+1) = matrixdot(layer_results(layer_number), syns(layer_number))
 
         var layer_deltas = Array.fill(layer_number+1)(Array[Array[Double]]())
+
         val layer_error = matrixminus(y, layer_results(layer_number+1))
-        layer_deltas(layer_number) = matrixmultiply(layer_error, neuralLayer(layer_results(layer_number+1), false))
+        layer_deltas(layer_number) = layer_error // matrixmultiply(layer_error, linearBack(layer_results(layer_number+1)))
         for (i <- layer_number-1 to 0 by -1) {
             val layer_error = matrixdot(layer_deltas(i+1), syns(i+1).transpose)
             layer_deltas(i) = matrixmultiply(layer_error, neuralLayer(layer_results(i+1), false))
@@ -51,9 +57,9 @@ class NeuralNetwork(val layer_neurons: Array[Int], val input_column: Int, val ou
 
     def predict(x: Array[Array[Double]]): Array[Array[Double]] = {
         var layer_input = x
-        for (i <- 0 to layer_number) {
+        for (i <- 0 until layer_number) {
             layer_input = neuralLayer(matrixdot(layer_input, syns(i)), true)
         }
-        return layer_input
+        return matrixdot(layer_input, syns(layer_number))
     }
 }

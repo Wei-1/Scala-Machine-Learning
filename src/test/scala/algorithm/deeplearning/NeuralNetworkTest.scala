@@ -8,10 +8,10 @@ import ght.mi.algorithm.NeuralNetwork
 
 class NeuralNetworkSuite extends FunSuite {
 
-    val layer_neurons = Array(5, 4)
+    val layer_neurons = Array(5, 4, 3)
     val input_column = UNLABELED_LARGE_HIGH_DIM_DATA.head.size
     val output_column = TARGET_LARGE_HIGH_DIM_DATA.head.size
-    val limit = 1000
+    val limit = 20000
 
     val nn = new NeuralNetwork(layer_neurons, input_column, output_column)
     test("NeuralNetwork Test : Initialization") {
@@ -20,12 +20,12 @@ class NeuralNetworkSuite extends FunSuite {
     }
 
     test("NeuralNetwork Test : Train") {
-        nn.train(UNLABELED_LARGE_HIGH_DIM_DATA, TARGET_LARGE_HIGH_DIM_DATA, limit)
+        nn.train(UNLABELED_LARGE_HIGH_DIM_DATA, TARGET_LARGE_HIGH_DIM_DATA, limit, 0.1)
         assert(!nn.syns.isEmpty)
     }
 
     test("NeuralNetwork Test : Predict") {
         val result = nn.predict(UNLABELED_SMALL_HIGH_DIM_DATA)
-        assert(matrixsimilar(result, TARGET_SMALL_HIGH_DIM_DATA, 0.2))
+        assert(matrixsimilar(result, TARGET_SMALL_HIGH_DIM_DATA, 0.3))
     }
 }

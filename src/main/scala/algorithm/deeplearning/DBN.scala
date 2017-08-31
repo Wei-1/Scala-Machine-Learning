@@ -27,7 +27,7 @@ class DBN(val layer_rbms: Array[Int], val layer_nns: Array[Int], val input_colum
             }
             layer_input = rbm_layers(i).forward(layer_input)
         }
-        nn.train(layer_input, y, limit)
+        nn.train(layer_input, y, limit, lr)
     }
 
     def predict(x: Array[Array[Double]]): Array[Array[Double]] = {
