@@ -1,5 +1,5 @@
-// Wei Chen - Q-Learning Test
-// 2017-08-16
+// Wei Chen - Q Neural Learning Test
+// 2017-08-31
 
 import org.scalatest.FunSuite
 import ght.mi.TestData._
@@ -33,6 +33,10 @@ class QNeuralLearningSuite extends FunSuite {
         val ql = new QNeuralLearning(Array(5, 4), Array(1.0, 0.0, 0.0, 0.0, 0.0), 2, simulator, 10)
         ql.iterate(limit, learning_rate, scale, epoch)
         val result = ql.result(epoch)
+        assert(result.size == 3)
+        assert(result.head.bestAct == 0)
+        assert(result(1).bestAct == 1)
+        assert(result.last.paras.zipWithIndex.maxBy(_._1)._2 == 4)
     }
 
     test("QNeuralLearning Test : Result 2") { // Case 2
@@ -56,5 +60,9 @@ class QNeuralLearningSuite extends FunSuite {
         val ql = new QNeuralLearning(Array(5, 4), Array(1.0, 0.0, 0.0, 0.0, 0.0), 2, simulator, 10)
         ql.iterate(limit, learning_rate, scale, epoch)
         val result = ql.result(epoch)
+        assert(result.size == 3)
+        assert(result.head.bestAct == 0)
+        assert(result(1).bestAct == 1)
+        assert(result.last.paras.zipWithIndex.maxBy(_._1)._2 == 4)
     }
 }

@@ -1,4 +1,4 @@
-// Wei Chen - HDBSCAN
+// Wei Chen - Hierarchical
 // 2016-11-12
 
 package ght.mi.algorithm
