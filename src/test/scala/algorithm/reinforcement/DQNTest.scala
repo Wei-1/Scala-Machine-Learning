@@ -1,18 +1,18 @@
-// Wei Chen - Q Neural Learning Test
-// 2017-08-31
+// Wei Chen - Deep Q Network
+// 2017-09-01
 
 import org.scalatest.FunSuite
 import ght.mi.TestData._
-import ght.mi.algorithm.QNeuralLearning
+import ght.mi.algorithm.DQN
 
-class QNeuralLearningSuite extends FunSuite {
+class DQNSuite extends FunSuite {
 
     val learning_rate = 0.1
     val scale = 1
     val limit = 10000
     val epoch = 100
 
-    test("QNeuralLearning Test : Result 1") { // Case 1
+    test("DQN Test : Result 1") { // Case 1
         def simulator(paras: Array[Double], act: Int): (Array[Double], Double, Boolean) = {
             val links = Map(0 -> Array(1, 2),
                 1 -> Array(3, 4))
@@ -30,7 +30,7 @@ class QNeuralLearningSuite extends FunSuite {
             }
         }
 
-        val ql = new QNeuralLearning(Array(5, 4), Array(1.0, 0.0, 0.0, 0.0, 0.0), 2, simulator, 10)
+        val ql = new DQN(Array(5, 4), Array(1.0, 0.0, 0.0, 0.0, 0.0), 2, simulator, 10)
         ql.train(limit, learning_rate, scale, epoch)
         val result = ql.result(epoch)
         assert(result.size == 3)
@@ -39,7 +39,7 @@ class QNeuralLearningSuite extends FunSuite {
         assert(result.last.paras.zipWithIndex.maxBy(_._1)._2 == 4)
     }
 
-    test("QNeuralLearning Test : Result 2") { // Case 2
+    test("DQN Test : Result 2") { // Case 2
         def simulator(paras: Array[Double], act: Int): (Array[Double], Double, Boolean) = {
             val links = Map(0 -> Array(1, 2),
                 1 -> Array(3, 4))
@@ -57,7 +57,7 @@ class QNeuralLearningSuite extends FunSuite {
             }
         }
 
-        val ql = new QNeuralLearning(Array(5, 4), Array(1.0, 0.0, 0.0, 0.0, 0.0), 2, simulator, 10)
+        val ql = new DQN(Array(5, 4), Array(1.0, 0.0, 0.0, 0.0, 0.0), 2, simulator, 10)
         ql.train(limit, learning_rate, scale, epoch)
         val result = ql.result(epoch)
         assert(result.size == 3)
