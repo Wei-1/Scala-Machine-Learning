@@ -22,17 +22,19 @@ class DQN(
         var c = 0
         var x = Array[Array[Double]]()
         var y = Array[Array[Double]]()
+        def consume = {
+            nn.train(x, y, train_number, nn_learning_rate)
+            c = 0
+            x = Array[Array[Double]]()
+            y = Array[Array[Double]]()
+        }
         def add(paras: Array[Double], target: Array[Double]) {
             x :+= paras
             y :+= target
             c += 1
-            if (c >= batchsize_number) {
-                nn.train(x, y, train_number, nn_learning_rate)
-                c = 0
-                x = Array[Array[Double]]()
-                y = Array[Array[Double]]()
-            }
+            if (c >= batchsize_number) consume
         }
+        def end = if (c > 0) consume
     }
 
     class DQState (val paras: Array[Double]) {
@@ -61,6 +63,7 @@ class DQN(
     def train(number: Int = 1, lr: Double = 0.1, df: Double = 0.6, epoch: Int = 100): Unit = {
         for (n <- 0 until number)
             state.learn(lr, df, epoch)
+        ex.end
     }
     def result(epoch: Int = 100): Array[DQState] = {
         var paras = initparas
