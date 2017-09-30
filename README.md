@@ -90,9 +90,9 @@ A very light weight Scala machine learning library that provide some basic ML fo
 
 - [ ] Principal Component Analysis
 
-- [ ] Linear Discriminant Analysis
+- [x] Linear Discriminant Analysis
 
-- [ ] Quadratic Discriminant Analysis
+- [x] Quadratic Discriminant Analysis
 
 ### Memory Searching Cognition
 
