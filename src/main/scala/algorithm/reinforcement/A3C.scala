@@ -43,7 +43,7 @@ class A3C(
         }
         def add(paras: Array[Double], p_s: Array[Double], act: Int, reward: Double) {
             val advantage = reward - critic.predict(Array(paras)).head.head
-            p_s(act) += advantage * 0.0001
+            p_s(act) += advantage
             x :+= paras
             y :+= softmax(p_s)
             r :+= Array(reward)
