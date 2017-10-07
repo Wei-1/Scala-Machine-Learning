@@ -78,7 +78,7 @@ A very light weight Scala machine learning library that provide some basic ML fo
 
 - [x] Double DQN (D-DQN)
 
-- [ ] Asynchronous Advantage Actor-Critic (A3C)
+- [x] Asynchronous Advantage Actor-Critic (A3C)
 
 ### Feature Analysis :
 
