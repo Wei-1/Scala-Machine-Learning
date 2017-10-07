@@ -18,7 +18,7 @@ class A3C(
 ) {
 
     val actor = new NeuralNetwork(actor_neurons, initparas.size, actnumber)
-    val critic = new NeuralNetwork(critic_neurons, initparas.size, actnumber)
+    val critic = new NeuralNetwork(critic_neurons, initparas.size, 1)
 
     val ex = new Exp
 
@@ -42,13 +42,11 @@ class A3C(
             r = Array[Array[Double]]()
         }
         def add(paras: Array[Double], p_s: Array[Double], act: Int, reward: Double) {
-            val q_s = critic.predict(Array(paras)).head
-            val advantage = reward - q_s(act)
-            q_s(act) = reward
-            p_s(act) += advantage
+            val advantage = reward - critic.predict(Array(paras)).head.head
+            p_s(act) += advantage * 0.0001
             x :+= paras
             y :+= softmax(p_s)
-            r :+= q_s
+            r :+= Array(reward)
             c += 1
             if (c >= batchsize_number) consume
         }

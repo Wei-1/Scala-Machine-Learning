@@ -11,7 +11,7 @@ class A3CSuite extends FunSuite {
     val limit = 10000
     val epoch = 100
 
-    test("A3C Test : Result 1 - IN DEV") { // Not Finished Yet
+    test("A3C Test : Result 1 - DEV DATA") { // Not Finished Yet
         def simulator(paras: Array[Double], act: Int): (Array[Double], Double, Boolean) = {
             val links = Map(0 -> Array(1, 2),
                 1 -> Array(3, 4))
@@ -32,6 +32,7 @@ class A3CSuite extends FunSuite {
         val ql = new A3C(Array(5, 4), Array(5, 4), Array(1.0, 0.0, 0.0, 0.0, 0.0), 2, simulator, 10)
         ql.train(limit, scale, epoch)
         val result = ql.result(epoch)
+
         if (result.size == 2) {
             assert(result.last.paras.zipWithIndex.maxBy(_._1)._2 == 2)
         } else {
