@@ -10,7 +10,7 @@ class GeneAlgorithm {
 
     def evolve(
         evaluation: Array[Double] => Double,
-        breeding: (Array[Double], Array[Double]) => Array[Double],
+        breeding: (Array[Double], Array[Double]) => Array[Array[Double]],
         generationsize: Int = 100,
         elitesize: Int = 3
     ): Array[Double] = {
@@ -18,7 +18,7 @@ class GeneAlgorithm {
             evaluation(arr)
         }.takeRight(elitesize)
         val parentsize = parents.size
-        val kids = (0 until generationsize - parentsize).map { i =>
+        val kids = (0 until generationsize - parentsize).flatMap { i =>
             val ai = scala.util.Random.nextInt.abs % parentsize
             val bi = scala.util.Random.nextInt.abs % parentsize
             breeding(parents(ai), parents(bi))
