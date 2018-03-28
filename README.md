@@ -86,17 +86,13 @@ A very light weight Scala machine learning library that provide some basic ML fo
 
 - [x] ANOVA
 
-- [ ] MANOVA
-
-- [ ] Principal Component Analysis
-
 - [x] Linear Discriminant Analysis
 
 - [x] Quadratic Discriminant Analysis
 
 ### Memory Searching Cognition
 
-- [ ] Neural Turing Machine
+- [ ] Neural Turing Machine - TODO
 
 ## Test
 
