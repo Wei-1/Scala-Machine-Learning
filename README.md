@@ -2,9 +2,11 @@
 
 [![Build Status](https://travis-ci.org/Wei-1/Scala-Machine-Learning.svg?branch=master)](https://travis-ci.org/Wei-1/Scala-Machine-Learning)
 
+
 ## Light Weight Scala Machine Learning Library
 
 A very light weight Scala machine learning library that provide some basic ML for learning ML in Scala.
+
 
 ## Pre-Requisite
 
@@ -12,7 +14,8 @@ A very light weight Scala machine learning library that provide some basic ML fo
 
 - Sbt 0.13
 
-## This package includes -
+
+## This package includes
 
 ### Classification :
 
@@ -90,9 +93,24 @@ A very light weight Scala machine learning library that provide some basic ML fo
 
 - [x] Quadratic Discriminant Analysis
 
-### Memory Searching Cognition
 
-- [ ] Neural Turing Machine - TODO
+## TODO - Memory Searching Cognition
+
+- [ ] Neural Turing Machine
+
+
+## Installation Process
+
+1. [install Scala 2.12](https://www.scala-lang.org/download/)
+
+2. [install Sbt 0.13](https://www.scala-sbt.org/download.html)
+
+3. Clone this project
+
+```
+git clone https://github.com/Wei-1/Scala-Machine-Learning.git
+```
+
 
 ## Test
 
