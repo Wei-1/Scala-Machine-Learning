@@ -1,7 +1,7 @@
 // Wei Chen - Matrix Function
 // 2015-11-26
 
-package ght.mi.general
+package com.interplanetarytech.general
 package object MatrixFunc {
 
     val equalfunc = (v: (Double, Double)) => v._1 == v._2

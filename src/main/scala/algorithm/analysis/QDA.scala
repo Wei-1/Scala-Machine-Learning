@@ -1,8 +1,8 @@
 // Wei Chen - Quadratic Discriminant Analysis
 // 2017-09-01
 
-package ght.mi.algorithm
-import ght.mi.general.MatrixFunc._
+package com.interplanetarytech.algorithm
+import com.interplanetarytech.general.MatrixFunc._
 
 class QDA(d1: Array[Array[Double]], d2: Array[Array[Double]]) {
 

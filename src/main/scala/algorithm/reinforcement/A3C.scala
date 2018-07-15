@@ -1,7 +1,7 @@
 // Wei Chen - Asynchronous Advantage Actor Critic
 // 2017-10-01
 
-package ght.mi.algorithm
+package com.interplanetarytech.algorithm
 
 // nextstate, reward, end = simulator(state, action)
 class A3C(

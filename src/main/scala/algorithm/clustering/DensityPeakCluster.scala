@@ -1,8 +1,8 @@
 // Wei Chen - Alex Rodriquez Fast Cluster Science 2014
 // 2015-07-08
 
-package ght.mi.algorithm
-import ght.mi.general.MatrixFunc._
+package com.interplanetarytech.algorithm
+import com.interplanetarytech.general.MatrixFunc._
 
 class DensityPeakCluster() {
     // Density Delta Data

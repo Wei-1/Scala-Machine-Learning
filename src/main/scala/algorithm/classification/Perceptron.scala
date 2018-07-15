@@ -1,8 +1,8 @@
 // Wei Chen - Perceptron - linear version no kernel
 // 2015-11-26
 
-package ght.mi.algorithm
-import ght.mi.general.MatrixFunc._
+package com.interplanetarytech.algorithm
+import com.interplanetarytech.general.MatrixFunc._
 
 class Perceptron() {
     var projector = Array[Double]()

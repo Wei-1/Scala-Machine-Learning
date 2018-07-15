@@ -1,7 +1,7 @@
 // Wei Chen - Gene algorithm
 // 2017-07-22
 
-package ght.mi.algorithm
+package com.interplanetarytech.algorithm
 
 class GeneAlgorithm {
     var seeds: Array[Array[Double]] = null

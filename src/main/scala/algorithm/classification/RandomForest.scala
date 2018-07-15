@@ -1,7 +1,7 @@
 // Wei Chen - Random Forest
 // 2016-11-28
 
-package ght.mi.algorithm
+package com.interplanetarytech.algorithm
 
 class RandomForest() {
     var trees = Array[DecisionTree]()

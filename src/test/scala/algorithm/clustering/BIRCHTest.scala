@@ -2,9 +2,9 @@
 // 2016-06-04
 
 import org.scalatest.FunSuite
-import ght.mi.TestData._
-import ght.mi.general.MatrixFunc._
-import ght.mi.algorithm.BIRCH
+import com.interplanetarytech.TestData._
+import com.interplanetarytech.general.MatrixFunc._
+import com.interplanetarytech.algorithm.BIRCH
 
 class BIRCHSuite extends FunSuite {
 

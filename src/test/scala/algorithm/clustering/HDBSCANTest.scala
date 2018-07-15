@@ -2,9 +2,9 @@
 // 2016-11-12
 
 import org.scalatest.FunSuite
-import ght.mi.TestData._
-import ght.mi.general.MatrixFunc._
-import ght.mi.algorithm.HDBSCAN
+import com.interplanetarytech.TestData._
+import com.interplanetarytech.general.MatrixFunc._
+import com.interplanetarytech.algorithm.HDBSCAN
 
 class HDBSCANSuite extends FunSuite {
 

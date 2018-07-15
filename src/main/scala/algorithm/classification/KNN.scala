@@ -1,7 +1,7 @@
 // Wei Chen - K-Nearest-Neighborhood
 // 2015-12-21
 
-package ght.mi.algorithm
+package com.interplanetarytech.algorithm
 
 class KNN() {
     var referencepoints = Array[(Int, Array[Double])]()

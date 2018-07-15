@@ -2,9 +2,9 @@
 // 2016-11-29
 
 import org.scalatest.FunSuite
-import ght.mi.TestData._
-import ght.mi.general.MatrixFunc._
-import ght.mi.algorithm.RandomForest
+import com.interplanetarytech.TestData._
+import com.interplanetarytech.general.MatrixFunc._
+import com.interplanetarytech.algorithm.RandomForest
 
 class RandomForestSuite extends FunSuite {
 

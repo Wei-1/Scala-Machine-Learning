@@ -1,8 +1,8 @@
 // Wei Chen - NN - Neural Network with basic sigmoid
 // 2016-08-29
 
-package ght.mi.algorithm
-import ght.mi.general.MatrixFunc._
+package com.interplanetarytech.algorithm
+import com.interplanetarytech.general.MatrixFunc._
 
 class NeuralNetwork(val layer_neurons: Array[Int], val input_column: Int, val output_column: Int) {
     val layer_number = layer_neurons.size

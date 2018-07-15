@@ -2,8 +2,8 @@
 // 2017-08-08
 
 import org.scalatest.FunSuite
-import ght.mi.general.MatrixFunc._
-import ght.mi.algorithm.MonteCarlo
+import com.interplanetarytech.general.MatrixFunc._
+import com.interplanetarytech.algorithm.MonteCarlo
 
 class MonteCarloSuite extends FunSuite {
     

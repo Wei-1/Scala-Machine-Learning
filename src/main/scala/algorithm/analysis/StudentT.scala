@@ -1,7 +1,7 @@
 // Wei Chen - Student T
 // 2017-07-25
 
-package ght.mi.algorithm
+package com.interplanetarytech.algorithm
 
 class StudentT {
 

@@ -2,7 +2,7 @@
 // 2017-09-01
 
 import org.scalatest.FunSuite
-import ght.mi.algorithm.QDA
+import com.interplanetarytech.algorithm.QDA
 
 class QDASuite extends FunSuite {
 

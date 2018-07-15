@@ -2,8 +2,8 @@
 // 2017-07-28
 
 import org.scalatest.FunSuite
-import ght.mi.TestData._
-import ght.mi.algorithm.NaiveFeedback
+import com.interplanetarytech.TestData._
+import com.interplanetarytech.algorithm.NaiveFeedback
 
 class NaiveFeedbackSuite extends FunSuite {
 

@@ -1,7 +1,7 @@
 // Wei Chen - Double Deep Q Network
 // 2017-10-07
 
-package ght.mi.algorithm
+package com.interplanetarytech.algorithm
 
 // nextstate, reward, end = simulator(state, action)
 class DDQN(

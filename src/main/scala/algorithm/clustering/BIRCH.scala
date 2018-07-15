@@ -1,8 +1,8 @@
 // Wei Chen - BIRCH
 // 2016-11-18
 
-package ght.mi.algorithm
-import ght.mi.general.MatrixFunc._
+package com.interplanetarytech.algorithm
+import com.interplanetarytech.general.MatrixFunc._
 
 class BIRCH() {
     var centers = Array[(Int, Array[Double], Array[Double])]()

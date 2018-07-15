@@ -1,7 +1,7 @@
 // Wei Chen - Q-Learning
 // 2017-08-16
 
-package ght.mi.algorithm
+package com.interplanetarytech.algorithm
 
 class QState (val id: Int = -1) {
     var reward: Double = 0.0

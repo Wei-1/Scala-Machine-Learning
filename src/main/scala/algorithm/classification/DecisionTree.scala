@@ -1,7 +1,7 @@
 // Wei Chen - Decision Tree
 // 2016-11-24
 
-package ght.mi.algorithm
+package com.interplanetarytech.algorithm
 
 class DecisionNode(col: Int, v: Double, tnode: DecisionNode , fnode: DecisionNode, r: Map[Int, Int]) {
     val column: Int = col

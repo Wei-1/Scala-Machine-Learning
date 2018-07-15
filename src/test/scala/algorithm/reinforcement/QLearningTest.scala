@@ -2,8 +2,8 @@
 // 2017-08-16
 
 import org.scalatest.FunSuite
-import ght.mi.TestData._
-import ght.mi.algorithm.QLearning
+import com.interplanetarytech.TestData._
+import com.interplanetarytech.algorithm.QLearning
 
 class QLearningSuite extends FunSuite {
 

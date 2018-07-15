@@ -2,7 +2,7 @@
 // 2017-08-30
 
 import org.scalatest.FunSuite
-import ght.mi.algorithm.ANOVA
+import com.interplanetarytech.algorithm.ANOVA
 
 class ANOVASuite extends FunSuite {
 

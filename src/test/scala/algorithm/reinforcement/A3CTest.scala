@@ -2,8 +2,8 @@
 // 2017-10-01
 
 import org.scalatest.FunSuite
-import ght.mi.TestData._
-import ght.mi.algorithm.A3C
+import com.interplanetarytech.TestData._
+import com.interplanetarytech.algorithm.A3C
 
 class A3CSuite extends FunSuite {
 

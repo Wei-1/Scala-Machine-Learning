@@ -2,8 +2,8 @@
 // 2017-08-31
 
 import org.scalatest.FunSuite
-import ght.mi.TestData._
-import ght.mi.algorithm.QNeuralLearning
+import com.interplanetarytech.TestData._
+import com.interplanetarytech.algorithm.QNeuralLearning
 
 class QNeuralLearningSuite extends FunSuite {
 

@@ -1,7 +1,7 @@
 // Wei Chen - Test Data Collection
 // 2016-12-1
 
-package ght.mi
+package com.interplanetarytech
 package object TestData {
     // Classification Data
     // Linear Classification Data

@@ -1,9 +1,9 @@
 // Wei Chen - Gaussian Process
 // 2016-11-24
 
-package ght.mi.algorithm
+package com.interplanetarytech.algorithm
 
-import ght.mi.general.MatrixFunc._
+import com.interplanetarytech.general.MatrixFunc._
 
 class GaussianProcess() {
     var pointGroups = Map[Int, Array[Array[Double]]]()

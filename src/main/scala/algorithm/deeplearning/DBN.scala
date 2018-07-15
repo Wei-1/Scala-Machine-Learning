@@ -1,7 +1,7 @@
 // Wei Chen - DBN - Deep Belief Network
 // 2016-11-23
 
-package ght.mi.algorithm
+package com.interplanetarytech.algorithm
 
 class DBN(val layer_rbms: Array[Int], val layer_nns: Array[Int], val input_column: Int, val output_column: Int) {
     val rbm_number = layer_rbms.size

@@ -2,9 +2,9 @@
 // 2016-11-06
 
 import org.scalatest.FunSuite
-import ght.mi.TestData._
-import ght.mi.general.MatrixFunc._
-import ght.mi.algorithm.NeuralNetwork
+import com.interplanetarytech.TestData._
+import com.interplanetarytech.general.MatrixFunc._
+import com.interplanetarytech.algorithm.NeuralNetwork
 
 class NeuralNetworkSuite extends FunSuite {
 

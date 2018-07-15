@@ -1,7 +1,7 @@
 // Wei Chen - Minimax
 // 2017-07-22
 
-package ght.mi.algorithm
+package com.interplanetarytech.algorithm
 
 class Minimax {
 

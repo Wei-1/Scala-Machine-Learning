@@ -1,8 +1,8 @@
 // Wei Chen - K-Mean
 // 2015-12-18
 
-package ght.mi.algorithm
-import ght.mi.general.MatrixFunc._
+package com.interplanetarytech.algorithm
+import com.interplanetarytech.general.MatrixFunc._
 
 class KMean() {
     var centers = Array[(Array[Double], Int)]()

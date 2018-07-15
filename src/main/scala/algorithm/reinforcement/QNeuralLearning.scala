@@ -1,7 +1,7 @@
 // Wei Chen - Q Neural Learning
 // 2017-08-16
 
-package ght.mi.algorithm
+package com.interplanetarytech.algorithm
 
 // nextstate, reward, end = simulator(state, action)
 class QNeuralLearning(

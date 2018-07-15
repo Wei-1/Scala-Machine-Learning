@@ -1,8 +1,8 @@
 // Wei Chen - Linear Regression
 // 2015-12-21
 
-package ght.mi.algorithm
-import ght.mi.general.MatrixFunc._
+package com.interplanetarytech.algorithm
+import com.interplanetarytech.general.MatrixFunc._
 
 class LinearRegression() {
     private def dot(x:Array[Double], y:Array[Double]): Double =

@@ -1,7 +1,7 @@
 // Wei Chen - ANOVA
 // 2017-08-30
 
-package ght.mi.algorithm
+package com.interplanetarytech.algorithm
 
 class ANOVA(data: Array[Array[Double]]) {
 
