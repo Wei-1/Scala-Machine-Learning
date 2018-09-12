@@ -11,8 +11,8 @@ class Perceptron() extends Classifier {
 
     override def clear(): Boolean = try {
         projector = Array[Double]()
-        lr: Double = 0.5
-        limit: Int = 1000
+        lr = 0.5
+        limit = 1000
         true
     } catch { case e: Exception =>
         Console.err.println(e)
