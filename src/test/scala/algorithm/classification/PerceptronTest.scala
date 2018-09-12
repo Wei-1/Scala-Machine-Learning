@@ -9,36 +9,24 @@ import com.interplanetarytech.algorithm.Perceptron
 class PerceptronSuite extends FunSuite {
 
     val perceptron = new Perceptron()
-    test("Perceptron Test : Initialization") {
-        assert(perceptron.projector.isEmpty)
+
+    test("Perceptron Test : Clear") {
+        assert(perceptron.clear())
     }
 
-    test("Perceptron Test : Linear Train") {
-        val learning_rate = 0.5
-        val limit = 1000
-        perceptron.train(LABELED_LINEAR_DATA, learning_rate, limit)
-        assert(!perceptron.projector.isEmpty)
-    }
-
-    test("Perceptron Test : Linear Predict") {
+    test("Perceptron Test : Linear Data") {
+        assert(perceptron.clear())
+        assert(perceptron.config(Map("learning_rate" -> 0.5, "limit" -> 1000)))
+        assert(perceptron.train(LABELED_LINEAR_DATA))
         val result = perceptron.predict(UNLABELED_LINEAR_DATA)
         assert(arrayequal(result, LABEL_LINEAR_DATA))
     }
 
-    test("Perceptron Test : Nonlinear Train") {
-        val learning_rate = 0.5
-        val limit = 1000
-        perceptron.train(LABELED_NONLINEAR_DATA, learning_rate, limit)
-        assert(!perceptron.projector.isEmpty)
-    }
-
-    test("Perceptron Test : Nonlinear Predict - WRONG") {
+    test("Perceptron Test : Nonlinear Data - WRONG") {
+        assert(perceptron.clear())
+        assert(perceptron.config(Map("learning_rate" -> 0.5, "limit" -> 1000)))
+        assert(perceptron.train(LABELED_NONLINEAR_DATA))
         val result = perceptron.predict(UNLABELED_NONLINEAR_DATA)
         assert(!arrayequal(result, LABEL_NONLINEAR_DATA))
-    }
-    
-    test("Perceptron Test : Clear") {
-        perceptron.clear()
-        assert(perceptron.projector.isEmpty)
     }
 }

@@ -4,22 +4,37 @@
 package com.interplanetarytech.algorithm
 import com.interplanetarytech.general.MatrixFunc._
 
-class LinearRegression() {
+class LinearRegression() extends Classifier {
     private def dot(x:Array[Double], y:Array[Double]): Double =
         arraymultiply(x, y).sum
 
     var projector = Array[(Int, Int, Array[Double], Array[Double])]()
-    def clear() = projector = Array[(Int, Int, Array[Double], Array[Double])]()
+
+    override def clear(): Boolean = try {
+        projector = Array[(Int, Int, Array[Double], Array[Double])]()
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
+
+    override def config(paras: Map[String, Double]): Boolean = try {
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
+
     // --- Start Linear Regression Function ---
-    def train(
+    override def train(
         data: Array[(Int, Array[Double])]   // Data Array(yi, xi)
-    ) = { // Return PData Class
+    ): Boolean = try { // Return PData Class
         val centers = data.groupBy(_._1).map{l =>
             val datasize = l._2.size
             (l._1, matrixaccumulate(l._2.map(_._2)).map(_/datasize))
         }
-        centers.map{center1 =>
-            centers.map{center2 =>
+        centers.map { center1 =>
+            centers.map { center2 =>
                 if (center1._1 < center2._1) {
                     val m = arraysum(center1._2, center2._2).map(_/2)
                     var w = arrayminus(center2._2, center1._2)
@@ -28,9 +43,13 @@ class LinearRegression() {
                 }
             }
         }
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
     }
     // --- Dual Projection Linear Regression ---
-    def predict(
+    override def predict(
         data: Array[Array[Double]]
     ): Array[Int] = {
         return data.map{d =>

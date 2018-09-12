@@ -3,9 +3,20 @@
 
 package com.interplanetarytech.algorithm
 
-class RandomForest() {
+class RandomForest() extends Classifier {
     var trees = Array[DecisionTree]()
-    def clear() = trees = Array[DecisionTree]()
+    var tree_n = 10 // Number of Trees
+    var sample_n = 10 // Number of Sample Data in a Tree
+
+    override def clear(): Boolean = try {
+        trees = Array[DecisionTree]()
+        tree_n = 10
+        sample_n = 10
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
 
     private def randomSelect(data: Array[(Int, Array[Double])], sample_n: Int) =
         scala.util.Random.shuffle(data.toList).take(sample_n).toArray
@@ -16,14 +27,27 @@ class RandomForest() {
         trees :+= dtree
     }
 
-    def train(data: Array[(Int, Array[Double])], tree_n: Int, sample_n: Int) {
+    override def config(paras: Map[String, Double]): Boolean = try {
+        tree_n = paras.getOrElse("TREE_NUMBER", paras.getOrElse("tree_number", paras.getOrElse("tree_n", 10.0))).toInt
+        sample_n = paras.getOrElse("SAMPLE_NUMBER", paras.getOrElse("sample_number", paras.getOrElse("sample_n", 10.0))).toInt
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
+
+    override def train(data: Array[(Int, Array[Double])]): Boolean = try {
         val data_n = data.size
         if (data_n > sample_n) {
             for (i <- 0 until tree_n) addTree(randomSelect(data, sample_n))
         } else addTree(data)
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
     }
 
-    def predict(data: Array[Array[Double]]): Array[Int] = {
+    override def predict(data: Array[Array[Double]]): Array[Int] = {
         val data_n = data.size
         return trees.map { tree =>
             tree.predict(data)

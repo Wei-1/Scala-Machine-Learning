@@ -4,53 +4,65 @@
 package com.interplanetarytech.algorithm
 import com.interplanetarytech.general.MatrixFunc._
 
-class BayesianDecision() {
+class BayesianDecision() extends Classifier {
 
     var groupcnt = Map[Int, Int]()
     var groupavg = Map[Int, Array[Double]]()
     var groupcov = Map[Int, Array[Array[Double]]]()
 
-    def clear() = {
+    override def clear(): Boolean = try {
         groupcnt = Map[Int, Int]()
         groupavg = Map[Int, Array[Double]]()
         groupcov = Map[Int, Array[Array[Double]]]()
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
+
+    override def config(paras: Map[String, Double]): Boolean = try {
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
     }
 
     private def arrstats(
         i: Int,
         data: Array[Array[Double]]
-    ): Int = {
+    ) {
         val n = data.size
         val m = matrixaccumulate(data).map(_/n)
         val s = covariance(data)
         groupcnt += (i -> n)
         groupavg += (i -> m)
         groupcov += (i -> s)
-        return n
     }
 
-    def train(
+    override def train(
         data: Array[(Int, Array[Double])]
-    ): Array[Int] = {
-        return data.groupBy(_._1)
-            .map { d =>
-                arrstats(d._1, d._2.map(_._2))
-            }.toArray
+    ): Boolean = try {
+        data.groupBy(_._1).foreach { d =>
+            arrstats(d._1, d._2.map(_._2))
+        }
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
     }
 
-    def predict(
+    override def predict(
         data: Array[Array[Double]]
     ): Array[Int] = {
         val n = groupavg.size
         if (n == 0) {
-            return Array[Int]()
-        }else{
-            return data.map { d =>
+            Array[Int]()
+        } else {
+            data.map { d =>
                 groupcnt.map { cnt =>
                     val i = cnt._1
                     (i, cnt._2 * gaussianprobability(d, groupavg(i), groupcov(i)))
-                }.toArray
-                    .maxBy(_._2)._1
+                }.toArray.maxBy(_._2)._1
             }
         }
     }
