@@ -5,11 +5,11 @@ package com.interplanetarytech.algorithm
 
 class KNN() extends Classifier {
     var referencepoints = Array[(Int, Array[Double])]()
-    var k = 2
+    var k = 1
 
     override def clear(): Boolean = try {
         referencepoints = Array[(Int, Array[Double])]()
-        k = 2
+        k = 1
         true
     } catch { case e: Exception =>
         Console.err.println(e)
@@ -17,7 +17,7 @@ class KNN() extends Classifier {
     }
 
     override def config(paras: Map[String, Double]): Boolean = try {
-        k = paras.getOrElse("K", paras.getOrElse("k", 2.0)).toInt
+        k = paras.getOrElse("K", paras.getOrElse("k", 1.0)).toInt
         true
     } catch { case e: Exception =>
         Console.err.println(e)
@@ -26,6 +26,7 @@ class KNN() extends Classifier {
     // --- Start KNN Function ---
     override def train(tdata: Array[(Int, Array[Double])]): Boolean = try {
         referencepoints = tdata
+        true
     } catch { case e: Exception =>
         Console.err.println(e)
         false
