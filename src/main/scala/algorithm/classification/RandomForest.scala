@@ -28,8 +28,8 @@ class RandomForest() extends Classifier {
     }
 
     override def config(paras: Map[String, Double]): Boolean = {
-        tree_n = paras.getOrElse("TREE_NUMBER", paras.getOrElse("tree_number", paras.getOrElse("tree_n", 0)))
-        sample_n = paras.getOrElse("SAMPLE_NUMBER", paras.getOrElse("sample_number", paras.getOrElse("sample_n", 0)))
+        tree_n = paras.getOrElse("TREE_NUMBER", paras.getOrElse("tree_number", paras.getOrElse("tree_n", 10.0))).toInt
+        sample_n = paras.getOrElse("SAMPLE_NUMBER", paras.getOrElse("sample_number", paras.getOrElse("sample_n", 10.0))).toInt
     }
 
     override def train(data: Array[(Int, Array[Double])]): Boolean = try {

@@ -16,7 +16,7 @@ class RandomForestSuite extends FunSuite {
 
     test("RandomForest Test : Linear Data") {
         assert(rf.clear())
-        assert(rf.config(Map("tree_n" -> 5, "sample_n" -> 4)))
+        assert(rf.config(Map("tree_n" -> 5.0, "sample_n" -> 4.0)))
         assert(rf.train(LABELED_LINEAR_DATA))
         val result = rf.predict(UNLABELED_LINEAR_DATA)
         assert(arrayequal(result, LABEL_LINEAR_DATA))
@@ -24,7 +24,7 @@ class RandomForestSuite extends FunSuite {
     
     test("RandomForest Test : Nonlinear Data") {
         assert(rf.clear())
-        assert(rf.config(Map("tree_n" -> 20, "sample_n" -> 4)))
+        assert(rf.config(Map("tree_n" -> 20.0, "sample_n" -> 4.0)))
         assert(rf.train(LABELED_NONLINEAR_DATA))
         val result = rf.predict(UNLABELED_NONLINEAR_DATA)
         assert(arrayequal(result, LABEL_NONLINEAR_DATA))
