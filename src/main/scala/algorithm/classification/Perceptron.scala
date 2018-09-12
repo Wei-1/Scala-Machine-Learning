@@ -4,15 +4,35 @@
 package com.interplanetarytech.algorithm
 import com.interplanetarytech.general.MatrixFunc._
 
-class Perceptron() {
+class Perceptron() extends Classifier {
     var projector = Array[Double]()
-    def clear() = projector = Array[Double]()
+    var lr: Double = 0.5
+    var limit: Int = 1000
+
+    override def clear(): Boolean = try {
+        projector = Array[Double]()
+        lr: Double = 0.5
+        limit: Int = 1000
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
+
+    override def config(paras: Map[String, Double]): Boolean = try {
+        lr = paras.getOrElse("LEARNING_RATE", paras.getOrElse("learning_rate", paras.getOrElse("lr", 0.5)))
+        limit = paras.getOrElse("LIMIT", paras.getOrElse("limit", 1000.0)).toInt
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
 
     private def dot(x:Array[Double], y:Array[Double]): Double =
         arraymultiply(x, y).sum
 
     // train(Array((1,Array(1,2)),(1,Array(2,3)),(-1,Array(2,1)),(-1,Array(3,2))), 0.5, 100)
-    def train(data: Array[(Int, Array[Double])], lr: Double, limit: Int) {
+    override def train(data: Array[(Int, Array[Double])]): Boolean = try {
         val traindatasize = data.size
         val featuresize = data.head._2.size
         var w = new Array[Double](featuresize + 1)
@@ -34,9 +54,13 @@ class Perceptron() {
             else saturated = true
         }
         projector = w
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
     }
 
-    def predict(data: Array[Array[Double]]): Array[Int] = {
+    override def predict(data: Array[Array[Double]]): Array[Int] = {
         return data.map { xt =>
             val xi = xt :+ 1.0
             if (dot(xi, projector) < 0) -1

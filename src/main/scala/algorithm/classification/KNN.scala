@@ -3,16 +3,36 @@
 
 package com.interplanetarytech.algorithm
 
-class KNN() {
+class KNN() extends Classifier {
     var referencepoints = Array[(Int, Array[Double])]()
-    def clear() = referencepoints = Array[(Int, Array[Double])]()
-    // --- Start KNN Function ---
-    def train(tdata: Array[(Int, Array[Double])]) =
-        referencepoints = tdata
+    var k = 2
 
-    def predict(                            // K Mean
-        pdata: Array[Array[Double]],        // Data Array(xi)
-        k: Int                              // K Nearest
+    override def clear(): Boolean = try {
+        referencepoints = Array[(Int, Array[Double])]()
+        k = 2
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
+
+    override def config(paras: Map[String, Double]): Boolean = try {
+        k = paras.getOrElse("K", paras.getOrElse("k", 2.0)).toInt
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
+    // --- Start KNN Function ---
+    override def train(tdata: Array[(Int, Array[Double])]): Boolean = try {
+        referencepoints = tdata
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
+
+    override def predict(                   // K Mean
+        pdata: Array[Array[Double]]         // Data Array(xi)
     ): Array[Int] = {                       // Return PData Class
         return pdata.map { pd =>
             referencepoints.map { td =>

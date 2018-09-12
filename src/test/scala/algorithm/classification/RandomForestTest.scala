@@ -22,7 +22,7 @@ class RandomForestSuite extends FunSuite {
         assert(arrayequal(result, LABEL_LINEAR_DATA))
     }
     
-    test("RandomForest Test : Nonlinear Data") {
+    test("RandomForest Test : Nonlinear Data - WRONG") {
         assert(rf.clear())
         assert(rf.config(Map("tree_n" -> 20.0, "sample_n" -> 4.0)))
         assert(rf.train(LABELED_NONLINEAR_DATA))

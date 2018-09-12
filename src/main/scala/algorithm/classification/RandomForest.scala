@@ -5,13 +5,13 @@ package com.interplanetarytech.algorithm
 
 class RandomForest() extends Classifier {
     var trees = Array[DecisionTree]()
-    var tree_n = 0 // Number of Trees
-    var sample_n = 0 // Number of Sample Data in a Tree
+    var tree_n = 10 // Number of Trees
+    var sample_n = 10 // Number of Sample Data in a Tree
 
     override def clear(): Boolean = try {
         trees = Array[DecisionTree]()
-        tree_n = 0
-        sample_n = 0
+        tree_n = 10
+        sample_n = 10
         true
     } catch { case e: Exception =>
         Console.err.println(e)

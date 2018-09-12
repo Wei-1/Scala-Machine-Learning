@@ -9,32 +9,25 @@ import com.interplanetarytech.algorithm.GaussianProcess
 class GaussianProcessSuite extends FunSuite {
 
     val gp = new GaussianProcess()
-    test("GaussianProcess Test : Initialization") {
-        assert(gp.pointGroups.isEmpty)
+
+    test("GaussianProcess Test : Clear") {
+        assert(gp.clear())
     }
 
-    test("GaussianProcess Test : Linear Train") {
-        gp.train(LABELED_LINEAR_DATA)
+    test("GaussianProcess Test : Linear Data") {
+        assert(gp.clear())
+        assert(gp.config(Map("std" -> 3.0)))
+        assert(gp.train(LABELED_LINEAR_DATA))
         assert(gp.pointGroups.size == 2)
-    }
-    
-    test("GaussianProcess Test : Linear Predict") {
-        val result = gp.predict(UNLABELED_LINEAR_DATA, 3)
+        val result = gp.predict(UNLABELED_LINEAR_DATA)
         assert(arrayequal(result, LABEL_LINEAR_DATA))
     }
-
-    test("GaussianProcess Test : Nonlinear Train") {
-        gp.train(LABELED_NONLINEAR_DATA)
-        assert(gp.pointGroups.size == 2)
-    }
     
-    test("GaussianProcess Test : Nonlinear Predict") {
+    test("GaussianProcess Test : Nonlinear Data") {
+        assert(gp.clear())
+        assert(gp.config(Map("std" -> 3.0)))
+        assert(gp.train(LABELED_NONLINEAR_DATA))
         val result = gp.predict(UNLABELED_NONLINEAR_DATA, 3)
         assert(arrayequal(result, LABEL_NONLINEAR_DATA))
-    }
-    
-    test("GaussianProcess Test : Clear") {
-        gp.clear()
-        assert(gp.pointGroups.isEmpty)
     }
 }

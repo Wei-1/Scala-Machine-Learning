@@ -9,32 +9,23 @@ import com.interplanetarytech.algorithm.KNN
 class KNNSuite extends FunSuite {
 
     val knn = new KNN()
-    test("KNN Test : Initialization") {
-        assert(knn.referencepoints.isEmpty)
+    test("KNN Test : Clear") {
+        assert(knn.clear())
     }
 
-    test("KNN Test : Linear Train") {
-        knn.train(LABELED_LINEAR_DATA)
-        assert(!knn.referencepoints.isEmpty)
-    }
-    
-    test("KNN Test : Linear Predict") {
-        val result = knn.predict(UNLABELED_LINEAR_DATA, 3)
+    test("KNN Test : Linear Data") {
+        assert(knn.clear())
+        assert(knn.config(Map("k" -> 3.0)))
+        assert(knn.train(LABELED_LINEAR_DATA))
+        val result = knn.predict(UNLABELED_LINEAR_DATA)
         assert(arrayequal(result, LABEL_LINEAR_DATA))
     }
-
+    
     test("KNN Test : Nonlinear Train") {
-        knn.train(LABELED_NONLINEAR_DATA)
-        assert(!knn.referencepoints.isEmpty)
-    }
-    
-    test("KNN Test : Nonlinear Predict") {
-        val result = knn.predict(UNLABELED_NONLINEAR_DATA, 1)
+        assert(knn.clear())
+        assert(knn.config(Map("k" -> 1.0)))
+        assert(knn.train(LABELED_NONLINEAR_DATA))
+        val result = knn.predict(UNLABELED_NONLINEAR_DATA)
         assert(arrayequal(result, LABEL_NONLINEAR_DATA))
-    }
-    
-    test("KNN Test : Clear") {
-        knn.clear()
-        assert(knn.referencepoints.isEmpty)
     }
 }
