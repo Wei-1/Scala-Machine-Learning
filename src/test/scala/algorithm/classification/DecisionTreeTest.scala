@@ -9,32 +9,24 @@ import com.interplanetarytech.algorithm.DecisionTree
 class DecisionTreeSuite extends FunSuite {
 
     val dtree = new DecisionTree()
-    test("DecisionTree Test : Initialization") {
-        assert(dtree.tree == null)
+    
+    test("DecisionTree Test : Clear") {
+        assert(dtree.clear())
     }
 
-    test("DecisionTree Test : Linear Train") {
-        dtree.train(LABELED_LINEAR_DATA)
-        assert(dtree.tree != null)
-    }
-
-    test("DecisionTree Test : Linear Predict") {
+    test("DecisionTree Test : Linear Data") {
+        assert(dtree.clear())
+        assert(dtree.config(Map[String, Double]()))
+        assert(dtree.train(LABELED_LINEAR_DATA))
         val result = dtree.predict(UNLABELED_LINEAR_DATA)
         assert(arrayequal(result, LABEL_LINEAR_DATA))
     }
 
-    test("DecisionTree Test : Nonlinear Train") {
-        dtree.train(LABELED_NONLINEAR_DATA)
-        assert(dtree.tree != null)
-    }
-
-    test("DecisionTree Test : Nonlinear Predict - WRONG") {
+    test("DecisionTree Test : Nonlinear Data - WRONG") {
+        assert(dtree.clear())
+        assert(dtree.config(Map[String, Double]()))
+        assert(dtree.train(LABELED_NONLINEAR_DATA))
         val result = dtree.predict(UNLABELED_NONLINEAR_DATA)
         assert(!arrayequal(result, LABEL_NONLINEAR_DATA))
-    }
-    
-    test("DecisionTree Test : Clear") {
-        dtree.clear()
-        assert(dtree.tree == null)
     }
 }
