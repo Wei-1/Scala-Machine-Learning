@@ -16,7 +16,7 @@ class DecisionTreeSuite extends FunSuite {
 
     test("DecisionTree Test : Linear Data") {
         assert(dtree.clear())
-        assert(dtree.confid(Map[String, Double]()))
+        assert(dtree.config(Map[String, Double]()))
         assert(dtree.train(LABELED_LINEAR_DATA))
         val result = dtree.predict(UNLABELED_LINEAR_DATA)
         assert(arrayequal(result, LABEL_LINEAR_DATA))
@@ -24,7 +24,7 @@ class DecisionTreeSuite extends FunSuite {
 
     test("DecisionTree Test : Nonlinear Data - WRONG") {
         assert(dtree.clear())
-        assert(dtree.confid(Map[String, Double]()))
+        assert(dtree.config(Map[String, Double]()))
         assert(dtree.train(LABELED_NONLINEAR_DATA))
         val result = dtree.predict(UNLABELED_NONLINEAR_DATA)
         assert(!arrayequal(result, LABEL_NONLINEAR_DATA))

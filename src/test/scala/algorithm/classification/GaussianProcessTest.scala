@@ -27,7 +27,7 @@ class GaussianProcessSuite extends FunSuite {
         assert(gp.clear())
         assert(gp.config(Map("std" -> 3.0)))
         assert(gp.train(LABELED_NONLINEAR_DATA))
-        val result = gp.predict(UNLABELED_NONLINEAR_DATA, 3)
+        val result = gp.predict(UNLABELED_NONLINEAR_DATA)
         assert(arrayequal(result, LABEL_NONLINEAR_DATA))
     }
 }
