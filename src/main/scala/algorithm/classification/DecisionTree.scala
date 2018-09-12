@@ -18,10 +18,24 @@ class DecisionNode(col: Int, v: Double, tnode: DecisionNode , fnode: DecisionNod
     }
 }
 
-class DecisionTree() {
+class DecisionTree() extends Classifier {
 
     var tree: DecisionNode = null
-    def clear() = tree = null
+
+    override def clear(): Boolean = try {
+        tree = null
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
+
+    override def config(paras: Map[String, Double]): Boolean = try {
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
 
     private def log2(x: Double) = Math.log(x) / Math.log(2)
 
@@ -70,7 +84,13 @@ class DecisionTree() {
         } else return new DecisionNode(0, 0, null, null, uniqueCount(data))
     }
 
-    def train(data: Array[(Int, Array[Double])]) = tree = buildtree(data)
+    override def train(data: Array[(Int, Array[Double])]): Boolean = try {
+        tree = buildtree(data)
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
 
-    def predict(x: Array[Array[Double]]): Array[Int] = x.map(xi => tree.predict(xi))
+    override def predict(x: Array[Array[Double]]): Array[Int] = x.map(xi => tree.predict(xi))
 }
