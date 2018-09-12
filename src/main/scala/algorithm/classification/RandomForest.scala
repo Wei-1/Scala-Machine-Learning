@@ -27,9 +27,13 @@ class RandomForest() extends Classifier {
         trees :+= dtree
     }
 
-    override def config(paras: Map[String, Double]): Boolean = {
+    override def config(paras: Map[String, Double]): Boolean = try {
         tree_n = paras.getOrElse("TREE_NUMBER", paras.getOrElse("tree_number", paras.getOrElse("tree_n", 10.0))).toInt
         sample_n = paras.getOrElse("SAMPLE_NUMBER", paras.getOrElse("sample_number", paras.getOrElse("sample_n", 10.0))).toInt
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
     }
 
     override def train(data: Array[(Int, Array[Double])]): Boolean = try {
