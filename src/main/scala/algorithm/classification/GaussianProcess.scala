@@ -5,7 +5,10 @@ package com.interplanetarytech.algorithm
 
 import com.interplanetarytech.general.MatrixFunc._
 
-class GaussianProcess() extends Classifier {
+class GaussianProcess() extends Classification {
+    val algoname: String = "GaussianProcess"
+    val version: String = "0.1"
+
     var pointGroups = Map[Int, Array[Array[Double]]]()
     var std: Double = 1.0 // Standard Deviation
 
@@ -18,8 +21,8 @@ class GaussianProcess() extends Classifier {
         false
     }
 
-    override def config(paras: Map[String, Double]): Boolean = try {
-        std = paras.getOrElse("STANDARD_DEVIATION", paras.getOrElse("standard_deviation", paras.getOrElse("std", 1.0)))
+    override def config(paras: Map[String, Any]): Boolean = try {
+        std = paras.getOrElse("STANDARD_DEVIATION", paras.getOrElse("standard_deviation", paras.getOrElse("std", 1.0))).asInstanceOf[Double]
         true
     } catch { case e: Exception =>
         Console.err.println(e)

@@ -3,7 +3,10 @@
 
 package com.interplanetarytech.algorithm
 
-class KNN() extends Classifier {
+class KNN() extends Classification {
+    val algoname: String = "KNN"
+    val version: String = "0.1"
+
     var referencepoints = Array[(Int, Array[Double])]()
     var k = 1
 
@@ -16,8 +19,8 @@ class KNN() extends Classifier {
         false
     }
 
-    override def config(paras: Map[String, Double]): Boolean = try {
-        k = paras.getOrElse("K", paras.getOrElse("k", 1.0)).toInt
+    override def config(paras: Map[String, Any]): Boolean = try {
+        k = paras.getOrElse("K", paras.getOrElse("k", 1.0)).asInstanceOf[Double].toInt
         true
     } catch { case e: Exception =>
         Console.err.println(e)

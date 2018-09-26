@@ -3,7 +3,10 @@
 
 package com.interplanetarytech.algorithm
 
-class RandomForest() extends Classifier {
+class RandomForest() extends Classification {
+    val algoname: String = "RandomForest"
+    val version: String = "0.1"
+
     var trees = Array[DecisionTree]()
     var tree_n = 10 // Number of Trees
     var sample_n = 10 // Number of Sample Data in a Tree
@@ -27,9 +30,9 @@ class RandomForest() extends Classifier {
         trees :+= dtree
     }
 
-    override def config(paras: Map[String, Double]): Boolean = try {
-        tree_n = paras.getOrElse("TREE_NUMBER", paras.getOrElse("tree_number", paras.getOrElse("tree_n", 10.0))).toInt
-        sample_n = paras.getOrElse("SAMPLE_NUMBER", paras.getOrElse("sample_number", paras.getOrElse("sample_n", 10.0))).toInt
+    override def config(paras: Map[String, Any]): Boolean = try {
+        tree_n = paras.getOrElse("TREE_NUMBER", paras.getOrElse("tree_number", paras.getOrElse("tree_n", 10.0))).asInstanceOf[Double].toInt
+        sample_n = paras.getOrElse("SAMPLE_NUMBER", paras.getOrElse("sample_number", paras.getOrElse("sample_n", 10.0))).asInstanceOf[Double].toInt
         true
     } catch { case e: Exception =>
         Console.err.println(e)

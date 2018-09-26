@@ -4,7 +4,10 @@
 package com.interplanetarytech.algorithm
 import com.interplanetarytech.general.MatrixFunc._
 
-class LinearRegression() extends Classifier {
+class LinearRegression() extends Classification {
+    val algoname: String = "LinearRegression"
+    val version: String = "0.1"
+
     private def dot(x:Array[Double], y:Array[Double]): Double =
         arraymultiply(x, y).sum
 
@@ -18,7 +21,7 @@ class LinearRegression() extends Classifier {
         false
     }
 
-    override def config(paras: Map[String, Double]): Boolean = try {
+    override def config(paras: Map[String, Any]): Boolean = try {
         true
     } catch { case e: Exception =>
         Console.err.println(e)

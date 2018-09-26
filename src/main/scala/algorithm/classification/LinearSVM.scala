@@ -7,9 +7,31 @@ import com.interplanetarytech.general.MatrixFunc._
 // LinearSVM = linear Support Vector Machine
 // This core function only support dual classification cus linear
 // classifier is only good at dual classification problems
-class LinearSVM() {
+class LinearSVM() extends Classification {
+    val algoname: String = "LinearSVM"
+    val version: String = "0.1"
     var projector = Array[Double]()
-    def clear() = projector = Array[Double]()
+    var cost = Map(-1 -> 1.0, 1 -> 1.0) // Cost of two groups
+    var limit = 1000                    // Iteration limit
+    var err = 1e-1                      // Saturation error
+    override def clear(): Boolean = try {
+        projector = Array[Double]()
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
+
+    override def config(paras: Map[String, Any]): Boolean = try {
+        cost = paras.getOrElse("COST", paras.getOrElse("cost", Map(-1 -> 1.0, 1 -> 1.0))).asInstanceOf[Map[Int, Double]]
+        limit = paras.getOrElse("LIMIT", paras.getOrElse("limit", 1000)).asInstanceOf[Int]
+        err = paras.getOrElse("ERROR", paras.getOrElse("error", paras.getOrElse("err", 1e-1))).asInstanceOf[Double]
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
+
     // --- Sub Variables & Functions ---
     private val INF = 1.0 / 0           // Infinite
     private val rng = scala.util.Random // Random Seed
@@ -26,11 +48,8 @@ class LinearSVM() {
     }
     // --- Function Core Start ---
     def train(
-        data: Array[(Int, Array[Double])], // Data Array(yi, xi)
-        cost: Map[Int, Double],            // Cost of two groups
-        limit: Int,                        // Iteration limit
-        err: Double                        // Saturation error
-    ) { // - Feature Initialization
+        data: Array[(Int, Array[Double])] // Data Array(yi, xi)
+    ): Boolean = try { // - Feature Initialization
         val traindatasize = data.size
         val featuresize = data.head._2.size
         var w = new Array[Double](featuresize + 1)   // Initial weighting
@@ -81,6 +100,10 @@ class LinearSVM() {
         // Console.err.println("Iterate:" + iter + "  SV_Number:" + alpha.filter(_ > 0).size)
         // Console.err.println("W = " + w.mkString(","))
         projector = w
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
     }
     // --- Prediction Function ---
     def predict(data: Array[Array[Double]]): Array[Int] = {

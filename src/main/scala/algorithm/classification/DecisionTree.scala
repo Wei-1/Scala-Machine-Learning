@@ -18,7 +18,9 @@ class DecisionNode(col: Int, v: Double, tnode: DecisionNode , fnode: DecisionNod
     }
 }
 
-class DecisionTree() extends Classifier {
+class DecisionTree() extends Classification {
+    val algoname: String = "DecisionTree"
+    val version: String = "0.1"
 
     var tree: DecisionNode = null
 
@@ -30,7 +32,7 @@ class DecisionTree() extends Classifier {
         false
     }
 
-    override def config(paras: Map[String, Double]): Boolean = try {
+    override def config(paras: Map[String, Any]): Boolean = try {
         true
     } catch { case e: Exception =>
         Console.err.println(e)

@@ -9,37 +9,32 @@ import com.interplanetarytech.algorithm.LinearSVM
 class LinearSVMSuite extends FunSuite {
 
     val linearsvm = new LinearSVM()
-    test("LinearSVM Test : Initialization") {
+    test("LinearSVM Test : Clear") {
+        assert(linearsvm.clear())
         assert(linearsvm.projector.isEmpty)
     }
 
-    test("LinearSVM Test : Linear Train") {
+    test("LinearSVM Test : Linear Data") {
+        assert(linearsvm.projector.isEmpty)
         val cost = Map(-1 -> 1.0, 1 -> 1.0)
         val limit = 1000
         val err = 1e-1
-        linearsvm.train(LABELED_LINEAR_DATA, cost, limit, err)
+        val paras: Map[String, Any] = Map("cost" -> cost, "limit" -> limit, "err" -> err)
+        assert(linearsvm.config(paras))
+        assert(linearsvm.train(LABELED_LINEAR_DATA))
         assert(!linearsvm.projector.isEmpty)
-    }
-
-    test("LinearSVM Test : Linear Predict") {
         val result = linearsvm.predict(UNLABELED_LINEAR_DATA)
         assert(arrayequal(result, LABEL_LINEAR_DATA))
     }
-    
-    test("LinearSVM Test : Clear") {
-        linearsvm.clear()
-        assert(linearsvm.projector.isEmpty)
-    }
 
-    test("LinearSVM Test : Nonlinear Train") {
+    test("LinearSVM Test : Nonlinear Data - WRONG") {
         val cost = Map(1 -> 1.0, 2 -> 1.0)
         val limit = 1000
         val err = 1e-1
-        linearsvm.train(LABELED_NONLINEAR_DATA, cost, limit, err)
+        val paras: Map[String, Any] = Map("cost" -> cost, "limit" -> limit, "err" -> err)
+        assert(linearsvm.config(paras))
+        assert(linearsvm.train(LABELED_NONLINEAR_DATA))
         assert(!linearsvm.projector.isEmpty)
-    }
-
-    test("LinearSVM Test : Nonlinear Predict - WRONG") {
         val result = linearsvm.predict(UNLABELED_NONLINEAR_DATA)
         assert(!arrayequal(result, LABEL_NONLINEAR_DATA))
     }

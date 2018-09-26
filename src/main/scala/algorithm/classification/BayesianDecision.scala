@@ -4,7 +4,9 @@
 package com.interplanetarytech.algorithm
 import com.interplanetarytech.general.MatrixFunc._
 
-class BayesianDecision() extends Classifier {
+class BayesianDecision() extends Classification {
+    val algoname: String = "BayesianDecision"
+    val version: String = "0.1"
 
     var groupcnt = Map[Int, Int]()
     var groupavg = Map[Int, Array[Double]]()
@@ -20,7 +22,7 @@ class BayesianDecision() extends Classifier {
         false
     }
 
-    override def config(paras: Map[String, Double]): Boolean = try {
+    override def config(paras: Map[String, Any]): Boolean = try {
         true
     } catch { case e: Exception =>
         Console.err.println(e)

@@ -4,7 +4,10 @@
 package com.interplanetarytech.algorithm
 import com.interplanetarytech.general.MatrixFunc._
 
-class Perceptron() extends Classifier {
+class Perceptron() extends Classification {
+    val algoname: String = "Perceptron"
+    val version: String = "0.1"
+
     var projector = Array[Double]()
     var lr: Double = 0.5
     var limit: Int = 1000
@@ -19,9 +22,9 @@ class Perceptron() extends Classifier {
         false
     }
 
-    override def config(paras: Map[String, Double]): Boolean = try {
-        lr = paras.getOrElse("LEARNING_RATE", paras.getOrElse("learning_rate", paras.getOrElse("lr", 0.5)))
-        limit = paras.getOrElse("LIMIT", paras.getOrElse("limit", 1000.0)).toInt
+    override def config(paras: Map[String, Any]): Boolean = try {
+        lr = paras.getOrElse("LEARNING_RATE", paras.getOrElse("learning_rate", paras.getOrElse("lr", 0.5))).asInstanceOf[Double]
+        limit = paras.getOrElse("LIMIT", paras.getOrElse("limit", 1000.0)).asInstanceOf[Double].toInt
         true
     } catch { case e: Exception =>
         Console.err.println(e)

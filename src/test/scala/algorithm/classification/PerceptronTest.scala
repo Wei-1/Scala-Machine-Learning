@@ -16,7 +16,7 @@ class PerceptronSuite extends FunSuite {
 
     test("Perceptron Test : Linear Data") {
         assert(perceptron.clear())
-        assert(perceptron.config(Map("learning_rate" -> 0.5, "limit" -> 1000)))
+        assert(perceptron.config(Map("learning_rate" -> 0.5, "limit" -> 1000.0)))
         assert(perceptron.train(LABELED_LINEAR_DATA))
         val result = perceptron.predict(UNLABELED_LINEAR_DATA)
         assert(arrayequal(result, LABEL_LINEAR_DATA))
@@ -24,7 +24,7 @@ class PerceptronSuite extends FunSuite {
 
     test("Perceptron Test : Nonlinear Data - WRONG") {
         assert(perceptron.clear())
-        assert(perceptron.config(Map("learning_rate" -> 0.5, "limit" -> 1000)))
+        assert(perceptron.config(Map("learning_rate" -> 0.5, "limit" -> 1000.0)))
         assert(perceptron.train(LABELED_NONLINEAR_DATA))
         val result = perceptron.predict(UNLABELED_NONLINEAR_DATA)
         assert(!arrayequal(result, LABEL_NONLINEAR_DATA))
