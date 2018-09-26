@@ -12,7 +12,7 @@ A very light weight Scala machine learning library that provide some basic ML fo
 
 - Scala 2.12
 
-- Sbt 0.13
+- Sbt 1.2
 
 
 ## This package includes
@@ -34,6 +34,12 @@ A very light weight Scala machine learning library that provide some basic ML fo
 - [x] Decision Tree
 
 - [x] Random Forest
+
+### Boost :
+
+- [x] Naive Boost
+
+- [x] Weighted Boost
 
 ### Clustering :
 
