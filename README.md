@@ -5,10 +5,10 @@
 
 ## Light Weight Scala Machine Learning Library
 
-A very light weight Scala machine learning library that provide some basic ML for learning ML in Scala.
+A very light weight Scala machine learning library that provide some basic ML algorithms in Scala. The repo is served as a algorithm gallery. Please enjoy and dive into the algorithm that you will like to learn in its basic level.
 
 
-## Pre-Requisite
+## Dev-Environment
 
 - Scala 2.12
 
@@ -107,11 +107,9 @@ A very light weight Scala machine learning library that provide some basic ML fo
 
 ## Installation Process
 
-1. [install Scala 2.12](https://www.scala-lang.org/download/)
+1. [install Sbt](https://www.scala-sbt.org/download.html)
 
-2. [install Sbt 0.13](https://www.scala-sbt.org/download.html)
-
-3. Clone this project
+2. Clone this project
 
 ```
 git clone https://github.com/Wei-1/Scala-Machine-Learning.git
@@ -121,6 +119,7 @@ git clone https://github.com/Wei-1/Scala-Machine-Learning.git
 ## Test
 
     sbt test
+
 
 ## Build Jar
 
