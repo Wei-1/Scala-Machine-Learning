@@ -5,7 +5,6 @@ package com.interplanetarytech.algorithm
 
 trait Classification extends Algorithm {
     val algotype: String = "Classification"
-    val label: Boolean = true
     def train(data: Array[(Int, Array[Double])]): Boolean
     def predict(data: Array[Array[Double]]): Array[Int]
 }

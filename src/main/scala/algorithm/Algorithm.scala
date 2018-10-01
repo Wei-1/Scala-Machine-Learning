@@ -8,6 +8,5 @@ trait Algorithm {
     val algoname: String
     val version: String
     def clear: Boolean
-    def label: Boolean
     def config(paras: Map[String, Any]): Boolean
 }
