@@ -10,25 +10,28 @@ class DensityPeakClusterSuite extends FunSuite {
 
     val dpc = new DensityPeakCluster()
     test("DensityPeakCluster Test : Clustering Tiny Data") {
-        dpc.density(UNLABELED_TINY_DATA, 1)
-        val result = dpc.cluster(1, 1)
+        assert(dpc.clear())
+        assert(dpc.config(Map("sd" -> 1.0, "densityf" -> 1.0, "deltaf" -> 1.0)))
+        val result = dpc.cluster(UNLABELED_TINY_DATA)
         assert(arrayequal(result, LABEL_TINY_DATA.reverse))
     }
 
     test("DensityPeakCluster Test : Clustering Small Data") {
-        dpc.density(UNLABELED_SMALL_DATA, 2)
-        val result = dpc.cluster(1, 2)
+        assert(dpc.clear())
+        assert(dpc.config(Map("sd" -> 2.0, "densityf" -> 1.0, "deltaf" -> 2.0)))
+        val result = dpc.cluster(UNLABELED_SMALL_DATA)
         assert(arrayequal(result, LABEL_SMALL_DATA.reverse))
     }
 
     test("DensityPeakCluster Test : Clustering Large Data") {
-        dpc.density(UNLABELED_LARGE_DATA, 3)
-        val result = dpc.cluster(12, 2)
+        assert(dpc.clear())
+        assert(dpc.config(Map("sd" -> 3.0, "densityf" -> 12.0, "deltaf" -> 2.0)))
+        val result = dpc.cluster(UNLABELED_LARGE_DATA)
         assert(arrayequal(result, LABEL_LARGE_DATA))
     }
 
     test("DensityPeakCluster Test : Clear") {
-        dpc.clear()
+        assert(dpc.clear())
         assert(dpc.dddata.isEmpty)
     }
 }

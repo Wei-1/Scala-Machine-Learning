@@ -10,24 +10,28 @@ class BIRCHSuite extends FunSuite {
 
     val birch = new BIRCH()
     test("BIRCH Test : Clustering Tiny Data") {
-        val result = birch.cluster(UNLABELED_TINY_DATA, 1)
+        assert(birch.clear())
+        assert(birch.config(Map("limit" -> 1.0)))
+        val result = birch.cluster(UNLABELED_TINY_DATA)
         assert(arrayequal(result, LABEL_TINY_DATA))
     }
 
     test("BIRCH Test : Clustering Small Data") {
-        birch.clear()
-        val result = birch.cluster(UNLABELED_SMALL_DATA, 2)
+        assert(birch.clear())
+        assert(birch.config(Map("limit" -> 2.0)))
+        val result = birch.cluster(UNLABELED_SMALL_DATA)
         assert(arrayequal(result, LABEL_SMALL_DATA))
     }
 
     test("BIRCH Test : Clustering Large Data - WRONG") {
-        birch.clear()
-        val result = birch.cluster(UNLABELED_LARGE_DATA, 3)
+        assert(birch.clear())
+        assert(birch.config(Map("limit" -> 3.0)))
+        val result = birch.cluster(UNLABELED_LARGE_DATA)
         assert(!arrayequal(result, LABEL_LARGE_DATA))
     }
 
     test("BIRCH Test : Clearing") {
-        birch.clear()
+        assert(birch.clear())
         assert(birch.centers.isEmpty)
     }
 }

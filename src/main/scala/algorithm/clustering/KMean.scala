@@ -4,14 +4,37 @@
 package com.interplanetarytech.algorithm
 import com.interplanetarytech.general.MatrixFunc._
 
-class KMean() {
+class KMean() extends Clustering {
+    val algoname: String = "KMean"
+    val version: String = "0.1"
+
     var centers = Array[(Array[Double], Int)]()
     var groupdata = Array[(Array[Double], Int)]()
+    var k = 2
+    var iter = 100
+
+    override def clear(): Boolean = try {
+        centers = Array[(Array[Double], Int)]()
+        groupdata = Array[(Array[Double], Int)]()
+        k = 2
+        iter = 100
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
+
+    override def config(paras: Map[String, Any]): Boolean = try {
+        k = paras.getOrElse("K", paras.getOrElse("k", 2)).asInstanceOf[Int]
+        iter = paras.getOrElse("ITERATION", paras.getOrElse("iteration", paras.getOrElse("iter", 2))).asInstanceOf[Int]
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
     // --- Start K-Mean Function ---
-    def cluster(                  // K Mean
-        data: Array[Array[Double]], // Data Array(xi)
-        k: Int,                     // K groups
-        iter: Int                   // Iteration limit
+    override def cluster(          // K Mean
+        data: Array[Array[Double]] // Data Array(xi)
     ): Array[Int] = {     // Return centers
         centers = data.zipWithIndex
             .groupBy { l => l._2 % k + 1 }

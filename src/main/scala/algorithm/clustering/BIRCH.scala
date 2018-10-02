@@ -4,17 +4,37 @@
 package com.interplanetarytech.algorithm
 import com.interplanetarytech.general.MatrixFunc._
 
-class BIRCH() {
+class BIRCH() extends Clustering {
+    val algoname: String = "BIRCH"
+    val version: String = "0.1"
+
     var centers = Array[(Int, Array[Double], Array[Double])]()
-    def clear() = centers = Array[(Int, Array[Double], Array[Double])]()
+    var limit = 1.0
+
+    override def clear(): Boolean = try {
+        centers = Array[(Int, Array[Double], Array[Double])]()
+        limit = 1.0
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
+
+    override def config(paras: Map[String, Any]): Boolean = try {
+        limit = paras.getOrElse("LIMIT", paras.getOrElse("limit", 1.0)).asInstanceOf[Double]
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
+
     def notzero(x: Double): Double =
         if (x >= 0 && x < 1e-20) 1e-20
         else if (x < 0 && x > -1e-20) -1e-20
         else x
     // --- Start BIRCH Function ---
-    def cluster(                    // BIRCH
-        data: Array[Array[Double]], // Data Array(xi)
-        limit: Double               // Group Separation Length
+    override def cluster(                    // BIRCH
+        data: Array[Array[Double]] // Data Array(xi)
     ): Array[Int] = { // Return Centers
         return data.map { d =>
             val ss = d.map(Math.pow(_, 2))

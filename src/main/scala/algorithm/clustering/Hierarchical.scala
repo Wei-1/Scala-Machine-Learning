@@ -4,15 +4,14 @@
 package com.interplanetarytech.algorithm
 import com.interplanetarytech.general.MatrixFunc._
 
-// val data = Array(Array(1.0, 2.0), Array(1.0, 1.0), Array(0.8, 1.0),
-//     Array(2.0, 3.0), Array(1.1, 1.1), Array(2.0, 2.2), Array(6.0, 5.0),
-//     Array(6.0, 7.0), Array(6.0, 6.6), Array(6.0, 6.1), Array(6.0, 6.2))
-// val hdbscan = new HDBSCAN()
-// hdbscan.cluster(data, 2, 3)
+class Hierarchical() extends Clustering {
+    val algoname: String = "Hierarchical"
+    val version: String = "0.1"
 
-class Hierarchical() {
     var splittree = Array[(Int, Int)]()
     var treecheck = Map[Int, Int]()
+    var group = 2
+
     def distArr(a1: Array[Double], a2: Array[Double]): Double =
         Math.sqrt(arrayminussquare(a1, a2).sum)
     def cascade(p: Int, c: Int) {
@@ -26,10 +25,27 @@ class Hierarchical() {
             }
         }
     }
+
+    override def clear(): Boolean = try {
+        splittree = Array[(Int, Int)]()
+        treecheck = Map[Int, Int]()
+        group = 2
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
+
+    override def config(paras: Map[String, Any]): Boolean = try {
+        group = paras.getOrElse("GROUP", paras.getOrElse("group", 2)).asInstanceOf[Int]
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
     // --- Hierarchical ---
-    def cluster(                    // Hierarchical
-        data: Array[Array[Double]], // Data Array(xi)
-        grouplimit: Int
+    override def cluster(          // Hierarchical
+        data: Array[Array[Double]] // Data Array(xi)
     ): Array[Int] = {
         val n = data.size
         var undone = Map(0 -> 0.0)
@@ -48,7 +64,7 @@ class Hierarchical() {
                 }
             }
         }
-        splittree = tree.toArray.sortBy(_._2._2).dropRight(grouplimit-1).map(l => (l._1, l._2._1))
+        splittree = tree.toArray.sortBy(_._2._2).dropRight(group-1).map(l => (l._1, l._2._1))
         treecheck = (0 until n).map((_, -1)).toMap
         var c = 1
         for (i <- 0 until n) {

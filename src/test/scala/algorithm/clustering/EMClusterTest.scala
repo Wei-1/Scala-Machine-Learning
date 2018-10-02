@@ -10,17 +10,23 @@ class EMClusterSuite extends FunSuite {
 
     val em = new EMCluster()
     test("EMCluster Test : Clustering Tiny Data") {
-        val result = em.cluster(UNLABELED_TINY_DATA, 2, 100)
+        assert(em.clear())
+        assert(em.config(Map("k" -> 2, "iter" -> 100)))
+        val result = em.cluster(UNLABELED_TINY_DATA)
         assert(arrayequal(result, LABEL_TINY_DATA))
     }
 
     test("EMCluster Test : Clustering Small Data - WRONG") {
-        val result = em.cluster(UNLABELED_SMALL_DATA, 2, 100)
+        assert(em.clear())
+        assert(em.config(Map("k" -> 2, "iter" -> 100)))
+        val result = em.cluster(UNLABELED_SMALL_DATA)
         assert(!arrayequal(result, LABEL_SMALL_DATA))
     }
 
     test("EMCluster Test : Clustering Large Data - WRONG") {
-        val result = em.cluster(UNLABELED_LARGE_DATA, 2, 100)
+        assert(em.clear())
+        assert(em.config(Map("k" -> 2, "iter" -> 100)))
+        val result = em.cluster(UNLABELED_LARGE_DATA)
         assert(!arrayequal(result, LABEL_LARGE_DATA))
     }
 }

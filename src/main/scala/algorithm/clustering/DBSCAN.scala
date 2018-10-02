@@ -8,16 +8,38 @@ import com.interplanetarytech.general.MatrixFunc._
 //     Array(2.0, 3.0), Array(1.1, 1.1), Array(2.0, 2.2), Array(6.0, 5.0),
 //     Array(6.0, 7.0), Array(6.0, 6.6), Array(6.0, 6.1), Array(6.0, 6.2))
 // val dbscan = new DBSCAN()
-// dbscan.cluster(data, 2)
+// dbscan.config(Map("limit" -> 2.0))
+// dbscan.cluster(data)
 
 class Point(arr: Array[Double], ct: Int) {
     val a = arr
     var c = ct
 }
 
-class DBSCAN() {
+class DBSCAN() extends Clustering {
+    val algoname: String = "DBSCAN"
+    val version: String = "0.1"
+
     var groupdata = Array[Point]()
-    var distLimit = 0.0
+    var limit = 1.0
+
+    override def clear(): Boolean = try {
+        groupdata = Array[Point]()
+        limit = 1.0
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
+
+    override def config(paras: Map[String, Any]): Boolean = try {
+        limit = paras.getOrElse("LIMIT", paras.getOrElse("limit", 1.0)).asInstanceOf[Double]
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
+
     // --- Euclidean Distance ---
     def distPoint(p1: Point, p2: Point): Double =
         Math.sqrt(arrayminussquare(p1.a, p2.a).sum)
@@ -26,7 +48,7 @@ class DBSCAN() {
         for (i <- ind until groupdata.size) {
             val p2 = groupdata(i)
             if (p2.c < 0) {
-                if (distPoint(p1, p2) < distLimit) {
+                if (distPoint(p1, p2) < limit) {
                     p2.c = c
                     cascade(p2, c, ind)
                 }
@@ -34,12 +56,10 @@ class DBSCAN() {
         }
     }
     // --- Start DBSCAN Function ---
-    def cluster(                    // DBSCAN
-        data: Array[Array[Double]], // Data Array(xi)
-        distlimit: Double
+    override def cluster(                    // DBSCAN
+        data: Array[Array[Double]] // Data Array(xi)
     ): Array[Int] = {
         groupdata = data.map(l => new Point(l, -1))
-        distLimit = distlimit
         var c = 1
         for (i <- 0 until groupdata.size) {
             val p1 = groupdata(i)

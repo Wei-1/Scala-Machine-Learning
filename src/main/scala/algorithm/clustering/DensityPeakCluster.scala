@@ -4,15 +4,40 @@
 package com.interplanetarytech.algorithm
 import com.interplanetarytech.general.MatrixFunc._
 
-class DensityPeakCluster() {
+class DensityPeakCluster() extends Clustering {
+    val algoname: String = "DensityPeakCluster"
+    val version: String = "0.1"
     // Density Delta Data
     var dddata = Array[(Double, Double, Int)]()
-    def clear() = dddata = Array[(Double, Double, Int)]()
+    var sd = 1.0
+    var densityf = 3.0
+    var deltaf = 3.0
+
+    override def clear(): Boolean = try {
+        dddata = Array[(Double, Double, Int)]()
+        sd = 1.0
+        densityf = 3.0
+        deltaf = 3.0
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
+
+    override def config(paras: Map[String, Any]): Boolean = try {
+        sd = paras.getOrElse("STANDARDDEVIATION", paras.getOrElse("standarddeviation", paras.getOrElse("sd", 1.0))).asInstanceOf[Double]
+        densityf = paras.getOrElse("DENSITYFILTER", paras.getOrElse("densityfilter", paras.getOrElse("densityf", 3.0))).asInstanceOf[Double]
+        deltaf = paras.getOrElse("DELTAFILTER", paras.getOrElse("deltafilter", paras.getOrElse("deltaf", 3.0))).asInstanceOf[Double]
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
+    }
     // Density Delta export import
     def importdd(data: Array[(Double, Double, Int)]) = dddata = data
     // density(Array(Array(1.0,2.0), Array(2.0,2.0),
     //   Array(1.0,0.1), Array(0.0,0.0)))
-    def density(data: Array[Array[Double]], sd: Double) = {
+    override def cluster(data: Array[Array[Double]]) = {
 
         val densitydata = data.zipWithIndex.map { l1 =>
             (l1._2, data.map { l2 =>
@@ -29,9 +54,7 @@ class DensityPeakCluster() {
                 (l1._2, ldmin._1, ldmin._2)
             } else (l1._2, t.size.toDouble * sd, -1)
         }
-    }
-    // cluster(0.8, 1.1)
-    def cluster(densityf: Double, deltaf: Double): Array[Int] = {
+
         val densitydelta = dddata.zipWithIndex.map { l =>
             (l._2, l._1._1, l._1._2, l._1._3)
         }.sortBy(l => l._2).reverse
@@ -47,6 +70,7 @@ class DensityPeakCluster() {
         for (l <- groupdata) {
             if (l._3 == 0) groupkeymap += (l._1 -> groupkeymap(l._2))
         }
-        return groupkeymap.toArray.sortBy(_._1).map(_._2)
+        // Returned Result
+        groupkeymap.toArray.sortBy(_._1).map(_._2)
     }
 }
