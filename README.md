@@ -100,9 +100,11 @@ A very light weight Scala machine learning library that provide some basic ML al
 - [x] Quadratic Discriminant Analysis
 
 
-## TODO - Memory Searching Cognition
+## TODO
 
-- [ ] Neural Turing Machine
+- [ ] Neural Turing Machine - Memory Searching Cognition
+
+- [ ] Alpha-go Zero (MCTS-NN) - Deep Reinforcement Learning
 
 
 ## Installation Process
