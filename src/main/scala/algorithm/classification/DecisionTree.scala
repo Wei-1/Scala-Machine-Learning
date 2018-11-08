@@ -3,19 +3,21 @@
 
 package com.interplanetarytech.algorithm
 
-class DecisionNode(col: Int, v: Double, tnode: DecisionNode , fnode: DecisionNode, r: Map[Int, Int]) {
-    val column: Int = col
-    val value: Double = v
-    val trueNode: DecisionNode = tnode
-    val falseNode: DecisionNode = fnode
-    val results: Map[Int, Int] = r
-
+class DecisionNode(
+    val col: Int, val v: Double,
+    val tnode: DecisionNode, val fnode: DecisionNode,
+    val r: Map[Int, Int],
+    val cats: Set[Int] = Set[Int]()
+) {
     def predict(x: Array[Double]): Int = {
-        if (results == null) {
-            if (x(column) >= value) return trueNode.predict(x)
-            else return falseNode.predict(x)
-        } else return results.maxBy(_._2)._1
+        if(r == null) {
+            if((!cats.contains(col) && x(col) > v) || x(col) == v) tnode.predict(x)
+            else fnode.predict(x)
+        } else r.maxBy(_._2)._1
     }
+    override def toString: String =
+        col + (if(cats.contains(col)) " == " else " >= ") + v + " ? " +
+        tnode + " : " + fnode
 }
 
 class DecisionTree() extends Classification {
@@ -23,6 +25,7 @@ class DecisionTree() extends Classification {
     val version: String = "0.1"
 
     var tree: DecisionNode = null
+    var catColumns: Set[Int] = Set[Int]()
 
     override def clear(): Boolean = try {
         tree = null
@@ -33,6 +36,7 @@ class DecisionTree() extends Classification {
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {
+        catColumns = paras.getOrElse("CATEGORYCOLUMNS", paras.getOrElse("catColumns", Set[Int]())).asInstanceOf[Set[Int]]
         true
     } catch { case e: Exception =>
         Console.err.println(e)
@@ -41,13 +45,12 @@ class DecisionTree() extends Classification {
 
     private def log2(x: Double) = Math.log(x) / Math.log(2)
 
-    private def uniqueCount(data: Array[(Int, Array[Double])]): Map[Int, Int] = {
-        return data.groupBy(_._1).map(t => (t._1, t._2.size))
-    }
+    private def uniqueCount(data: Array[(Int, Array[Double])]): Map[Int, Int] =
+        data.groupBy(_._1).map(t => (t._1, t._2.size))
 
     private def entropy(data: Array[(Int, Array[Double])]): Double = {
         val dataSize = data.size.toDouble
-        return uniqueCount(data).map { case (k, v) =>
+        uniqueCount(data).map { case (k, v) =>
             val p = v / dataSize
             -p * log2(p)
         }.sum
@@ -67,7 +70,10 @@ class DecisionTree() extends Classification {
             var valueSet: Set[Double] = Set()
             for (d <- data) valueSet += d._2(col)
             for (value <- valueSet) {
-                val (tData, fData) = data.partition(d => d._2(col) >= value)
+                val (tData, fData) = data.partition { d =>
+                    if(catColumns.contains(col)) d._2(col) == value
+                    else d._2(col) >= value
+                }
                 val p = tData.size / dataSize
                 val gain = currentScore - p * entropy(tData) - (1-p) * entropy(fData)
                 if (gain > bestGain && tData.size > 0 && fData.size > 0) {
@@ -82,8 +88,8 @@ class DecisionTree() extends Classification {
         if (bestGain > 0) {
             val tnode = buildtree(bestTrueData)
             val fnode = buildtree(bestFalseData)
-            return new DecisionNode(bestColumn, bestValue, tnode, fnode, null)
-        } else return new DecisionNode(0, 0, null, null, uniqueCount(data))
+            new DecisionNode(bestColumn, bestValue, tnode, fnode, null)
+        } else new DecisionNode(0, 0, null, null, uniqueCount(data))
     }
 
     override def train(data: Array[(Int, Array[Double])]): Boolean = try {
