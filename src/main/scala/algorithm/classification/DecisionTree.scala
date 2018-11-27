@@ -26,6 +26,7 @@ class DecisionTree() extends Classification {
 
     var tree: DecisionNode = null
     var catColumns: Set[Int] = Set[Int]()
+    var maxLayer: Int = 5
 
     override def clear(): Boolean = try {
         tree = null
@@ -37,6 +38,7 @@ class DecisionTree() extends Classification {
 
     override def config(paras: Map[String, Any]): Boolean = try {
         catColumns = paras.getOrElse("CATEGORYCOLUMNS", paras.getOrElse("catColumns", Set[Int]())).asInstanceOf[Set[Int]]
+        maxLayer = paras.getOrElse("maxLayer", 5.0).asInstanceOf[Double].toInt
         true
     } catch { case e: Exception =>
         Console.err.println(e)
@@ -56,7 +58,7 @@ class DecisionTree() extends Classification {
         }.sum
     }
 
-    private def buildtree(data: Array[(Int, Array[Double])]): DecisionNode = {
+    private def buildtree(data: Array[(Int, Array[Double])], layer: Int = maxLayer): DecisionNode = {
         var currentScore: Double = entropy(data)
         var bestGain: Double = 0
         var bestColumn: Int = 0
@@ -85,9 +87,9 @@ class DecisionTree() extends Classification {
                 }
             }
         }
-        if (bestGain > 0) {
-            val tnode = buildtree(bestTrueData)
-            val fnode = buildtree(bestFalseData)
+        if (bestGain > 0 && layer > 0) {
+            val tnode = buildtree(bestTrueData, layer - 1)
+            val fnode = buildtree(bestFalseData, layer - 1)
             new DecisionNode(bestColumn, bestValue, tnode, fnode, null)
         } else new DecisionNode(0, 0, null, null, uniqueCount(data))
     }

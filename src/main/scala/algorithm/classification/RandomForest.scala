@@ -11,6 +11,7 @@ class RandomForest() extends Classification {
     var tree_n = 10 // Number of Trees
     var sample_n = 10 // Number of Sample Data in a Tree
     var catColumns = Set[Int]()
+    var maxLayer = 5
 
     override def clear(): Boolean = try {
         trees = Array[DecisionTree]()
@@ -27,7 +28,9 @@ class RandomForest() extends Classification {
 
     private def addTree(data: Array[(Int, Array[Double])]) {
         val dtree = new DecisionTree()
-        if(catColumns.size > 0) dtree.config(Map("catColumns" -> catColumns): Map[String, Any])
+        var paras = Map("maxLayer" -> maxLayer): Map[String, Any]
+        if(catColumns.size > 0) paras += "catColumns" -> catColumns
+        dtree.config(paras)
         dtree.train(data)
         trees :+= dtree
     }
@@ -36,6 +39,7 @@ class RandomForest() extends Classification {
         tree_n = paras.getOrElse("TREE_NUMBER", paras.getOrElse("tree_number", paras.getOrElse("tree_n", 10.0))).asInstanceOf[Double].toInt
         sample_n = paras.getOrElse("SAMPLE_NUMBER", paras.getOrElse("sample_number", paras.getOrElse("sample_n", 10.0))).asInstanceOf[Double].toInt
         catColumns = paras.getOrElse("CATEGORYCOLUMNS", paras.getOrElse("catColumns", Set[Int]())).asInstanceOf[Set[Int]]
+        maxLayer = paras.getOrElse("maxLayer", 5.0).asInstanceOf[Double].toInt
         true
     } catch { case e: Exception =>
         Console.err.println(e)
