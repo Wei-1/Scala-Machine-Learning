@@ -8,7 +8,7 @@ class DBN(val layer_rbms: Array[Int], val layer_nns: Array[Int], val input_colum
     val nn_number = layer_nns.size
 
     val rbm_layers: Array[RBM] = new Array[RBM](layer_rbms.size)
-    val nn = new NeuralNetwork(layer_nns, layer_rbms.last, output_column)
+    val nn = new BasicNN(layer_nns, layer_rbms.last, output_column)
 
     def clear() {
         rbm_layers(0) = new RBM(input_column, layer_rbms(0))

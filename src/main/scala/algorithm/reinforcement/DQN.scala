@@ -15,7 +15,7 @@ class DQN(
     val nn_learning_rate: Double = 0.01
 ) {
 
-    val nn = new NeuralNetwork(layer_neurons, initparas.size, actnumber)
+    val nn = new BasicNN(layer_neurons, initparas.size, actnumber)
     val ex = new Exp
 
     class Exp {

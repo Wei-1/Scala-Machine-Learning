@@ -15,12 +15,12 @@ class DDQN(
     val nn_learning_rate: Double = 0.01
 ) {
 
-    val nn1 = new NeuralNetwork(layer_neurons, initparas.size, actnumber)
-    val nn2 = new NeuralNetwork(layer_neurons, initparas.size, actnumber)
+    val nn1 = new BasicNN(layer_neurons, initparas.size, actnumber)
+    val nn2 = new BasicNN(layer_neurons, initparas.size, actnumber)
     val ex1 = new Exp(nn2)
     val ex2 = new Exp(nn1)
 
-    class Exp(nn: NeuralNetwork) {
+    class Exp(nn: BasicNN) {
         var c = 0
         var x = Array[Array[Double]]()
         var y = Array[Array[Double]]()

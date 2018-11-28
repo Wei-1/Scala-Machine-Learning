@@ -17,8 +17,8 @@ class A3C(
     val critic_learning_rate: Double = 0.01
 ) {
 
-    val actor = new NeuralNetwork(actor_neurons, initparas.size, actnumber)
-    val critic = new NeuralNetwork(critic_neurons, initparas.size, 1)
+    val actor = new BasicNN(actor_neurons, initparas.size, actnumber)
+    val critic = new BasicNN(critic_neurons, initparas.size, 1)
 
     val ex = new Exp
 
