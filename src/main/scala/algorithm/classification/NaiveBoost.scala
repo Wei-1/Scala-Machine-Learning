@@ -26,8 +26,7 @@ class NaiveBoost() extends Classification {
     }
 
     override def train(data: Array[(Int, Array[Double])]): Boolean = try {
-        classifiers.foreach(classifier => classifier.train(data))
-        true
+        classifiers.forall(classifier => classifier.train(data))
     } catch { case e: Exception =>
         Console.err.println(e)
         false

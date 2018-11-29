@@ -28,9 +28,10 @@ class WeightedBoost() extends Classification {
     }
 
     override def train(data: Array[(Int, Array[Double])]): Boolean = try {
-        classifiers.foreach(classifier => classifier.train(data))
-        weight = classifiers.map(classifier => classifier.predict(data.map(_._2)).zip(data.map(_._1)).count(p => p._1 == p._2) / data.size.toDouble)
-        true
+        if(classifiers.forall(classifier => classifier.train(data))) {
+            weight = classifiers.map(classifier => classifier.predict(data.map(_._2)).zip(data.map(_._1)).count(p => p._1 == p._2) / data.size.toDouble)
+            true
+        } else false
     } catch { case e: Exception =>
         Console.err.println(e)
         false

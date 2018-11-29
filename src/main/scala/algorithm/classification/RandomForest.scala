@@ -28,7 +28,7 @@ class RandomForest() extends Classification {
 
     private def addTree(data: Array[(Int, Array[Double])]) {
         val dtree = new DecisionTree()
-        var paras = Map("maxLayer" -> maxLayer): Map[String, Any]
+        var paras = Map("maxLayer" -> maxLayer.toDouble): Map[String, Any]
         if(catColumns.size > 0) paras += "catColumns" -> catColumns
         dtree.config(paras)
         dtree.train(data)
