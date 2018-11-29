@@ -20,27 +20,27 @@ class Node(
 ) {
     /** List of input links. */
     var inputLinks = Array[Link]()
-    var bias: Double = if(initZero) 0.0 else 0.1
+    var bias: Double = if(initZero) 1e-8 else 0.1
     /** List of output links. */
     var outputLinks = Array[Link]()
     /** Node input and output. */
     var totalInput: Double = 0.0
     var output: Double = 0.0
     /** Error derivative with respect to this node's output. */
-    var outputDer: Double = 0
+    var outputDer: Double = 0.0
     /** Error derivative with respect to this node's total input. */
-    var inputDer: Double = 0
+    var inputDer: Double = 0.0
     /**
      * Accumulated error derivative with respect to this node's total input since
      * the last update. This derivative equals dE/db where b is the node's
      * bias term.
      */
-    var accInputDer: Double = 0
+    var accInputDer: Double = 0.0
     /**
      * Number of accumulated err. derivatives with respect to the total input
      * since the last update.
      */
-    var numAccumulatedDers: Double = 0
+    var numAccumulatedDers: Double = 0.0
 
     /** Recomputes the node's output and returns it. */
     def updateOutput(): Double = {
@@ -49,6 +49,9 @@ class Node(
         output = activation.output(totalInput)
         output
     }
+
+    /** Debug node */
+    override def toString: String = id + "_" + outputLinks.map(_.weight).mkString(",")
 }
 
 /** Built-in error functions */
@@ -123,25 +126,31 @@ class Link(
     val initZero: Boolean = false
 ) {
     val id: String = source.id + "-" + dest.id
-    var weight: Double = if(initZero) 0 else Math.random() - 0.5
+    var weight: Double = if(initZero) 1e-8 else Math.random() - 0.5
     var isDead: Boolean = false
     /** Error derivative with respect to this weight. */
-    var errorDer: Double = 0
+    var errorDer: Double = 0.0
     /** Accumulated error derivative since the last update. */
-    var accErrorDer: Double = 0
+    var accErrorDer: Double = 0.0
     /** Number of accumulated derivatives since the last update. */
-    var numAccumulatedDers: Double = 0
+    var numAccumulatedDers: Double = 0.0
 }
 
 /**
  * A wrapper for all neural network functions
  */
 class NeuralNetwork {
-    var iter = 0
-    var updateIter = 0
-    var batchSize = 10
-    var learningRate = 0.03
-    var regularizationRate = 0
+    var networkShape: Array[Int] = Array(4, 2)
+    var activation: ActivationFunction = TANH
+    var outputActivation: ActivationFunction = LINEAR
+    var regularization: RegularizationFunction = null
+    var inputIds: Array[String] = Array[String]()
+    var initZero: Boolean = false // fix 0.0 for testing
+    var index: Int = 0
+    var updateIndex: Int = 0
+    var batchSize: Int = 10
+    var learningRate: Double = 0.03
+    var regularizationRate: Double = 0.0
     var network = Array[Array[Node]]()
     /**
      * Builds a neural network.
@@ -157,14 +166,32 @@ class NeuralNetwork {
      * @param inputIds List of ids for the input nodes.
      */
     def config(
-        networkShape: Array[Int],
-        activation: ActivationFunction = TANH,
-        outputActivation: ActivationFunction = LINEAR,
-        regularization: RegularizationFunction = null,
-        inputIds: Array[String] = Array[String](),
-        initZero: Boolean
+        _networkShape: Array[Int] = networkShape,
+        _activation: ActivationFunction = activation,
+        _outputActivation: ActivationFunction = outputActivation,
+        _regularization: RegularizationFunction = regularization,
+        _inputIds: Array[String] = inputIds,
+        _initZero: Boolean = initZero,
+        _index: Int = index,
+        _updateIndex: Int = updateIndex,
+        _batchSize: Int = batchSize,
+        _learningRate: Double = learningRate,
+        _regularizationRate: Double = regularizationRate
     ): Boolean = {
         try {
+            /** Parameters */
+            networkShape = _networkShape
+            activation = _activation
+            outputActivation = _outputActivation
+            regularization = _regularization
+            inputIds = _inputIds
+            initZero = _initZero
+            index = _index
+            updateIndex = _updateIndex
+            batchSize = _batchSize
+            learningRate = _learningRate
+            regularizationRate = _regularizationRate
+            /** Network */
             val numLayers = networkShape.length
             var id = 1
             /** List of layers, with each layer being a list of nodes. */
@@ -198,6 +225,7 @@ class NeuralNetwork {
             }
             true
         } catch { case e: Exception =>
+            Console.err.println(e)
             false
         }
     }
@@ -243,8 +271,8 @@ class NeuralNetwork {
         errorFunc: ErrorFunction = SQUARE
     ): Unit = {
         val outputNodes = network.last
-        if(targets.size == outputNodes.size) {
-            Console.err.println("The number of outputs must match the number of nodes in the output layer")
+        if(targets.size != outputNodes.size) {
+            Console.err.println(s"Outputs(${targets.size}) must match the output layer(${outputNodes.size})")
             System.exit(1)
         }
         // The output node is a special case. We use the user-defined error
@@ -279,7 +307,7 @@ class NeuralNetwork {
                 val prevLayer = network(layerIdx - 1)
                 for(node <- prevLayer) {
                     // Compute the error derivative with respect to each node's output.
-                    node.outputDer = 0
+                    node.outputDer = 0.0
                     for(output <- node.outputLinks) {
                         node.outputDer += output.weight * output.dest.inputDer
                     }
@@ -297,8 +325,8 @@ class NeuralNetwork {
             // Update the node's bias.
             if(node.numAccumulatedDers > 0) {
                 node.bias -= learningRate * node.accInputDer / node.numAccumulatedDers
-                node.accInputDer = 0
-                node.numAccumulatedDers = 0
+                node.accInputDer = 0.0
+                node.numAccumulatedDers = 0.0
             }
             // Update the weights coming into this node.
             for(link <- node.inputLinks) {
@@ -308,19 +336,19 @@ class NeuralNetwork {
                         link.weight = link.weight -
                             (learningRate / link.numAccumulatedDers) * link.accErrorDer
                         // Further update the weight based on regularization.
-                        val regulDer = if(link.regularization != null) link.regularization.der(link.weight) else 0
+                        val regulDer = if(link.regularization != null) link.regularization.der(link.weight) else 0.0
                         val newLinkWeight = link.weight - (learningRate * regularizationRate) * regulDer
                         if(link.regularization != null &&
                             link.regularization.der(2) == 1 && // regularization == L1
                             link.weight * newLinkWeight < 0) {
                             // The weight crossed 0 due to the regularization term. Set it to 0.
-                            link.weight = 0
+                            link.weight = 0.0
                             link.isDead = true
                         } else {
                             link.weight = newLinkWeight
                         }
-                        link.accErrorDer = 0
-                        link.numAccumulatedDers = 0
+                        link.accErrorDer = 0.0
+                        link.numAccumulatedDers = 0.0
                     }
                 }
             }
@@ -342,23 +370,31 @@ class NeuralNetwork {
     def getOutputNodes: Array[Node] =
         network.last
 
-    /** Reset the network and iteration pointer */
-    def reset(onStartup: Boolean = false): Unit = {
-        // Make a simple network.
-        iter = 0
-        updateIter = 0
+    /** Reset the network parameters and iteration pointer */
+    def reset(onStartup: Boolean = false): Boolean = {
+        networkShape = Array(4, 2)
+        activation = TANH
+        outputActivation = LINEAR
+        regularization = null
+        inputIds = Array[String]()
+        initZero = false
+        index = 0
+        updateIndex = 0
         batchSize = 10
         learningRate = 0.03
-        regularizationRate = 0
-        network = Array[Array[Node]]()
+        regularizationRate = 0.0
+        config()
     }
 
     /** Train one inputs to one targets, moved and Modified from Playground. */
     def trainOne(inputs: Array[Double], targets: Array[Double], errorFunc: ErrorFunction = SQUARE): Unit = {
-        iter += 1
         forwardProp(inputs)
         backProp(targets, errorFunc)
-        if((iter - updateIter + 1) % batchSize == 0) updateWeights()
+        if((index - updateIndex + 1) % batchSize == 0) {
+            updateIndex = index
+            updateWeights()
+        }
+        index += 1
     }
 
     /** Predict one inputs */
@@ -372,8 +408,14 @@ class NeuralNetwork {
     }
 
     /** Train all data */
-    def train(x: Array[Array[Double]], y: Array[Array[Double]], errorFunc: ErrorFunction = SQUARE): Unit = {
-        x.zip(y).foreach { case (inputs, targets) => trainOne(inputs, targets, errorFunc) }
+    def train(x: Array[Array[Double]], y: Array[Array[Double]], errorFunc: ErrorFunction = SQUARE, iter: Int = 1): Boolean = try {
+        val data = x.zip(y)
+        for(i <- 0 until iter)
+            data.foreach { case (inputs, targets) => trainOne(inputs, targets, errorFunc) }
+        true
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        false
     }
 
     /** Predict all data */
