@@ -23,14 +23,14 @@ class DBNSuite extends FunSuite {
             assert(test.rbm_layers(i).hbias.sum == 0)
             assert(test.rbm_layers(i).vbias.sum == 0)
         }
-        assert(test.nn.syns(0).size == layer_rbms.last)
-        assert(test.nn.syns(layer_nns.size).head.size == output_column)
+        assert(test.nn.network.head.size == layer_rbms.last)
+        assert(test.nn.network.last.size == output_column)
     }
 
     val dbn = new DBN(layer_rbms, layer_nns, input_column, output_column)
     test("DBN Test : Train") {
         dbn.train(UNLABELED_LARGE_HIGH_DIM_DATA, TARGET_LARGE_HIGH_DIM_DATA, learning_rate, k, limit)
-        assert(!dbn.nn.syns.isEmpty)
+        assert(!dbn.nn.network.isEmpty)
     }
 
     test("DBN Test : Predict") {
@@ -47,7 +47,7 @@ class DBNSuite extends FunSuite {
             assert(dbn.rbm_layers(i).hbias.sum == 0)
             assert(dbn.rbm_layers(i).vbias.sum == 0)
         }
-        assert(dbn.nn.syns(0).size == layer_rbms.last)
-        assert(dbn.nn.syns(layer_nns.size).head.size == output_column)
+        assert(dbn.nn.network.head.size == layer_rbms.last)
+        assert(dbn.nn.network.last.size == output_column)
     }
 }

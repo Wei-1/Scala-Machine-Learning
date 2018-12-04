@@ -386,6 +386,9 @@ class NeuralNetwork {
         config()
     }
 
+    /** Clear current network */
+    def clear() = reset(false)
+
     /** Train one inputs to one targets, moved and Modified from Playground. */
     def trainOne(inputs: Array[Double], targets: Array[Double], errorFunc: ErrorFunction = SQUARE): Unit = {
         forwardProp(inputs)
@@ -408,7 +411,8 @@ class NeuralNetwork {
     }
 
     /** Train all data */
-    def train(x: Array[Array[Double]], y: Array[Array[Double]], errorFunc: ErrorFunction = SQUARE, iter: Int = 1): Boolean = try {
+    def train(x: Array[Array[Double]], y: Array[Array[Double]], errorFunc: ErrorFunction = SQUARE, iter: Int = 1, _learningRate: Double = learningRate): Boolean = try {
+        learningRate = _learningRate
         val data = x.zip(y)
         for(i <- 0 until iter)
             data.foreach { case (inputs, targets) => trainOne(inputs, targets, errorFunc) }
