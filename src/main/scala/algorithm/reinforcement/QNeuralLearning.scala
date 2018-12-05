@@ -14,11 +14,12 @@ class QNeuralLearning(
     val nn_learning_rate: Double = 0.01
 ) {
 
-    val nn = new BasicNN(layer_neurons, initparas.size, actnumber)
+    val nn = new NeuralNetwork()
+    nn.config(initparas.size +: layer_neurons :+ actnumber, _batchSize = batchsize_number)
 
     class QNState (val paras: Array[Double]) {
         def learn(lr: Double, df: Double, epoch: Int): Double = {
-            val q_s = nn.predict(Array(paras)).head
+            val q_s = nn.predictOne(paras)
             val act = (if (scala.util.Random.nextDouble > epsilon) q_s.zipWithIndex.maxBy(_._1)._2
                 else scala.util.Random.nextInt.abs % actnumber)
             if (epsilon > 0.1) epsilon -= depsilon
@@ -30,10 +31,10 @@ class QNeuralLearning(
             } else {
                 q_s(act) = newreward
             }
-            nn.train(Array(paras), Array(q_s), batchsize_number, nn_learning_rate)
+            nn.train(Array(paras), Array(q_s), _learningRate = nn_learning_rate)
             q_s.max
         }
-        val bestAct: Int = nn.predict(Array(paras)).head.zipWithIndex.maxBy(_._1)._2
+        val bestAct: Int = nn.predictOne(paras).zipWithIndex.maxBy(_._1)._2
     }
 
     var epsilon = 1.0

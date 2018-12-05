@@ -13,6 +13,7 @@ class NeuralNetworkSuite extends FunSuite {
     val output_column = TARGET_LARGE_HIGH_DIM_DATA.head.size
     val layer_neurons = input_column +: hidden_layer :+ output_column
     val limit = 20000
+    val nn_learning_rate = 0.1
 
     val nn = new NeuralNetwork()
     test("NeuralNetwork Test : Initialization") {
@@ -20,7 +21,8 @@ class NeuralNetworkSuite extends FunSuite {
     }
 
     test("NeuralNetwork Test : Train") {
-        assert(nn.train(UNLABELED_LARGE_HIGH_DIM_DATA, TARGET_LARGE_HIGH_DIM_DATA, iter = limit))
+        assert(nn.train(UNLABELED_LARGE_HIGH_DIM_DATA, TARGET_LARGE_HIGH_DIM_DATA,
+            iter = limit, _learningRate = nn_learning_rate))
         assert(!nn.network.isEmpty)
     }
 
