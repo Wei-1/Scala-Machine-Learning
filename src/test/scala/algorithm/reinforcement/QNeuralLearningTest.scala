@@ -8,6 +8,7 @@ import com.interplanetarytech.algorithm.QNeuralLearning
 class QNeuralLearningSuite extends FunSuite {
 
     val learning_rate = 0.1
+    val nn_learning_rate = 0.1
     val scale = 1
     val limit = 10000
     val epoch = 100
@@ -29,7 +30,7 @@ class QNeuralLearningSuite extends FunSuite {
                 (result, scores.getOrElse(endloc, 0.0), nextmoves.size == 0)
             }
         }
-
+        // if set nn_lr to 0.1, might fix result to (10.0, 13.0)
         val ql = new QNeuralLearning(Array(5, 4), Array(1.0, 0.0, 0.0, 0.0, 0.0), 2, simulator, 10)
         ql.train(limit, learning_rate, scale, epoch)
         val result = ql.result(epoch)
@@ -56,8 +57,9 @@ class QNeuralLearningSuite extends FunSuite {
                 (result, scores.getOrElse(endloc, 0.0), nextmoves.size == 0)
             }
         }
-
-        val ql = new QNeuralLearning(Array(5, 4), Array(1.0, 0.0, 0.0, 0.0, 0.0), 2, simulator, 10)
+        // if set nn_lr to 0.01, might not have enough feedback for first step
+        val ql = new QNeuralLearning(Array(5, 4), Array(1.0, 0.0, 0.0, 0.0, 0.0), 2, simulator, 10,
+            nn_learning_rate = nn_learning_rate)
         ql.train(limit, learning_rate, scale, epoch)
         val result = ql.result(epoch)
         assert(result.size == 3)

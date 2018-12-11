@@ -45,13 +45,15 @@ class WeightedBoostSuite extends FunSuite {
         val result1 = boost.predict(UNLABELED_NONLINEAR_DATA)
         assert(arrayequal(result1, LABEL_NONLINEAR_DATA))
 
+        val svm = new LinearSVM()
+        svm.config(Map("cost" -> Map(1 -> 1.0, 2 -> 1.0)): Map[String, Any])
         val classifiers: Any = Array(
             new BayesianDecision,
             new DecisionTree,
             new GaussianProcess,
             new KNN,
             new LinearRegression,
-            new LinearSVM,
+            svm,
             new Perceptron,
             new RandomForest
         )

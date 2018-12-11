@@ -17,8 +17,10 @@ class A3C(
     val critic_learning_rate: Double = 0.01
 ) {
 
-    val actor = new NeuralNetwork(actor_neurons, initparas.size, actnumber)
-    val critic = new NeuralNetwork(critic_neurons, initparas.size, 1)
+    val actor = new NeuralNetwork()
+    actor.config(initparas.size +: actor_neurons :+ actnumber, _batchSize = batchsize_number)
+    val critic = new NeuralNetwork()
+    critic.config(initparas.size +: critic_neurons :+ 1, _batchSize = batchsize_number)
 
     val ex = new Exp
 
@@ -34,15 +36,15 @@ class A3C(
         var y = Array[Array[Double]]()
         var r = Array[Array[Double]]()
         def consume = {
-            actor.train(x, y, train_number, actor_learning_rate)
-            critic.train(x, r, train_number, critic_learning_rate)
+            actor.train(x, y, iter = train_number, _learningRate = actor_learning_rate)
+            critic.train(x, r, iter = train_number, _learningRate = critic_learning_rate)
             c = 0
             x = Array[Array[Double]]()
             y = Array[Array[Double]]()
             r = Array[Array[Double]]()
         }
         def add(paras: Array[Double], p_s: Array[Double], act: Int, reward: Double) {
-            val advantage = reward - critic.predict(Array(paras)).head.head
+            val advantage = reward - critic.predictOne(paras).head
             p_s(act) += advantage
             x :+= paras
             y :+= softmax(p_s)
@@ -55,7 +57,7 @@ class A3C(
 
     class ACState (val paras: Array[Double]) {
         def learn(df: Double, epoch: Int): Double = {
-            val p_s = actor.predict(Array(paras)).head
+            val p_s = actor.predictOne(paras)
             val act = (if (scala.util.Random.nextDouble > epsilon) p_s.zipWithIndex.maxBy(_._1)._2
                 else scala.util.Random.nextInt.abs % actnumber)
             if (epsilon > 0.1) epsilon -= depsilon
@@ -70,7 +72,7 @@ class A3C(
                 newreward
             }
         }
-        val bestAct: Int = actor.predict(Array(paras)).head.zipWithIndex.maxBy(_._1)._2
+        val bestAct: Int = actor.predictOne(paras).zipWithIndex.maxBy(_._1)._2
     }
 
     var epsilon = 1.0

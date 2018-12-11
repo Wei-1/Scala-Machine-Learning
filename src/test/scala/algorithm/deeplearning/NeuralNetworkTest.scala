@@ -1,5 +1,5 @@
 // Wei Chen - Neural Network Test
-// 2016-11-06
+// 2018-11-29
 
 import org.scalatest.FunSuite
 import com.interplanetarytech.TestData._
@@ -8,20 +8,22 @@ import com.interplanetarytech.algorithm.NeuralNetwork
 
 class NeuralNetworkSuite extends FunSuite {
 
-    val layer_neurons = Array(5, 4, 3)
+    val hidden_layer = Array(5, 4, 3)
     val input_column = UNLABELED_LARGE_HIGH_DIM_DATA.head.size
     val output_column = TARGET_LARGE_HIGH_DIM_DATA.head.size
+    val layer_neurons = input_column +: hidden_layer :+ output_column
     val limit = 20000
+    val nn_learning_rate = 0.1
 
-    val nn = new NeuralNetwork(layer_neurons, input_column, output_column)
+    val nn = new NeuralNetwork()
     test("NeuralNetwork Test : Initialization") {
-        assert(nn.syns(0).size == input_column)
-        assert(nn.syns(layer_neurons.size).head.size == output_column)
+        assert(nn.config(layer_neurons))
     }
 
     test("NeuralNetwork Test : Train") {
-        nn.train(UNLABELED_LARGE_HIGH_DIM_DATA, TARGET_LARGE_HIGH_DIM_DATA, limit, 0.1)
-        assert(!nn.syns.isEmpty)
+        assert(nn.train(UNLABELED_LARGE_HIGH_DIM_DATA, TARGET_LARGE_HIGH_DIM_DATA,
+            iter = limit, _learningRate = nn_learning_rate))
+        assert(!nn.network.isEmpty)
     }
 
     test("NeuralNetwork Test : Predict") {

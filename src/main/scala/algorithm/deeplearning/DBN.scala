@@ -8,14 +8,15 @@ class DBN(val layer_rbms: Array[Int], val layer_nns: Array[Int], val input_colum
     val nn_number = layer_nns.size
 
     val rbm_layers: Array[RBM] = new Array[RBM](layer_rbms.size)
-    val nn = new NeuralNetwork(layer_nns, layer_rbms.last, output_column)
+    val nn = new NeuralNetwork()
+    nn.config(layer_rbms.last +: layer_nns :+ output_column)
 
     def clear() {
         rbm_layers(0) = new RBM(input_column, layer_rbms(0))
         for (i <- 1 until rbm_number) {
             rbm_layers(i) = new RBM(layer_rbms(i-1), layer_rbms(i))
         }
-        nn.clear
+        nn.clear()
     }
     clear()
 
@@ -27,7 +28,7 @@ class DBN(val layer_rbms: Array[Int], val layer_nns: Array[Int], val input_colum
             }
             layer_input = rbm_layers(i).forward(layer_input)
         }
-        nn.train(layer_input, y, limit, lr)
+        nn.train(layer_input, y, iter = limit, _learningRate = lr)
     }
 
     def predict(x: Array[Array[Double]]): Array[Array[Double]] = {
