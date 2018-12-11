@@ -15,17 +15,19 @@ class DDQN(
     val nn_learning_rate: Double = 0.01
 ) {
 
-    val nn1 = new BasicNN(layer_neurons, initparas.size, actnumber)
-    val nn2 = new BasicNN(layer_neurons, initparas.size, actnumber)
+    val nn1 = new NeuralNetwork()
+    nn1.config(initparas.size +: layer_neurons :+ actnumber, _batchSize = batchsize_number)
+    val nn2 = new NeuralNetwork()
+    nn2.config(initparas.size +: layer_neurons :+ actnumber, _batchSize = batchsize_number)
     val ex1 = new Exp(nn2)
     val ex2 = new Exp(nn1)
 
-    class Exp(nn: BasicNN) {
+    class Exp(nn: NeuralNetwork) {
         var c = 0
         var x = Array[Array[Double]]()
         var y = Array[Array[Double]]()
         def consume = {
-            nn.train(x, y, train_number, nn_learning_rate)
+            nn.train(x, y, iter = train_number, _learningRate = nn_learning_rate)
             c = 0
             x = Array[Array[Double]]()
             y = Array[Array[Double]]()
@@ -41,8 +43,8 @@ class DDQN(
 
     class DQState (val paras: Array[Double]) {
         def learn(lr: Double, df: Double, epoch: Int): Double = {
-            val q_s1 = nn1.predict(Array(paras)).head
-            val q_s2 = nn2.predict(Array(paras)).head
+            val q_s1 = nn1.predictOne(paras)
+            val q_s2 = nn2.predictOne(paras)
             val act1 = (if (scala.util.Random.nextDouble > epsilon) q_s1.zipWithIndex.maxBy(_._1)._2
                 else scala.util.Random.nextInt.abs % actnumber)
             val act2 = (if (scala.util.Random.nextDouble > epsilon) q_s2.zipWithIndex.maxBy(_._1)._2
@@ -66,7 +68,7 @@ class DDQN(
             ex2.add(paras, q_s1) // nn.train(Array(paras), Array(q_s), batchsize_number, lr)
             Math.max(q_s1.max, q_s2.max)
         }
-        val bestAct: Int = nn1.predict(Array(paras)).head.zipWithIndex.maxBy(_._1)._2
+        val bestAct: Int = nn1.predictOne(paras).zipWithIndex.maxBy(_._1)._2
     }
 
     var epsilon = 1.0
