@@ -102,14 +102,14 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 ## TODO
 
-- [ ] Neural Turing Machine - Memory Searching Cognition
+- [x] Neural Turing Machine - Memory Searching Cognition [(Code in a Different Repo)](https://github.com/Wei-1/Scala-NTM)
 
 - [ ] Alpha-go Zero (MCTS-NN) - Deep Reinforcement Learning
 
 
 ## Installation Process
 
-1. [install Sbt](https://www.scala-sbt.org/download.html)
+1. [Install sbt](https://www.scala-sbt.org/download.html)
 
 2. Clone this project
 
