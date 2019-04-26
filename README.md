@@ -67,6 +67,8 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 - [x] Long Short-Term Memory (LSTM)
 
+- [x] Neural Turing Machine - Memory Searching Cognition [(Code in a Different Repo)](https://github.com/Wei-1/Scala-NTM)
+
 ### Optimization :
 
 - [x] Gene Algorithm (GA)
@@ -101,8 +103,6 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 
 ## TODO
-
-- [x] Neural Turing Machine - Memory Searching Cognition [(Code in a Different Repo)](https://github.com/Wei-1/Scala-NTM)
 
 - [ ] Alpha-go Zero (MCTS-NN) - Deep Reinforcement Learning
 
