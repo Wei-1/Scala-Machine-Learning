@@ -1,6 +1,9 @@
 # Scala Machine Learning
 
-[![Build Status](https://travis-ci.org/Wei-1/Scala-Machine-Learning.svg?branch=master)](https://travis-ci.org/Wei-1/Scala-Machine-Learning)
+Branch | Status | CodeCov
+-|-|-
+[master](https://github.com/wei-1/scala-machine-learning/tree/master) | [![Build Status](https://travis-ci.org/Wei-1/Scala-Machine-Learning.svg?branch=master)](https://travis-ci.org/Wei-1/Scala-Machine-Learning) | [![Codecov](https://codecov.io/gh/wei-1/scala-machine-learning/branch/master/graph/badge.svg)](https://codecov.io/gh/wei-1/scala-machine-learning)
+[develop](https://github.com/wei-1/scala-machine-learning/tree/develop) | [![Build Status](https://travis-ci.org/Wei-1/Scala-Machine-Learning.svg?branch=develop)](https://travis-ci.org/Wei-1/Scala-Machine-Learning) | [![Codecov](https://codecov.io/gh/wei-1/scala-machine-learning/branch/develop/graph/badge.svg)](https://codecov.io/gh/wei-1/scala-machine-learning)
 
 
 ## Light Weight Scala Machine Learning Library
@@ -67,6 +70,8 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 - [x] Long Short-Term Memory (LSTM)
 
+- [x] Neural Turing Machine - Memory Searching Cognition [(Code in a Different Repo)](https://github.com/Wei-1/Scala-NTM)
+
 ### Optimization :
 
 - [x] Gene Algorithm (GA)
@@ -102,14 +107,12 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 ## TODO
 
-- [ ] Neural Turing Machine - Memory Searching Cognition
-
 - [ ] Alpha-go Zero (MCTS-NN) - Deep Reinforcement Learning
 
 
 ## Installation Process
 
-1. [install Sbt](https://www.scala-sbt.org/download.html)
+1. [Install sbt](https://www.scala-sbt.org/download.html)
 
 2. Clone this project
 
