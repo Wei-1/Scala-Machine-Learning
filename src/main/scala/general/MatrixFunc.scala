@@ -49,10 +49,10 @@ package object MatrixFunc {
         data: Array[Array[Double]]
     ): (Array[Double], Array[Double], Array[Array[Double]]) = {
         val datasize = data.size
-        val avg = matrixaccumulate(data).map(_/datasize)
+        val avg = matrixaccumulate(data).map(_ / datasize)
         val std  = matrixaccumulate(data.map{l =>
             arrayminussquare(l, avg)
-        }).map(l => Math.sqrt(l/datasize))
+        }).map(l => Math.sqrt(l / datasize))
         (avg, std, data.map{l =>
             arraydevide(arrayminus(l, avg), std)
         })
@@ -76,7 +76,7 @@ package object MatrixFunc {
     ): Array[Array[Double]] = {
         val datasize = data.size
         val featuresize = data.head.size
-        val avg = matrixaccumulate(data).map(_/datasize)
+        val avg = matrixaccumulate(data).map(_ / datasize)
         val dataminus = data.map(d => arrayminus(d, avg))
         var cov = Array.ofDim[Double](featuresize, featuresize)
         dataminus.map { d =>
@@ -98,7 +98,7 @@ package object MatrixFunc {
         val datasize = data.size
         val featuresize = data.head.size
         if (datasize > row + 1 && featuresize > column + 1) {
-            var submat = Array.ofDim[Double](datasize-1, featuresize-1)
+            var submat = Array.ofDim[Double](datasize - 1, featuresize - 1)
             for (i <- 0 to datasize-2) {
                 for (j <- 0 to featuresize-2) {
                     val ii = if (i >= row) i + 1 else i
@@ -120,9 +120,9 @@ package object MatrixFunc {
         val featuresize = data.head.size
         var newdata = data.clone
         var det = 1.0
-        for (i <- 0 to featuresize-2) {
+        for (i <- 0 to featuresize - 2) {
             if (newdata(i)(i) == 0) {
-                var j = i+1
+                var j = i + 1
                 while (j < datasize) {
                     if (newdata(j)(i) != 0) {
                         val temp = newdata(j)
@@ -137,7 +137,7 @@ package object MatrixFunc {
             val arr = newdata(i)
             val arrhead = arr(i)
             det *= arrhead
-            for (j <- i+1 until datasize) {
+            for (j <- i + 1 until datasize) {
                 val newhead = newdata(j)(i)
                 if (newhead != 0) {
                     newdata(j) = arrayminus(newdata(j),
@@ -145,7 +145,7 @@ package object MatrixFunc {
                 }
             }
         }
-        det *= newdata(featuresize-1)(featuresize-1)
+        det *= newdata(featuresize - 1)(featuresize - 1)
         return (if (Math.abs(det) < 1E-12) 1E-12 else det)
     }
 
@@ -162,7 +162,7 @@ package object MatrixFunc {
         }
         for (i <- 0 until featuresize) {
             if (newdata(i)(i) == 0) {
-                var j = i+1
+                var j = i + 1
                 while (j < datasize) {
                     if (newdata(j)(i) != 0) {
                         val temp1 = newdata(j)

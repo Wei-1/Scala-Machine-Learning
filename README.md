@@ -28,7 +28,7 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 - [x] Gaussian Process Classification
 
-- [x] Linear Regression
+- [x] Linear Classification
 
 - [x] Linear Support Vector Machine (linear-SVM)
 
@@ -43,6 +43,12 @@ A very light weight Scala machine learning library that provide some basic ML al
 - [x] Naive Boost
 
 - [x] Weighted Boost
+
+### Regression :
+
+- [x] Multiple Linear Regression
+
+- [ ] Multivariant Linear Regression - GD
 
 ### Clustering :
 

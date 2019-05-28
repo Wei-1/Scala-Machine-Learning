@@ -26,7 +26,7 @@ class NaiveBoostSuite extends FunSuite {
             new DecisionTree,
             new GaussianProcess,
             new KNN,
-            new LinearRegression,
+            new LinearClassification,
             new LinearSVM,
             new Perceptron,
             new RandomForest
@@ -52,7 +52,7 @@ class NaiveBoostSuite extends FunSuite {
             new DecisionTree,
             new GaussianProcess,
             new KNN,
-            new LinearRegression,
+            new LinearClassification,
             svm,
             new Perceptron,
             new RandomForest
