@@ -80,13 +80,13 @@ package object MatrixFunc {
         val dataminus = data.map(d => arrayminus(d, avg))
         var cov = Array.ofDim[Double](featuresize, featuresize)
         dataminus.map { d =>
-            for (i <- 0 until featuresize) {
-                for (j <- 0 until featuresize) {
+            for(i <- 0 until featuresize) {
+                for(j <- 0 until featuresize) {
                     cov(i)(j) = cov(i)(j) + d(i) * d(j)
                 }
             }
         }
-        return cov.map(d => d.map(_ / datasize))
+        cov.map(d => d.map(_ / datasize))
     }
 
     // cut submatrix for middle high dimensional determinant calculation
@@ -97,19 +97,17 @@ package object MatrixFunc {
     ): Array[Array[Double]] = {
         val datasize = data.size
         val featuresize = data.head.size
-        if (datasize > row + 1 && featuresize > column + 1) {
+        if(datasize > row + 1 && featuresize > column + 1) {
             var submat = Array.ofDim[Double](datasize - 1, featuresize - 1)
-            for (i <- 0 to datasize-2) {
-                for (j <- 0 to featuresize-2) {
+            for(i <- 0 to datasize-2) {
+                for(j <- 0 to featuresize-2) {
                     val ii = if (i >= row) i + 1 else i
                     val jj = if (j >= column) j + 1 else j
                     submat(i)(j) = data(ii)(jj)
                 }
             }
-            return submat
-        }else{
-            return Array(Array(0.0))
-        }
+            submat
+        } else Array(Array(0.0))
     }
 
     // | matrix |
@@ -120,11 +118,11 @@ package object MatrixFunc {
         val featuresize = data.head.size
         var newdata = data.clone
         var det = 1.0
-        for (i <- 0 to featuresize - 2) {
-            if (newdata(i)(i) == 0) {
+        for(i <- 0 to featuresize - 2) {
+            if(newdata(i)(i) == 0) {
                 var j = i + 1
-                while (j < datasize) {
-                    if (newdata(j)(i) != 0) {
+                while(j < datasize) {
+                    if(newdata(j)(i) != 0) {
                         val temp = newdata(j)
                         newdata(j) = newdata(i)
                         newdata(i) = temp
@@ -137,16 +135,17 @@ package object MatrixFunc {
             val arr = newdata(i)
             val arrhead = arr(i)
             det *= arrhead
-            for (j <- i + 1 until datasize) {
+            for(j <- i + 1 until datasize) {
                 val newhead = newdata(j)(i)
-                if (newhead != 0) {
+                if(newhead != 0) {
                     newdata(j) = arrayminus(newdata(j),
                         arr.map(_ * newhead / arrhead))
                 }
             }
         }
         det *= newdata(featuresize - 1)(featuresize - 1)
-        return (if (Math.abs(det) < 1E-12) 1E-12 else det)
+        if(Math.abs(det) < 1E-12) 1E-12
+        else det
     }
 
     // inverse matrix
@@ -157,14 +156,14 @@ package object MatrixFunc {
         val featuresize = data.head.size
         var newdata = data.clone
         var resultdata = Array.ofDim[Double](featuresize, featuresize)
-        for (i <- 0 until featuresize) {
+        for(i <- 0 until featuresize) {
             resultdata(i)(i) = 1.0
         }
-        for (i <- 0 until featuresize) {
-            if (newdata(i)(i) == 0) {
+        for(i <- 0 until featuresize) {
+            if(newdata(i)(i) == 0) {
                 var j = i + 1
-                while (j < datasize) {
-                    if (newdata(j)(i) != 0) {
+                while(j < datasize) {
+                    if(newdata(j)(i) != 0) {
                         val temp1 = newdata(j)
                         newdata(j) = newdata(i)
                         newdata(i) = temp1
@@ -179,20 +178,20 @@ package object MatrixFunc {
             val arr1 = newdata(i)
             val arrhead = if (Math.abs(arr1(i)) < 1E-12) 1E-12 else arr1(i)
             val arr2 = resultdata(i)
-            for (j <- 0 until datasize) {
-                if (j == i) {
+            for(j <- 0 until datasize) {
+                if(j == i) {
                     newdata(j) = newdata(j).map(_ / arrhead)
                     resultdata(j) = resultdata(j).map(_ / arrhead)
                 } else {
                     val newhead = newdata(j)(i)
-                    if (newhead != 0) {
+                    if(newhead != 0) {
                         newdata(j) = arrayminus(newdata(j), arr1.map(_ * newhead / arrhead))
                         resultdata(j) = arrayminus(resultdata(j), arr2.map(_ * newhead / arrhead))
                     }
                 }
             }
         }
-        return resultdata
+        resultdata
     }
 
     // mahalanobis distance ^2
@@ -205,12 +204,12 @@ package object MatrixFunc {
         val d = arrayminus(x, m)
         val inv = inverse(s)
         var dist = 0.0
-        for (i <- 0 until featuresize) {
-            for (j <- 0 until featuresize) {
+        for(i <- 0 until featuresize) {
+            for(j <- 0 until featuresize) {
                 dist += d(i) * d(j) * inv(i)(j)
             }
         }
-        return dist
+        dist
     }
 
     // gaussian probability of a data point
@@ -231,18 +230,31 @@ package object MatrixFunc {
         val rowmatch = y.size
         val columns = y.head.size
         var m = Array.ofDim[Double](rows, columns)
-        if (columnmatch == rowmatch) {
-            for (i <- 0 until rows) {
-                for (j <- 0 until columns) {
+        if(columnmatch == rowmatch) {
+            for(i <- 0 until rows) {
+                for(j <- 0 until columns) {
                     var a = 0.0
-                    for (k <- 0 until columnmatch) {
+                    for(k <- 0 until columnmatch) {
                         a += x(i)(k) * y(k)(j)
                     }
                     m(i)(j) = a
                 }
             }
         }
-        return m
+        m
+    }
+
+    def gradientDescent(x: Array[Array[Double]], y: Array[Double],
+        alpha: Double, limit: Int): Array[Double] = {
+        val xSize = x.head.size
+        val ySize = y.size
+        var theta = new Array[Double](xSize)
+        for(i <- 0 until limit) {
+            val diff = arrayminus(x.map(xi => arraymultiply(xi, theta).sum), y)
+            // val cost = diff.map(d => Math.pow(d, 2)).sum / ySize / 2
+            val gradientSum = matrixaccumulate(x.zip(diff).map { case (xi, d) => xi.map(_ * d) })
+            for(j <- 0 until xSize) theta(j) -= gradientSum(j) / ySize * alpha
+        }
+        theta
     }
 }
-

@@ -48,7 +48,7 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 - [x] Multiple Linear Regression
 
-- [ ] Multivariant Linear Regression - GD
+- [x] Multivariate Linear Regression - GD
 
 ### Clustering :
 
