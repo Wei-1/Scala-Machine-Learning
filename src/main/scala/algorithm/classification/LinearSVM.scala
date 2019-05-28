@@ -1,8 +1,8 @@
 // Wei Chen - LSVM - linear Support Vector Machine
 // 2015-12-09
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 // LinearSVM = linear Support Vector Machine
 // This core function only support dual classification cus linear

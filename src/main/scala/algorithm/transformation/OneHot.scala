@@ -1,7 +1,7 @@
 // Wei Chen - OneHot
 // 2018-11-07
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 class OneHot(
     // name, type

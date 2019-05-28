@@ -1,8 +1,8 @@
 // Wei Chen - BIRCH
 // 2016-11-18
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class BIRCH() extends Clustering {
     val algoname: String = "BIRCH"

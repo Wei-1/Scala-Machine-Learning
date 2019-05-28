@@ -2,9 +2,9 @@
 // 2016-06-04
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm.EMCluster
+import com.scalaml.TestData._
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm.EMCluster
 
 class EMClusterSuite extends FunSuite {
 

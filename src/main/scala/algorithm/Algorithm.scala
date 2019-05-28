@@ -1,7 +1,7 @@
 // Wei Chen - Algorithm
 // 2018-09-22
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 trait Algorithm {
     val algotype: String

@@ -1,7 +1,7 @@
 // Wei Chen - Deep Q Network
 // 2017-08-31
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 // nextstate, reward, end = simulator(state, action)
 class DQN(

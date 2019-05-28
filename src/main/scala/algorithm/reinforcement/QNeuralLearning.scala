@@ -1,7 +1,7 @@
 // Wei Chen - Q Neural Learning
 // 2017-08-16
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 // nextstate, reward, end = simulator(state, action)
 class QNeuralLearning(

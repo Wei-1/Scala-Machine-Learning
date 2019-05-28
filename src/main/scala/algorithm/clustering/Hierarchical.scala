@@ -1,8 +1,8 @@
 // Wei Chen - Hierarchical
 // 2016-11-12
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class Hierarchical() extends Clustering {
     val algoname: String = "Hierarchical"

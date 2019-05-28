@@ -1,8 +1,8 @@
 // Wei Chen - Linear Discriminant Analysis
 // 2017-09-01
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class LDA(d1: Array[Array[Double]], d2: Array[Array[Double]]) {
 

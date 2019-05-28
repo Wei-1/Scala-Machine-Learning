@@ -2,9 +2,9 @@
 // 2016-11-12
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm.Hierarchical
+import com.scalaml.TestData._
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm.Hierarchical
 
 class HierarchicalSuite extends FunSuite {
 

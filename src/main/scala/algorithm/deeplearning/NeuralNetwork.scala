@@ -2,7 +2,7 @@
 // Wei Chen
 // 2018-10-02
 // From Google's NN-Playground in TypeScript to Scala (merging Plyaground, State, and NN)
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 /**
  * A node in a neural network. Each node has a state

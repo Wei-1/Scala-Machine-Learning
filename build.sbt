@@ -1,4 +1,4 @@
-name := "scala-ml"
+name := "scalaml-algo"
 
 version := "0.4"
 

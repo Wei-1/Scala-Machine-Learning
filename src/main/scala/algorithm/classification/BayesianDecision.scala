@@ -1,8 +1,8 @@
 // Wei Chen - Bayesian Decision
 // 2015-12-20
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class BayesianDecision() extends Classification {
     val algoname: String = "BayesianDecision"

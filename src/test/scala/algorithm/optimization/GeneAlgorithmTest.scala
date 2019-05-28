@@ -2,8 +2,8 @@
 // 2017-07-22
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm.GeneAlgorithm
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm.GeneAlgorithm
 
 class GeneAlgorithmSuite extends FunSuite {
 

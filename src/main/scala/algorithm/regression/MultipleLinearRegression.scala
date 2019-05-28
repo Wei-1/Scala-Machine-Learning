@@ -1,8 +1,8 @@
 // Wei Chen - Multiple Linear Regression
 // 2019-05-27
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class MultipleLinearRegression() extends Regression {
     val algoname: String = "MultipleLinearRegression"

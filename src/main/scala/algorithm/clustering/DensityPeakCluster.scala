@@ -1,8 +1,8 @@
 // Wei Chen - Alex Rodriquez Fast Cluster Science 2014
 // 2015-07-08
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class DensityPeakCluster() extends Clustering {
     val algoname: String = "DensityPeakCluster"

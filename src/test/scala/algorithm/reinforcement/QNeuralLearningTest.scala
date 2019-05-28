@@ -2,8 +2,8 @@
 // 2017-08-31
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.algorithm.QNeuralLearning
+import com.scalaml.TestData._
+import com.scalaml.algorithm.QNeuralLearning
 
 class QNeuralLearningSuite extends FunSuite {
 

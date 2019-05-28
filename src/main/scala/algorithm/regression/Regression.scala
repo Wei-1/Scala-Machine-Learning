@@ -1,7 +1,7 @@
 // Wei Chen - Regression
 // 2018-09-12
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 trait Regression extends Algorithm {
     val algotype: String = "Regression"

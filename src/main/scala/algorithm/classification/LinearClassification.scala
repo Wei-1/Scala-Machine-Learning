@@ -1,8 +1,8 @@
 // Wei Chen - Linear Classification
 // 2015-12-21
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class LinearClassification() extends Classification {
     val algoname: String = "LinearRegression"

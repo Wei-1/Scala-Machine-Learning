@@ -2,7 +2,7 @@
 // 2017-09-01
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.algorithm.LDA
+import com.scalaml.algorithm.LDA
 
 class LDASuite extends FunSuite {
 

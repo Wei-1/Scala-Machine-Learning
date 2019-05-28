@@ -1,8 +1,8 @@
 // Wei Chen - HDBSCAN
 // 2016-11-12
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 // val data = Array(Array(1.0, 2.0), Array(1.0, 1.0), Array(0.8, 1.0),
 //     Array(2.0, 3.0), Array(1.1, 1.1), Array(2.0, 2.2), Array(6.0, 5.0),

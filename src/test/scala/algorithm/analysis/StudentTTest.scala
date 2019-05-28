@@ -2,9 +2,9 @@
 // 2017-07-25
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm.StudentT
+import com.scalaml.TestData._
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm.StudentT
 
 class StudentTSuite extends FunSuite {
 

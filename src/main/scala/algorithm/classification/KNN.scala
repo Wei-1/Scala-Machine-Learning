@@ -1,7 +1,7 @@
 // Wei Chen - K-Nearest-Neighborhood
 // 2015-12-21
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 class KNN() extends Classification {
     val algoname: String = "KNN"

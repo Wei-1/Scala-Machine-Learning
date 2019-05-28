@@ -2,9 +2,9 @@
 // 2016-11-20
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm.RBM
+import com.scalaml.TestData._
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm.RBM
 
 class RBMSuite extends FunSuite {
 

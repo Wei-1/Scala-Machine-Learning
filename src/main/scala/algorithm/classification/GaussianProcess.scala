@@ -1,9 +1,8 @@
 // Wei Chen - Gaussian Process
 // 2016-11-24
 
-package com.interplanetarytech.algorithm
-
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class GaussianProcess() extends Classification {
     val algoname: String = "GaussianProcess"

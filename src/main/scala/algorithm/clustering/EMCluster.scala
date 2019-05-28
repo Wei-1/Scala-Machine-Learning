@@ -1,8 +1,8 @@
 // Wei Chen - K-Mean
 // 2016-11-07
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class EMCluster() extends Clustering {
     val algoname: String = "EMCluster"

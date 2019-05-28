@@ -2,10 +2,10 @@
 // 2016-11-23
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm.LstmParam
-import com.interplanetarytech.algorithm.LstmNetwork
+import com.scalaml.TestData._
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm.LstmParam
+import com.scalaml.algorithm.LstmNetwork
 
 class LSTMSuite extends FunSuite {
 

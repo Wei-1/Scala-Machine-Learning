@@ -2,7 +2,7 @@
 // 2017-08-30
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.algorithm.ANOVA
+import com.scalaml.algorithm.ANOVA
 
 class ANOVASuite extends FunSuite {
 

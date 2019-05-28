@@ -1,8 +1,8 @@
 // Wei Chen - K-Mean
 // 2015-12-18
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class KMean() extends Clustering {
     val algoname: String = "KMean"

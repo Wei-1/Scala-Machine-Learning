@@ -1,7 +1,7 @@
 // Wei Chen - Clustering
 // 2018-09-30
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 trait Clustering extends Algorithm {
     val algotype: String = "Clustering"

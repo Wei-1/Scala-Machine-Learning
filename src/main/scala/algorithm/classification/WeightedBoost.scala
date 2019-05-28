@@ -1,7 +1,7 @@
 // Wei Chen - Weighted Boost
 // 2018-09-26
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 class WeightedBoost() extends Classification {
     val algoname: String = "WeightedBoost"

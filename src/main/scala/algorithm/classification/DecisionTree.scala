@@ -1,7 +1,7 @@
 // Wei Chen - Decision Tree
 // 2016-11-24
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 class DecisionNode(
     val col: Int, val v: Double,

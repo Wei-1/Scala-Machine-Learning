@@ -1,7 +1,7 @@
 // Wei Chen - Random Forest
 // 2016-11-28
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 class RandomForest() extends Classification {
     val algoname: String = "RandomForest"

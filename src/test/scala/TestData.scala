@@ -1,7 +1,7 @@
 // Wei Chen - Test Data Collection
 // 2016-12-1
 
-package com.interplanetarytech
+package com.scalaml
 package object TestData {
     // Classification Data
     // Linear Classification Data

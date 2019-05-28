@@ -1,8 +1,8 @@
 // Wei Chen - Perceptron - linear version no kernel
 // 2015-11-26
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class Perceptron() extends Classification {
     val algoname: String = "Perceptron"

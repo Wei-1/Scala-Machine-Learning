@@ -2,8 +2,8 @@
 // 2019-05-27
 // Use Gradient Decent instead of the optimal solution
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class MultivariateLinearRegression() extends Regression {
     val algoname: String = "MultivariateLinearRegression"

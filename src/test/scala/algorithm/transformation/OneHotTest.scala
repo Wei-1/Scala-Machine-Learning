@@ -2,7 +2,7 @@
 // 2018-11-08
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.algorithm.OneHot
+import com.scalaml.algorithm.OneHot
 
 class OneHotSuite extends FunSuite {
 

@@ -1,7 +1,7 @@
 // Wei Chen - Naive Boost
 // 2018-09-26
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 class NaiveBoost() extends Classification {
     val algoname: String = "NaiveBoost"
