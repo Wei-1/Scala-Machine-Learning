@@ -66,7 +66,7 @@ class DDQN(
             }
             ex1.add(paras, q_s2) // nn.train(Array(paras), Array(q_s), batchsize_number, lr)
             ex2.add(paras, q_s1) // nn.train(Array(paras), Array(q_s), batchsize_number, lr)
-            Math.max(q_s1.max, q_s2.max)
+            (q_s1.max + q_s2.max) / 2
         }
         val bestAct: Int = nn1.predictOne(paras).zipWithIndex.maxBy(_._1)._2
     }
