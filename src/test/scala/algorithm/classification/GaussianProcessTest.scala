@@ -30,4 +30,9 @@ class GaussianProcessSuite extends FunSuite {
         val result = gp.predict(UNLABELED_NONLINEAR_DATA)
         assert(arrayequal(result, LABEL_NONLINEAR_DATA))
     }
+
+    test("GaussianProcess Test : Invalid Config") {
+        assert(gp.clear())
+        assert(!gp.config(Map("std" -> "test")))
+    }
 }

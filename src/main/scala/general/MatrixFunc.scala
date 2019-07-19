@@ -107,7 +107,7 @@ package object MatrixFunc {
                 }
             }
             submat
-        } else Array(Array(0.0))
+        } else null
     }
 
     // | matrix |

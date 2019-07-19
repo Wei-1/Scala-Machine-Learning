@@ -29,4 +29,9 @@ class HierarchicalSuite extends FunSuite {
         val result = hi.cluster(UNLABELED_LARGE_DATA)
         assert(arrayequal(result, LABEL_LARGE_DATA))
     }
+
+    test("Hierarchical Test : Invalid Config") {
+        assert(hi.clear())
+        assert(!hi.config(Map("group" -> "test")))
+    }
 }

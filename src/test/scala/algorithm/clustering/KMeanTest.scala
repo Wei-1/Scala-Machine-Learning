@@ -29,4 +29,9 @@ class KMeanSuite extends FunSuite {
         val result = km.cluster(UNLABELED_LARGE_DATA)
         assert(!arrayequal(result, LABEL_LARGE_DATA))
     }
+
+    test("KMean Test : Invalid Config") {
+        assert(km.clear())
+        assert(!km.config(Map("k" -> "test")))
+    }
 }

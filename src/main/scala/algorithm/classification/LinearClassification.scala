@@ -13,25 +13,19 @@ class LinearClassification() extends Classification {
 
     var projector = Array[(Int, Int, Array[Double], Array[Double])]()
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         projector = Array[(Int, Int, Array[Double], Array[Double])]()
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
-    override def config(paras: Map[String, Any]): Boolean = try {
+    override def config(paras: Map[String, Any]): Boolean = {
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     // --- Start Linear Classification Function ---
     override def train(
         data: Array[(Int, Array[Double])]   // Data Array(yi, xi)
-    ): Boolean = try { // Return PData Class
+    ): Boolean = { // Return PData Class
         val centers = data.groupBy(_._1).map { l =>
             val datasize = l._2.size
             (l._1, matrixaccumulate(l._2.map(_._2)).map(_ / datasize))
@@ -47,10 +41,8 @@ class LinearClassification() extends Classification {
             }
         }
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
+    
     // --- Dual Projection Linear Classification ---
     override def predict(
         data: Array[Array[Double]]

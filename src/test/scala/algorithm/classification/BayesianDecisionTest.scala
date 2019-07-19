@@ -29,4 +29,10 @@ class BayesianDecisionSuite extends FunSuite {
         val result = bayesiandecision.predict(UNLABELED_NONLINEAR_DATA)
         assert(arrayequal(result, LABEL_NONLINEAR_DATA))
     }
+
+    test("BayesianDecision Test : Invalid Data") {
+        assert(bayesiandecision.clear())
+        assert(!bayesiandecision.train(Array((1, Array(1, 2)), (1, Array()))))
+        assert(bayesiandecision.predict(Array(Array(1.0))).size == 0)
+    }
 }

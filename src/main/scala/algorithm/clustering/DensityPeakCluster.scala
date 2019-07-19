@@ -13,15 +13,12 @@ class DensityPeakCluster() extends Clustering {
     var densityf = 3.0
     var deltaf = 3.0
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         dddata = Array[(Double, Double, Int)]()
         sd = 1.0
         densityf = 3.0
         deltaf = 3.0
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {
@@ -34,7 +31,10 @@ class DensityPeakCluster() extends Clustering {
         false
     }
     // Density Delta export import
-    def importdd(data: Array[(Double, Double, Int)]) = dddata = data
+    def importdd(data: Array[(Double, Double, Int)]): Boolean = {
+        dddata = data
+        true
+    }
     // density(Array(Array(1.0,2.0), Array(2.0,2.0),
     //   Array(1.0,0.1), Array(0.0,0.0)))
     override def cluster(data: Array[Array[Double]]) = {

@@ -178,7 +178,6 @@ class LstmNetwork(val param: LstmParam) {
             return loss
         } else {
             System.err.println("Y_LIST_SIZE != X_LIST_SIZE")
-            System.exit(1)
             return 0
         }
     }

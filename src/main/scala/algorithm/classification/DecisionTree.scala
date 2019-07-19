@@ -6,18 +6,21 @@ package com.scalaml.algorithm
 class DecisionNode(
     val col: Int, val v: Double,
     val tnode: DecisionNode, val fnode: DecisionNode,
-    val r: Map[Int, Int],
+    val r: Int = 0,
     val cats: Set[Int] = Set[Int]()
 ) {
     def predict(x: Array[Double]): Int = {
-        if(r == null) {
+        if(tnode != null && fnode != null) {
             if((!cats.contains(col) && x(col) > v) || x(col) == v) tnode.predict(x)
             else fnode.predict(x)
-        } else r.maxBy(_._2)._1
+        } else r
     }
-    override def toString: String =
-        col + (if(cats.contains(col)) " == " else " >= ") + v + " ? " +
-        tnode + " : " + fnode
+    override def toString: String = {
+        if(tnode != null && fnode != null) {
+            s"col[$col]" + (if(cats.contains(col)) " == " else " >= ") + v +
+            s" ? ($tnode) : ($fnode)"
+        } else s"class[$r]"
+    }
 }
 
 class DecisionTree() extends Classification {
@@ -28,12 +31,9 @@ class DecisionTree() extends Classification {
     var catColumns: Set[Int] = Set[Int]()
     var maxLayer: Int = 5
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         tree = null
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {
@@ -77,7 +77,7 @@ class DecisionTree() extends Classification {
                     else d._2(col) >= value
                 }
                 val p = tData.size / dataSize
-                val gain = currentScore - p * entropy(tData) - (1-p) * entropy(fData)
+                val gain = currentScore - p * entropy(tData) - (1 - p) * entropy(fData)
                 if (gain > bestGain && tData.size > 0 && fData.size > 0) {
                     bestGain = gain
                     bestColumn = col
@@ -90,8 +90,8 @@ class DecisionTree() extends Classification {
         if (bestGain > 0 && layer > 0) {
             val tnode = buildtree(bestTrueData, layer - 1)
             val fnode = buildtree(bestFalseData, layer - 1)
-            new DecisionNode(bestColumn, bestValue, tnode, fnode, null)
-        } else new DecisionNode(0, 0, null, null, uniqueCount(data))
+            new DecisionNode(bestColumn, bestValue, tnode, fnode)
+        } else new DecisionNode(0, 0, null, null, uniqueCount(data).maxBy(_._2)._1)
     }
 
     override def train(data: Array[(Int, Array[Double])]): Boolean = try {

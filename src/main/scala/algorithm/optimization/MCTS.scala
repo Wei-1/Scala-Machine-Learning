@@ -19,11 +19,9 @@ class MCNode(val sim: Array[Double] => Double, val act: Array[Double] => Array[A
         arr = act(init).map(a => new MCNode(sim, act, a, this))
     }
     def backpropagate: Unit = {
-        if (parent != null) {
-            if (parent.score > score) {
-                parent.score = score
-                parent.backpropagate
-            }
+        if (parent != null && parent.score > score) {
+            parent.score = score
+            parent.backpropagate
         }
     }
 }

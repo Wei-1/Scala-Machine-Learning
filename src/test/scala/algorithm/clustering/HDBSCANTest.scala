@@ -29,4 +29,9 @@ class HDBSCANSuite extends FunSuite {
         val result = hdbscan.cluster(UNLABELED_LARGE_DATA)
         assert(arrayequal(result, LABEL_LARGE_DATA))
     }
+
+    test("HDBSCAN Test : Invalid Config") {
+        assert(hdbscan.clear())
+        assert(!hdbscan.config(Map("limit" -> "test")))
+    }
 }

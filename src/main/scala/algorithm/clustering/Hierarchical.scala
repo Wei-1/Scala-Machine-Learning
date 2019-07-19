@@ -26,14 +26,11 @@ class Hierarchical() extends Clustering {
         }
     }
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         splittree = Array[(Int, Int)]()
         treecheck = Map[Int, Int]()
         group = 2
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {

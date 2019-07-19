@@ -10,7 +10,7 @@ class RBMSuite extends FunSuite {
 
     val learning_rate: Double = 0.1
     val limit: Int = 100
-    val k: Int = 1
+    val k: Int = 2
     
     val visible_n: Int = UNLABELED_LARGE_HIGH_DIM_DATA.head.size
     val hidden_n: Int = 3

@@ -10,13 +10,10 @@ class KNN() extends Classification {
     var referencepoints = Array[(Int, Array[Double])]()
     var k = 1
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         referencepoints = Array[(Int, Array[Double])]()
         k = 1
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {
@@ -27,12 +24,9 @@ class KNN() extends Classification {
         false
     }
     // --- Start KNN Function ---
-    override def train(tdata: Array[(Int, Array[Double])]): Boolean = try {
+    override def train(tdata: Array[(Int, Array[Double])]): Boolean = {
         referencepoints = tdata
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def predict(                   // K Mean

@@ -29,4 +29,5 @@ class LinearClassificationSuite extends FunSuite {
         val result = linearC.predict(UNLABELED_NONLINEAR_DATA)
         assert(!arrayequal(result, LABEL_NONLINEAR_DATA))
     }
+
 }

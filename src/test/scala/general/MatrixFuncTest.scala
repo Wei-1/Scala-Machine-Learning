@@ -109,17 +109,20 @@ class MatrixFuncSuite extends FunSuite {
 
     test("MatrixFunc Test : Sub Matrix") {
         val submatrixdata = submatrix(data, 0, 0)
-        assert(arrayequal(submatrixdata(0), Array(1.0,6.0)))
+        assert(arrayequal(submatrixdata(0), Array(1.0, 6.0)))
+        assert(submatrix(data, 5, 6) == null)
     }
 
     test("MatrixFunc Test : Determinant") {
         val determinantdata = determinant(covariancedata)
         assert(rint4(determinantdata) == 0.16)
+        assert(determinant(Array(Array(0, 0), Array(0, 0))).abs < 1e-8)
     }
 
     val inversedata = inverse(covariancedata)
     test("MatrixFunc Test : Inverse") {
         assert(arrayequal(arrrint4(inversedata(0)), Array(8.75, 6.25, 0.0)))
+        assert(inverse(Array(Array(0, 0), Array(0, 0))).map(_.sum).sum > 1E12)
     }
 
     test("MatrixFunc Test : Mahalanobis ^ 2") {

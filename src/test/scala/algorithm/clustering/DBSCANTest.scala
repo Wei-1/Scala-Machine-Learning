@@ -29,4 +29,9 @@ class DBSCANSuite extends FunSuite {
         val result = dbscan.cluster(UNLABELED_LARGE_DATA)
         assert(arrayequal(result, LABEL_LARGE_DATA))
     }
+
+    test("DBSCAN Test : Invalid Config") {
+        assert(dbscan.clear())
+        assert(!dbscan.config(Map("limit" -> "test")))
+    }
 }

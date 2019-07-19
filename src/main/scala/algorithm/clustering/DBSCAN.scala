@@ -23,13 +23,10 @@ class DBSCAN() extends Clustering {
     var groupdata = Array[Point]()
     var limit = 1.0
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         groupdata = Array[Point]()
         limit = 1.0
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {

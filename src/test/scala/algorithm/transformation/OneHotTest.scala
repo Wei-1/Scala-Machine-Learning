@@ -29,4 +29,11 @@ class OneHotSuite extends FunSuite {
         assert(decodeData.last(0) == "A")
         assert(decodeData.last(1) == "2.2")
     }
+
+    test("OneHot Test : Invalid Data") {
+        assert(oh.encode(Array()) == null)
+        assert(oh.decode(Array()) == null)
+        assert(oh.encode(Array(Array())) == null)
+        assert(oh.decode(Array(Array())) == null)
+    }
 }

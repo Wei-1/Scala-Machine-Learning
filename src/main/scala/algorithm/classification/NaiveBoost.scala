@@ -9,12 +9,9 @@ class NaiveBoost() extends Classification {
 
     var classifiers = Array[Classification]()
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         classifiers = Array[Classification]()
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {

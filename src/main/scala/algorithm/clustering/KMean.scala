@@ -13,15 +13,12 @@ class KMean() extends Clustering {
     var k = 2
     var iter = 100
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         centers = Array[(Array[Double], Int)]()
         groupdata = Array[(Array[Double], Int)]()
         k = 2
         iter = 100
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {

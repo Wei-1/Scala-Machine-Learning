@@ -11,13 +11,10 @@ class GaussianProcess() extends Classification {
     var pointGroups = Map[Int, Array[Array[Double]]]()
     var std: Double = 1.0 // Standard Deviation
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         pointGroups = Map[Int, Array[Array[Double]]]()
         std = 1.0
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {
@@ -31,12 +28,9 @@ class GaussianProcess() extends Classification {
     private def prob(a1: Array[Double], a2:Array[Double], s: Double): Double =
         Math.exp(-arrayminussquare(a1, a2).sum / Math.pow(s, 2))
     
-    override def train(tdata: Array[(Int, Array[Double])]): Boolean = try {
+    override def train(tdata: Array[(Int, Array[Double])]): Boolean = {
         pointGroups = tdata.groupBy(_._1).map(l => (l._1, l._2.map(_._2)))
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def predict(                   // Gaussian Process

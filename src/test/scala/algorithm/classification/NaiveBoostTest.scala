@@ -63,4 +63,11 @@ class NaiveBoostSuite extends FunSuite {
         val result2 = boost.predict(UNLABELED_NONLINEAR_DATA)
         assert(arrayequal(result2, LABEL_NONLINEAR_DATA))
     }
+
+    test("NaiveBoost Test : Invalid Config & Data") {
+        assert(boost.clear())
+        assert(!boost.config(Map("classifiers" -> "test")))
+        assert(boost.config(Map[String, Any]()))
+        assert(!boost.train(Array((1, Array(1, 2)), (1, Array()))))
+    }
 }

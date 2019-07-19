@@ -22,4 +22,10 @@ class StudentTSuite extends FunSuite {
         assert(st.twoSample(arr1, arr2) > 16)
     }
     
+    test("StudentT Test : No Data") {
+        assert(st.oneSample(Array(), 0) == 0.0)
+        assert(st.twoSample(Array(), Array(1.0)) == 0.0)
+        assert(st.twoSample(Array(1.0), Array()) == 0.0)
+    }
+
 }

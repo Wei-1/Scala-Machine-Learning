@@ -10,13 +10,10 @@ class WeightedBoost() extends Classification {
     var classifiers = Array[Classification]()
     var weight = Array[Double]()
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         classifiers = Array[Classification]()
         weight = Array[Double]()
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {

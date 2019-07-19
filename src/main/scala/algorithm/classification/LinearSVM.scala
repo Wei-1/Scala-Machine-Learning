@@ -14,12 +14,9 @@ class LinearSVM() extends Classification {
     var cost = Map(-1 -> 1.0, 1 -> 1.0) // Cost of two groups
     var limit = 1000                    // Iteration limit
     var err = 1e-1                      // Saturation error
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         projector = Array[Double]()
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {

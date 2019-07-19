@@ -29,4 +29,10 @@ class MultivariateLinearRegressionSuite extends FunSuite {
         val result = mlr.predict(UNLABELED_NONLINEAR_DATA)
         assert(!arraysimilar(result, LABEL_LINEAR_DATA.map(_.toDouble), 0.45))
     }
+
+    test("MultivariateLinearRegression Test : Invalid Config & Data") {
+        assert(mlr.clear())
+        assert(!mlr.config(Map("limit" -> "test")))
+        assert(!mlr.train(Array((1, Array(1, 2)), (1, Array()))))
+    }
 }

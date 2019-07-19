@@ -29,4 +29,9 @@ class MultipleLinearRegressionSuite extends FunSuite {
         val result = mlr.predict(UNLABELED_NONLINEAR_DATA)
         assert(!arraysimilar(result, LABEL_LINEAR_DATA.map(_.toDouble), 0.45))
     }
+
+    test("MultipleLinearRegression Test : Invalid Data") {
+        assert(mlr.clear())
+        assert(!mlr.train(Array((1, Array(1, 2)), (1, Array()))))
+    }
 }

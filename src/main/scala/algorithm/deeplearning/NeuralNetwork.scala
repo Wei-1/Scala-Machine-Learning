@@ -245,7 +245,6 @@ class NeuralNetwork {
         val inputLayer = network.head
         if(inputs.length != inputLayer.length) {
             Console.err.println("The number of inputs must match the number of nodes in the input layer")
-            System.exit(1)
         }
         // Update the input layer.
         for(i <- 0 until inputLayer.length) {
@@ -273,7 +272,6 @@ class NeuralNetwork {
         val outputNodes = network.last
         if(targets.size != outputNodes.size) {
             Console.err.println(s"Outputs(${targets.size}) must match the output layer(${outputNodes.size})")
-            System.exit(1)
         }
         // The output node is a special case. We use the user-defined error
         // function for the derivative.

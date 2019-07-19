@@ -11,20 +11,14 @@ class MultipleLinearRegression() extends Regression {
     var slope = Array[Double]()
     var bias = Array[Double]()
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         slope = Array[Double]()
         bias = Array[Double]()
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
-    override def config(paras: Map[String, Any]): Boolean = try {
+    override def config(paras: Map[String, Any]): Boolean = {
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     // --- Start Multiple Linear Regression Function ---

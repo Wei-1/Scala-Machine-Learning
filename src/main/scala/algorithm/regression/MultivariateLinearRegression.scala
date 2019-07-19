@@ -14,12 +14,9 @@ class MultivariateLinearRegression() extends Regression {
     var limit = 1000 // for GD
     var lr = 0.01 // for GD
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         weights = Array[Double]()
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {

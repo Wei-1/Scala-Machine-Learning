@@ -28,4 +28,9 @@ class KNNSuite extends FunSuite {
         val result = knn.predict(UNLABELED_NONLINEAR_DATA)
         assert(arrayequal(result, LABEL_NONLINEAR_DATA))
     }
+
+    test("KNN Test : Invalid Config") {
+        assert(knn.clear())
+        assert(!knn.config(Map("k" -> "test")))
+    }
 }

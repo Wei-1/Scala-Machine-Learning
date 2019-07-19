@@ -29,4 +29,9 @@ class EMClusterSuite extends FunSuite {
         val result = em.cluster(UNLABELED_LARGE_DATA)
         assert(!arrayequal(result, LABEL_LARGE_DATA))
     }
+
+    test("EMCluster Test : Invalid Config") {
+        assert(em.clear())
+        assert(!em.config(Map("k" -> "test")))
+    }
 }

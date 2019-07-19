@@ -29,4 +29,11 @@ class RandomForestSuite extends FunSuite {
         val result = rf.predict(UNLABELED_NONLINEAR_DATA)
         assert(!arrayequal(result, LABEL_NONLINEAR_DATA))
     }
+
+    test("RandomForest Test : Invalid Config & Data") {
+        assert(rf.clear())
+        assert(!rf.config(Map("maxLayer" -> "test")))
+        assert(rf.config(Map("tree_n" -> 5.0, "sample_n" -> 4.0)))
+        assert(!rf.train(Array((1, Array(1, 2)), (1, Array(2)), (2, Array()), (2, Array(1)))))
+    }
 }

@@ -33,5 +33,12 @@ class DensityPeakClusterSuite extends FunSuite {
     test("DensityPeakCluster Test : Clear") {
         assert(dpc.clear())
         assert(dpc.dddata.isEmpty)
+        val emptyArr = dpc.dddata
+        assert(dpc.importdd(emptyArr))
+    }
+
+    test("DensityPeakCluster Test : Invalid Config") {
+        assert(dpc.clear())
+        assert(!dpc.config(Map("sd" -> "test")))
     }
 }

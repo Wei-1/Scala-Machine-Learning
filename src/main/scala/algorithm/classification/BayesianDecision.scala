@@ -12,21 +12,15 @@ class BayesianDecision() extends Classification {
     var groupavg = Map[Int, Array[Double]]()
     var groupcov = Map[Int, Array[Array[Double]]]()
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         groupcnt = Map[Int, Int]()
         groupavg = Map[Int, Array[Double]]()
         groupcov = Map[Int, Array[Array[Double]]]()
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
-    override def config(paras: Map[String, Any]): Boolean = try {
+    override def config(paras: Map[String, Any]): Boolean = {
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     private def arrstats(

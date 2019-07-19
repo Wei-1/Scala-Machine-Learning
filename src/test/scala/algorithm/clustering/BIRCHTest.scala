@@ -34,4 +34,9 @@ class BIRCHSuite extends FunSuite {
         assert(birch.clear())
         assert(birch.centers.isEmpty)
     }
+
+    test("BIRCH Test : Invalid Config") {
+        assert(birch.clear())
+        assert(!birch.config(Map("limit" -> "test")))
+    }
 }

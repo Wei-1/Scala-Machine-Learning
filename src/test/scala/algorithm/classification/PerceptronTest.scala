@@ -29,4 +29,9 @@ class PerceptronSuite extends FunSuite {
         val result = perceptron.predict(UNLABELED_NONLINEAR_DATA)
         assert(!arrayequal(result, LABEL_NONLINEAR_DATA))
     }
+
+    test("Perceptron Test : Invalid Config") {
+        assert(perceptron.clear())
+        assert(!perceptron.config(Map("limit" -> "test")))
+    }
 }

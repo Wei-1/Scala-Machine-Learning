@@ -88,4 +88,23 @@ class LSTMSuite extends FunSuite {
         }
         assert(loss < 0.05)
     }
+
+    test("LSTM Test : Clear") {
+        val mem_cell_ct = 4
+        val x_dim = 2
+        val lstm_param = new LstmParam(mem_cell_ct, x_dim)
+        val lstm_net = new LstmNetwork(lstm_param)
+        lstm_net.clear
+        lstm_param.clear_wb
+        lstm_param.clear_diff
+    }
+
+    test("LSTM Test : Invalid Data") {
+        val mem_cell_ct = 4
+        val x_dim = 2
+        val lstm_param = new LstmParam(mem_cell_ct, x_dim)
+        val lstm_net = new LstmNetwork(lstm_param)
+        lstm_net.set_x_list(Array())
+        val newloss = lstm_net.set_y_list(Array(Array()), loss_func, diff_func)
+    }
 }
