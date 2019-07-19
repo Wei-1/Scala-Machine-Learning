@@ -1,4 +1,4 @@
-// Wei Chen - Double Deep Q Network
+// Wei Chen - Dueling Deep Q Network
 // 2017-10-07
 
 package com.scalaml.algorithm

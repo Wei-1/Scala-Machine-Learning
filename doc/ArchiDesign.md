@@ -38,7 +38,7 @@ trait Classification extends Algorithm {
     def predict(data: Array[Array[Double]]): Array[Int]
 }
 
-class Test(val version: String) extends Classifier {
+class Test() extends Classifier {
     val algoname: String = "Test"
     val version: String = "0.0"
     override def clear: Boolean = true

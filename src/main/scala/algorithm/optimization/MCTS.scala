@@ -1,4 +1,4 @@
-// Wei Chen - Monte Carlo
+// Wei Chen - Monte Carlo Tree Search
 // 2017-08-08
 
 package com.scalaml.algorithm
@@ -28,7 +28,7 @@ class MCNode(val sim: Array[Double] => Double, val act: Array[Double] => Array[A
     }
 }
 
-class MonteCarlo {
+class MCTS {
     def search(
         sim: Array[Double] => Double,
         act: Array[Double] => Array[Array[Double]],

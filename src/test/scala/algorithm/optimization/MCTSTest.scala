@@ -1,13 +1,13 @@
-// Wei Chen - Monte Carlo Test
+// Wei Chen - Monte Carlo Tree Search Test
 // 2017-08-08
 
 import org.scalatest.FunSuite
 import com.scalaml.general.MatrixFunc._
-import com.scalaml.algorithm.MonteCarlo
+import com.scalaml.algorithm.MCTS
 
-class MonteCarloSuite extends FunSuite {
+class MCTSSuite extends FunSuite {
     
-    val mc = new MonteCarlo
+    val mcts = new MCTS
 
     def simulation(state: Array[Double]): Double = {
         val statei = state.zipWithIndex
@@ -41,21 +41,21 @@ class MonteCarloSuite extends FunSuite {
         }
     }
 
-    test("MonteCarlo Test : Search Test 1") {
+    test("MCTS Test : Search Test 1") {
         val state = Array(-1.0, 1.0, 0.0, 0.0)
         val iter: Int = 4
 
-        val node = mc.search(simulation, actions, state, iter)
+        val node = mcts.search(simulation, actions, state, iter)
 
         assert(arrayequal(node.init, Array(0.0, -1.0, 1.0, 0.0)) || arrayequal(node.init, Array(0.0, 0.0, 1.0, -1.0)))
         assert(node.score == 1.0)
     }
 
-    test("MonteCarlo Test : Search Test 2") {
+    test("MCTS Test : Search Test 2") {
         val state = Array(-1.0, 0.0, 1.0, 0.0)
         val iter: Int = 2
 
-        val node = mc.search(simulation, actions, state, iter)
+        val node = mcts.search(simulation, actions, state, iter)
 
         assert(arrayequal(node.init, Array(0.0, -1.0, 1.0, 0.0)) || arrayequal(node.init, Array(0.0, 0.0, 1.0, -1.0)))
         assert(node.score == 1.0)
