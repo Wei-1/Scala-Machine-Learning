@@ -13,12 +13,13 @@ class NeuralNetworkSuite extends FunSuite {
     val input_column = UNLABELED_LARGE_HIGH_DIM_DATA.head.size
     val output_column = TARGET_LARGE_HIGH_DIM_DATA.head.size
     val layer_neurons = input_column +: hidden_layer :+ output_column
-    val limit = 40000
+    val limit = 20000
     val nn_learning_rate = 0.05
+    val inputIds = (for(i <- 0 until input_column) yield ('a' + i).toString).toArray
 
     val nn = new NeuralNetwork()
     test("NeuralNetwork Test : SIGMOID Initialization") { // most stable in small data
-        assert(nn.config(layer_neurons, SIGMOID))
+        assert(nn.config(layer_neurons, SIGMOID, LINEAR, null, inputIds))
     }
 
     test("NeuralNetwork Test : SIGMOID Training") {
