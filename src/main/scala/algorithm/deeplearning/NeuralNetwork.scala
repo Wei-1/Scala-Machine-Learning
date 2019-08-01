@@ -149,6 +149,7 @@ class NeuralNetwork {
     var learningRate: Double = 0.03
     var regularizationRate: Double = 0.01
     var network = Array[Array[Node]]()
+    var gradientClipping: Boolean = false
     /**
      * Builds a neural network.
      *
@@ -173,7 +174,8 @@ class NeuralNetwork {
         _updateIndex: Int = updateIndex,
         _batchSize: Int = batchSize,
         _learningRate: Double = learningRate,
-        _regularizationRate: Double = regularizationRate
+        _regularizationRate: Double = regularizationRate,
+        _gradientClipping: Boolean = gradientClipping
     ): Boolean = {
         try {
             /** Parameters */
@@ -188,6 +190,7 @@ class NeuralNetwork {
             batchSize = _batchSize
             learningRate = _learningRate
             regularizationRate = _regularizationRate
+            gradientClipping = _gradientClipping
             /** Network */
             val numLayers = networkShape.length
             var id = 1
@@ -287,6 +290,9 @@ class NeuralNetwork {
                 for(link <- node.inputLinks) {
                     if(!link.isDead) {
                         link.errorDer = node.inputDer * link.source.output
+                        if(gradientClipping) {
+                            link.errorDer = Math.max(-1, Math.min(1, link.errorDer))
+                        }
                         link.accErrorDer += link.errorDer
                         link.numAccumulatedDers += 1
                     }

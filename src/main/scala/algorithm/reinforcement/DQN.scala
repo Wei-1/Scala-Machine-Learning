@@ -16,7 +16,8 @@ class DQN(
 ) {
 
     val nn = new NeuralNetwork()
-    nn.config(initparas.size +: layer_neurons :+ actnumber, _batchSize = batchsize_number)
+    nn.config(initparas.size +: layer_neurons :+ actnumber,
+        _batchSize = batchsize_number, _gradientClipping = true)
     val ex = new Exp
 
     class Exp {

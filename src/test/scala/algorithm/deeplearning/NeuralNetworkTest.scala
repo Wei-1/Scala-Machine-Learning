@@ -19,7 +19,8 @@ class NeuralNetworkSuite extends FunSuite {
 
     val nn = new NeuralNetwork()
     test("NeuralNetwork Test : SIGMOID Initialization") { // most stable in small data
-        assert(nn.config(layer_neurons, SIGMOID, LINEAR, null, inputIds))
+        assert(nn.config(layer_neurons, SIGMOID, LINEAR, null, inputIds,
+            _gradientClipping = true))
     }
 
     test("NeuralNetwork Test : SIGMOID Training") {

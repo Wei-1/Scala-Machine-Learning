@@ -18,9 +18,11 @@ class A3C(
 ) {
 
     val actor = new NeuralNetwork()
-    actor.config(initparas.size +: actor_neurons :+ actnumber, _batchSize = batchsize_number)
+    actor.config(initparas.size +: actor_neurons :+ actnumber,
+        _batchSize = batchsize_number, _gradientClipping = true)
     val critic = new NeuralNetwork()
-    critic.config(initparas.size +: critic_neurons :+ 1, _batchSize = batchsize_number)
+    critic.config(initparas.size +: critic_neurons :+ 1,
+        _batchSize = batchsize_number, _gradientClipping = true)
 
     val ex = new Exp
 

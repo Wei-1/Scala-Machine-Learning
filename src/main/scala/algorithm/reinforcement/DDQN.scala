@@ -16,9 +16,11 @@ class DDQN(
 ) {
 
     val nn1 = new NeuralNetwork()
-    nn1.config(initparas.size +: layer_neurons :+ actnumber, _batchSize = batchsize_number)
+    nn1.config(initparas.size +: layer_neurons :+ actnumber,
+        _batchSize = batchsize_number, _gradientClipping = true)
     val nn2 = new NeuralNetwork()
-    nn2.config(initparas.size +: layer_neurons :+ actnumber, _batchSize = batchsize_number)
+    nn2.config(initparas.size +: layer_neurons :+ actnumber,
+        _batchSize = batchsize_number, _gradientClipping = true)
     val ex1 = new Exp(nn2)
     val ex2 = new Exp(nn1)
 
