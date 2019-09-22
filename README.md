@@ -126,10 +126,6 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 2. Clone this project
 
-```
-git clone https://github.com/Wei-1/Scala-Machine-Learning.git
-```
-
 
 ## Test
 
