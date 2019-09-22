@@ -1,8 +1,8 @@
 // Wei Chen - K-Mean
 // 2016-11-07
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class EMCluster() extends Clustering {
     val algoname: String = "EMCluster"
@@ -13,15 +13,12 @@ class EMCluster() extends Clustering {
     var k = 2
     var iter = 100
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         gaussians = Array[((Int, Array[Double], Array[Array[Double]]), Int)]()
         groupdata = Array[(Array[Double], Int)]()
         k = 2
         iter = 100
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {

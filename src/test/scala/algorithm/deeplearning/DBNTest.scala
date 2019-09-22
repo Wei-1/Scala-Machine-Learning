@@ -2,9 +2,9 @@
 // 2016-11-23
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm.DBN
+import com.scalaml.TestData._
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm.DBN
 
 class DBNSuite extends FunSuite {
 

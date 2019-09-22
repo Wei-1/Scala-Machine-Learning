@@ -2,9 +2,9 @@
 // 2016-06-04
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm.KNN
+import com.scalaml.TestData._
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm.KNN
 
 class KNNSuite extends FunSuite {
 
@@ -27,5 +27,10 @@ class KNNSuite extends FunSuite {
         assert(knn.train(LABELED_NONLINEAR_DATA))
         val result = knn.predict(UNLABELED_NONLINEAR_DATA)
         assert(arrayequal(result, LABEL_NONLINEAR_DATA))
+    }
+
+    test("KNN Test : Invalid Config") {
+        assert(knn.clear())
+        assert(!knn.config(Map("k" -> "test")))
     }
 }

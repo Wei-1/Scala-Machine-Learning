@@ -2,9 +2,9 @@
 // 2016-06-04
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm.Perceptron
+import com.scalaml.TestData._
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm.Perceptron
 
 class PerceptronSuite extends FunSuite {
 
@@ -28,5 +28,10 @@ class PerceptronSuite extends FunSuite {
         assert(perceptron.train(LABELED_NONLINEAR_DATA))
         val result = perceptron.predict(UNLABELED_NONLINEAR_DATA)
         assert(!arrayequal(result, LABEL_NONLINEAR_DATA))
+    }
+
+    test("Perceptron Test : Invalid Config") {
+        assert(perceptron.clear())
+        assert(!perceptron.config(Map("limit" -> "test")))
     }
 }

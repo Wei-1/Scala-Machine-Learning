@@ -2,9 +2,9 @@
 // 2016-06-03
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm.DensityPeakCluster
+import com.scalaml.TestData._
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm.DensityPeakCluster
 
 class DensityPeakClusterSuite extends FunSuite {
 
@@ -33,5 +33,12 @@ class DensityPeakClusterSuite extends FunSuite {
     test("DensityPeakCluster Test : Clear") {
         assert(dpc.clear())
         assert(dpc.dddata.isEmpty)
+        val emptyArr = dpc.dddata
+        assert(dpc.importdd(emptyArr))
+    }
+
+    test("DensityPeakCluster Test : Invalid Config") {
+        assert(dpc.clear())
+        assert(!dpc.config(Map("sd" -> "test")))
     }
 }

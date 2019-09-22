@@ -1,7 +1,7 @@
 // Wei Chen - Naive Feedback Learning
 // 2017-07-28
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 class FState (val id: Int = -1) {
     var score: Double = 0.0

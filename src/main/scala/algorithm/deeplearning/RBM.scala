@@ -1,8 +1,8 @@
 // Wei Chen - Restricted Boltzmann Machine
 // 2016-11-20
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class RBM(val visible_n: Int, val hidden_n: Int) {
 

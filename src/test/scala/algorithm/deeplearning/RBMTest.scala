@@ -2,15 +2,15 @@
 // 2016-11-20
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm.RBM
+import com.scalaml.TestData._
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm.RBM
 
 class RBMSuite extends FunSuite {
 
     val learning_rate: Double = 0.1
     val limit: Int = 100
-    val k: Int = 1
+    val k: Int = 2
     
     val visible_n: Int = UNLABELED_LARGE_HIGH_DIM_DATA.head.size
     val hidden_n: Int = 3

@@ -2,9 +2,9 @@
 // 2016-11-24
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm.GaussianProcess
+import com.scalaml.TestData._
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm.GaussianProcess
 
 class GaussianProcessSuite extends FunSuite {
 
@@ -29,5 +29,10 @@ class GaussianProcessSuite extends FunSuite {
         assert(gp.train(LABELED_NONLINEAR_DATA))
         val result = gp.predict(UNLABELED_NONLINEAR_DATA)
         assert(arrayequal(result, LABEL_NONLINEAR_DATA))
+    }
+
+    test("GaussianProcess Test : Invalid Config") {
+        assert(gp.clear())
+        assert(!gp.config(Map("std" -> "test")))
     }
 }

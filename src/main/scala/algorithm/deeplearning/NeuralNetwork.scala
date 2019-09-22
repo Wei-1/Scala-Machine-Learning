@@ -2,7 +2,7 @@
 // Wei Chen
 // 2018-10-02
 // From Google's NN-Playground in TypeScript to Scala (merging Plyaground, State, and NN)
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 /**
  * A node in a neural network. Each node has a state
@@ -49,9 +49,6 @@ class Node(
         output = activation.output(totalInput)
         output
     }
-
-    /** Debug node */
-    override def toString: String = id + "_" + outputLinks.map(_.weight).mkString(",")
 }
 
 /** Built-in error functions */
@@ -75,16 +72,16 @@ object TANH extends ActivationFunction {
     override def output(x: Double): Double = Math.tanh(x)
     override def der(x: Double): Double = 1 - Math.pow(output(x), 2)
 }
-object RELU extends ActivationFunction {
-    override def output(x: Double): Double = Math.max(0, x)
-    override def der(x: Double): Double = if(x <= 0) 0 else 1
-}
 object SIGMOID extends ActivationFunction {
     override def output(x: Double): Double = 1 / (1 + Math.exp(-x))
     override def der(x: Double): Double = {
         val out = output(x)
         out * (1 - out)
     }
+}
+object RELU extends ActivationFunction {
+    override def output(x: Double): Double = Math.max(0, x)
+    override def der(x: Double): Double = if(x <= 0) 0 else 1
 }
 object LINEAR extends ActivationFunction {
     override def output(x: Double): Double = x
@@ -150,8 +147,9 @@ class NeuralNetwork {
     var updateIndex: Int = 0
     var batchSize: Int = 10
     var learningRate: Double = 0.03
-    var regularizationRate: Double = 0.0
+    var regularizationRate: Double = 0.01
     var network = Array[Array[Node]]()
+    var gradientClipping: Boolean = false
     /**
      * Builds a neural network.
      *
@@ -176,7 +174,8 @@ class NeuralNetwork {
         _updateIndex: Int = updateIndex,
         _batchSize: Int = batchSize,
         _learningRate: Double = learningRate,
-        _regularizationRate: Double = regularizationRate
+        _regularizationRate: Double = regularizationRate,
+        _gradientClipping: Boolean = gradientClipping
     ): Boolean = {
         try {
             /** Parameters */
@@ -191,6 +190,7 @@ class NeuralNetwork {
             batchSize = _batchSize
             learningRate = _learningRate
             regularizationRate = _regularizationRate
+            gradientClipping = _gradientClipping
             /** Network */
             val numLayers = networkShape.length
             var id = 1
@@ -243,10 +243,6 @@ class NeuralNetwork {
         inputs: Array[Double]
     ): Array[Double] = {
         val inputLayer = network.head
-        if(inputs.length != inputLayer.length) {
-            Console.err.println("The number of inputs must match the number of nodes in the input layer")
-            System.exit(1)
-        }
         // Update the input layer.
         for(i <- 0 until inputLayer.length) {
             val node = inputLayer(i)
@@ -271,10 +267,6 @@ class NeuralNetwork {
         errorFunc: ErrorFunction = SQUARE
     ): Unit = {
         val outputNodes = network.last
-        if(targets.size != outputNodes.size) {
-            Console.err.println(s"Outputs(${targets.size}) must match the output layer(${outputNodes.size})")
-            System.exit(1)
-        }
         // The output node is a special case. We use the user-defined error
         // function for the derivative.
         for((node, target) <- outputNodes.zip(targets)) {
@@ -298,6 +290,9 @@ class NeuralNetwork {
                 for(link <- node.inputLinks) {
                     if(!link.isDead) {
                         link.errorDer = node.inputDer * link.source.output
+                        if(gradientClipping) {
+                            link.errorDer = Math.max(-1, Math.min(1, link.errorDer))
+                        }
                         link.accErrorDer += link.errorDer
                         link.numAccumulatedDers += 1
                     }
@@ -338,10 +333,10 @@ class NeuralNetwork {
                         // Further update the weight based on regularization.
                         val regulDer = if(link.regularization != null) link.regularization.der(link.weight) else 0.0
                         val newLinkWeight = link.weight - (learningRate * regularizationRate) * regulDer
-                        if(link.regularization != null &&
-                            link.regularization.der(2) == 1 && // regularization == L1
+                        if(link.regularization != null && link.regularization.der(2) == 1 &&
                             link.weight * newLinkWeight < 0) {
                             // The weight crossed 0 due to the regularization term. Set it to 0.
+                            // Console.err.println(" --------------- YOU GOT A DEAD CELL -------------- ")
                             link.weight = 0.0
                             link.isDead = true
                         } else {
@@ -353,17 +348,6 @@ class NeuralNetwork {
                 }
             }
         }
-    }
-
-    /** Iterates over every node in the network/ */
-    def forEachNode(
-        ignoreInputs: Boolean,
-        accessor: Node => Unit
-    ): Unit = {
-        if(ignoreInputs) network.drop(1)
-        else network
-    }.foreach { currentLayer =>
-        currentLayer.foreach(node => accessor(node))
     }
 
     /** Returns the output node in the network. */
@@ -403,25 +387,14 @@ class NeuralNetwork {
     /** Predict one inputs */
     def predictOne = forwardProp _
 
-    /** Difference between outputs and targets, moved and Modified from Playground. */
-    def LossOne(inputs: Array[Double], targets: Array[Double], errorFunc: ErrorFunction = SQUARE): Double = {
-        forwardProp(inputs).zip(targets).map { case (output, target) =>
-            errorFunc.error(output, target)
-        }.sum
-    }
-
     /** Train all data */
-    def train(x: Array[Array[Double]], y: Array[Array[Double]], errorFunc: ErrorFunction = SQUARE, iter: Int = 1, _learningRate: Double = learningRate): Boolean = try {
+    def train(x: Array[Array[Double]], y: Array[Array[Double]], errorFunc: ErrorFunction = SQUARE, iter: Int = 1, _learningRate: Double = learningRate): Boolean = {
         learningRate = _learningRate
         val data = x.zip(y)
-        for(i <- 0 until iter)
-            data.foreach { case (inputs, targets) => trainOne(inputs, targets, errorFunc) }
+        for(i <- 0 until iter) data.foreach { case (inputs, targets) => trainOne(inputs, targets, errorFunc) }
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     /** Predict all data */
-    def predict(data: Array[Array[Double]]): Array[Array[Double]] = data.map(inputs => forwardProp(inputs))
+    def predict(data: Array[Array[Double]]): Array[Array[Double]] = data.map(inputs => predictOne(inputs))
 }

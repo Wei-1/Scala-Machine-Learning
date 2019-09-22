@@ -1,7 +1,7 @@
 // Wei Chen - Weighted Boost
 // 2018-09-26
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 class WeightedBoost() extends Classification {
     val algoname: String = "WeightedBoost"
@@ -10,13 +10,10 @@ class WeightedBoost() extends Classification {
     var classifiers = Array[Classification]()
     var weight = Array[Double]()
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         classifiers = Array[Classification]()
         weight = Array[Double]()
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {
@@ -27,14 +24,11 @@ class WeightedBoost() extends Classification {
         false
     }
 
-    override def train(data: Array[(Int, Array[Double])]): Boolean = try {
+    override def train(data: Array[(Int, Array[Double])]): Boolean = {
         if(classifiers.forall(classifier => classifier.train(data))) {
             weight = classifiers.map(classifier => classifier.predict(data.map(_._2)).zip(data.map(_._1)).count(p => p._1 == p._2) / data.size.toDouble)
             true
         } else false
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def predict(data: Array[Array[Double]]): Array[Int] = {

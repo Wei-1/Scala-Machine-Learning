@@ -2,9 +2,9 @@
 // 2017-07-25
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm.StudentT
+import com.scalaml.TestData._
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm.StudentT
 
 class StudentTSuite extends FunSuite {
 
@@ -22,4 +22,10 @@ class StudentTSuite extends FunSuite {
         assert(st.twoSample(arr1, arr2) > 16)
     }
     
+    test("StudentT Test : No Data") {
+        assert(st.oneSample(Array(), 0) == 0.0)
+        assert(st.twoSample(Array(), Array(1.0)) == 0.0)
+        assert(st.twoSample(Array(1.0), Array()) == 0.0)
+    }
+
 }

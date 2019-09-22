@@ -1,7 +1,7 @@
-// Wei Chen - Monte Carlo
+// Wei Chen - Monte Carlo Tree Search
 // 2017-08-08
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 class MCNode(val sim: Array[Double] => Double, val act: Array[Double] => Array[Array[Double]], val init: Array[Double], val parent: MCNode = null) {
     var score: Double = sim(init)
@@ -19,16 +19,14 @@ class MCNode(val sim: Array[Double] => Double, val act: Array[Double] => Array[A
         arr = act(init).map(a => new MCNode(sim, act, a, this))
     }
     def backpropagate: Unit = {
-        if (parent != null) {
-            if (parent.score > score) {
-                parent.score = score
-                parent.backpropagate
-            }
+        if (parent != null && parent.score > score) {
+            parent.score = score
+            parent.backpropagate
         }
     }
 }
 
-class MonteCarlo {
+class MCTS {
     def search(
         sim: Array[Double] => Double,
         act: Array[Double] => Array[Array[Double]],

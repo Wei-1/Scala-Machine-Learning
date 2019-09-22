@@ -1,7 +1,7 @@
 // Wei Chen - Deep Q Network
 // 2017-08-31
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 // nextstate, reward, end = simulator(state, action)
 class DQN(
@@ -16,7 +16,8 @@ class DQN(
 ) {
 
     val nn = new NeuralNetwork()
-    nn.config(initparas.size +: layer_neurons :+ actnumber, _batchSize = batchsize_number)
+    nn.config(initparas.size +: layer_neurons :+ actnumber,
+        _batchSize = batchsize_number, _gradientClipping = true)
     val ex = new Exp
 
     class Exp {

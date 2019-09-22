@@ -2,9 +2,9 @@
 // 2016-11-12
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm.HDBSCAN
+import com.scalaml.TestData._
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm.HDBSCAN
 
 class HDBSCANSuite extends FunSuite {
 
@@ -28,5 +28,10 @@ class HDBSCANSuite extends FunSuite {
         assert(hdbscan.config(Map("k" -> 2, "limit" -> 2)))
         val result = hdbscan.cluster(UNLABELED_LARGE_DATA)
         assert(arrayequal(result, LABEL_LARGE_DATA))
+    }
+
+    test("HDBSCAN Test : Invalid Config") {
+        assert(hdbscan.clear())
+        assert(!hdbscan.config(Map("limit" -> "test")))
     }
 }

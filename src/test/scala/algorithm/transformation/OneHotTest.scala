@@ -2,7 +2,7 @@
 // 2018-11-08
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.algorithm.OneHot
+import com.scalaml.algorithm.OneHot
 
 class OneHotSuite extends FunSuite {
 
@@ -28,5 +28,12 @@ class OneHotSuite extends FunSuite {
         assert(decodeData.head(1) == "2.1")
         assert(decodeData.last(0) == "A")
         assert(decodeData.last(1) == "2.2")
+    }
+
+    test("OneHot Test : Invalid Data") {
+        assert(oh.encode(Array()) == null)
+        assert(oh.decode(Array()) == null)
+        assert(oh.encode(Array(Array())) == null)
+        assert(oh.decode(Array(Array())) == null)
     }
 }

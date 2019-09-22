@@ -1,8 +1,8 @@
 // Wei Chen - BIRCH
 // 2016-11-18
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class BIRCH() extends Clustering {
     val algoname: String = "BIRCH"
@@ -11,13 +11,10 @@ class BIRCH() extends Clustering {
     var centers = Array[(Int, Array[Double], Array[Double])]()
     var limit = 1.0
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         centers = Array[(Int, Array[Double], Array[Double])]()
         limit = 1.0
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {

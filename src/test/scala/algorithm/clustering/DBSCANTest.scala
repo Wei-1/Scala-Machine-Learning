@@ -2,9 +2,9 @@
 // 2016-11-10
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm.DBSCAN
+import com.scalaml.TestData._
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm.DBSCAN
 
 class DBSCANSuite extends FunSuite {
 
@@ -28,5 +28,10 @@ class DBSCANSuite extends FunSuite {
         assert(dbscan.config(Map("limit" -> 3.0)))
         val result = dbscan.cluster(UNLABELED_LARGE_DATA)
         assert(arrayequal(result, LABEL_LARGE_DATA))
+    }
+
+    test("DBSCAN Test : Invalid Config") {
+        assert(dbscan.clear())
+        assert(!dbscan.config(Map("limit" -> "test")))
     }
 }

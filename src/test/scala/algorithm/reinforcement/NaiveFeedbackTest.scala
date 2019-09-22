@@ -2,8 +2,8 @@
 // 2017-07-28
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.algorithm.NaiveFeedback
+import com.scalaml.TestData._
+import com.scalaml.algorithm.NaiveFeedback
 
 class NaiveFeedbackSuite extends FunSuite {
 

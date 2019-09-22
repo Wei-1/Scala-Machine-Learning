@@ -1,8 +1,8 @@
 // Wei Chen - NN - Neural Network with basic sigmoid
 // 2016-08-29
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class BasicNN(val layer_neurons: Array[Int], val input_column: Int, val output_column: Int) {
     val layer_number = layer_neurons.size
@@ -26,10 +26,6 @@ class BasicNN(val layer_neurons: Array[Int], val input_column: Int, val output_c
         x.map(arr => arr.map(n => neuron(n, forward)))
     }
 
-    private def linearBack(x: Array[Array[Double]]): Array[Array[Double]] = {
-        x.map(arr => arr.map(n => 1.0))
-    }
-
     def iterate(x: Array[Array[Double]], y: Array[Array[Double]], lr: Double) {
         var layer_results = Array.fill(layer_number+2)(Array[Array[Double]]())
         layer_results(0) = x
@@ -41,7 +37,7 @@ class BasicNN(val layer_neurons: Array[Int], val input_column: Int, val output_c
         var layer_deltas = Array.fill(layer_number+1)(Array[Array[Double]]())
 
         val layer_error = matrixminus(y, layer_results(layer_number+1))
-        layer_deltas(layer_number) = layer_error // matrixmultiply(layer_error, linearBack(layer_results(layer_number+1)))
+        layer_deltas(layer_number) = layer_error
         for (i <- layer_number-1 to 0 by -1) {
             val layer_error = matrixdot(layer_deltas(i+1), syns(i+1).transpose)
             layer_deltas(i) = matrixmultiply(layer_error, neuralLayer(layer_results(i+1), false))

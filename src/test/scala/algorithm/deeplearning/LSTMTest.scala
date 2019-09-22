@@ -2,10 +2,10 @@
 // 2016-11-23
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm.LstmParam
-import com.interplanetarytech.algorithm.LstmNetwork
+import com.scalaml.TestData._
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm.LstmParam
+import com.scalaml.algorithm.LstmNetwork
 
 class LSTMSuite extends FunSuite {
 
@@ -87,5 +87,24 @@ class LSTMSuite extends FunSuite {
             loss = newloss
         }
         assert(loss < 0.05)
+    }
+
+    test("LSTM Test : Clear") {
+        val mem_cell_ct = 4
+        val x_dim = 2
+        val lstm_param = new LstmParam(mem_cell_ct, x_dim)
+        val lstm_net = new LstmNetwork(lstm_param)
+        lstm_net.clear
+        lstm_param.clear_wb
+        lstm_param.clear_diff
+    }
+
+    test("LSTM Test : Invalid Data") {
+        val mem_cell_ct = 4
+        val x_dim = 2
+        val lstm_param = new LstmParam(mem_cell_ct, x_dim)
+        val lstm_net = new LstmNetwork(lstm_param)
+        lstm_net.set_x_list(Array())
+        val newloss = lstm_net.set_y_list(Array(Array()), loss_func, diff_func)
     }
 }

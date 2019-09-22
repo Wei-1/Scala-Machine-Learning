@@ -1,7 +1,7 @@
 // Wei Chen - Random Forest
 // 2016-11-28
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 class RandomForest() extends Classification {
     val algoname: String = "RandomForest"
@@ -13,26 +13,23 @@ class RandomForest() extends Classification {
     var catColumns = Set[Int]()
     var maxLayer = 5
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         trees = Array[DecisionTree]()
         tree_n = 10
         sample_n = 10
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     private def randomSelect(data: Array[(Int, Array[Double])], sample_n: Int) =
         scala.util.Random.shuffle(data.toList).take(sample_n).toArray
 
-    private def addTree(data: Array[(Int, Array[Double])]) {
+    private def addTree(data: Array[(Int, Array[Double])]): Boolean = {
         val dtree = new DecisionTree()
         var paras = Map("maxLayer" -> maxLayer.toDouble): Map[String, Any]
         if(catColumns.size > 0) paras += "catColumns" -> catColumns
-        dtree.config(paras)
-        dtree.train(data)
-        trees :+= dtree
+        val check = dtree.config(paras) && dtree.train(data)
+        if(check) trees :+= dtree
+        check
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {
@@ -46,15 +43,11 @@ class RandomForest() extends Classification {
         false
     }
 
-    override def train(data: Array[(Int, Array[Double])]): Boolean = try {
+    override def train(data: Array[(Int, Array[Double])]): Boolean = {
         val data_n = data.size
         if (data_n > sample_n) {
-            for (i <- 0 until tree_n) addTree(randomSelect(data, sample_n))
+            (0 until tree_n).forall(i => addTree(randomSelect(data, sample_n)))
         } else addTree(data)
-        true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def predict(data: Array[Array[Double]]): Array[Int] = {

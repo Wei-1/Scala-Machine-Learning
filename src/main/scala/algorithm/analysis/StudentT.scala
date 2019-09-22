@@ -1,7 +1,7 @@
 // Wei Chen - Student T
 // 2017-07-25
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 class StudentT {
 

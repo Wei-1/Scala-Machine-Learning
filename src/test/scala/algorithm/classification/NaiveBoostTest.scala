@@ -2,9 +2,9 @@
 // 2018-09-26
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm._
+import com.scalaml.TestData._
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm._
 
 class NaiveBoostSuite extends FunSuite {
 
@@ -26,7 +26,7 @@ class NaiveBoostSuite extends FunSuite {
             new DecisionTree,
             new GaussianProcess,
             new KNN,
-            new LinearRegression,
+            new LinearClassification,
             new LinearSVM,
             new Perceptron,
             new RandomForest
@@ -52,7 +52,7 @@ class NaiveBoostSuite extends FunSuite {
             new DecisionTree,
             new GaussianProcess,
             new KNN,
-            new LinearRegression,
+            new LinearClassification,
             svm,
             new Perceptron,
             new RandomForest
@@ -62,5 +62,12 @@ class NaiveBoostSuite extends FunSuite {
         assert(boost.train(LABELED_NONLINEAR_DATA))
         val result2 = boost.predict(UNLABELED_NONLINEAR_DATA)
         assert(arrayequal(result2, LABEL_NONLINEAR_DATA))
+    }
+
+    test("NaiveBoost Test : Invalid Config & Data") {
+        assert(boost.clear())
+        assert(!boost.config(Map("classifiers" -> "test")))
+        assert(boost.config(Map[String, Any]()))
+        assert(!boost.train(Array((1, Array(1, 2)), (1, Array()))))
     }
 }

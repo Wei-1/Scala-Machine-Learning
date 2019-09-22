@@ -1,8 +1,8 @@
 // Wei Chen - Hierarchical
 // 2016-11-12
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class Hierarchical() extends Clustering {
     val algoname: String = "Hierarchical"
@@ -26,14 +26,11 @@ class Hierarchical() extends Clustering {
         }
     }
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         splittree = Array[(Int, Int)]()
         treecheck = Map[Int, Int]()
         group = 2
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {

@@ -2,9 +2,9 @@
 // 2016-06-04
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm.EMCluster
+import com.scalaml.TestData._
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm.EMCluster
 
 class EMClusterSuite extends FunSuite {
 
@@ -28,5 +28,10 @@ class EMClusterSuite extends FunSuite {
         assert(em.config(Map("k" -> 2, "iter" -> 100)))
         val result = em.cluster(UNLABELED_LARGE_DATA)
         assert(!arrayequal(result, LABEL_LARGE_DATA))
+    }
+
+    test("EMCluster Test : Invalid Config") {
+        assert(em.clear())
+        assert(!em.config(Map("k" -> "test")))
     }
 }

@@ -1,7 +1,7 @@
 // Wei Chen - Naive Boost
 // 2018-09-26
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 class NaiveBoost() extends Classification {
     val algoname: String = "NaiveBoost"
@@ -9,12 +9,9 @@ class NaiveBoost() extends Classification {
 
     var classifiers = Array[Classification]()
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         classifiers = Array[Classification]()
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {
@@ -25,11 +22,8 @@ class NaiveBoost() extends Classification {
         false
     }
 
-    override def train(data: Array[(Int, Array[Double])]): Boolean = try {
+    override def train(data: Array[(Int, Array[Double])]): Boolean = {
         classifiers.forall(classifier => classifier.train(data))
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def predict(data: Array[Array[Double]]): Array[Int] = {

@@ -1,8 +1,8 @@
 // Wei Chen - Perceptron - linear version no kernel
 // 2015-11-26
 
-package com.interplanetarytech.algorithm
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class Perceptron() extends Classification {
     val algoname: String = "Perceptron"
@@ -12,14 +12,11 @@ class Perceptron() extends Classification {
     var lr: Double = 0.5
     var limit: Int = 1000
 
-    override def clear(): Boolean = try {
+    override def clear(): Boolean = {
         projector = Array[Double]()
         lr = 0.5
         limit = 1000
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def config(paras: Map[String, Any]): Boolean = try {
@@ -35,7 +32,7 @@ class Perceptron() extends Classification {
         arraymultiply(x, y).sum
 
     // train(Array((1,Array(1,2)),(1,Array(2,3)),(-1,Array(2,1)),(-1,Array(3,2))), 0.5, 100)
-    override def train(data: Array[(Int, Array[Double])]): Boolean = try {
+    override def train(data: Array[(Int, Array[Double])]): Boolean = {
         val traindatasize = data.size
         val featuresize = data.head._2.size
         var w = new Array[Double](featuresize + 1)
@@ -58,9 +55,6 @@ class Perceptron() extends Classification {
         }
         projector = w
         true
-    } catch { case e: Exception =>
-        Console.err.println(e)
-        false
     }
 
     override def predict(data: Array[Array[Double]]): Array[Int] = {

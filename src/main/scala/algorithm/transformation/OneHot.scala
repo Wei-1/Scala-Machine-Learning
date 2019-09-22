@@ -1,7 +1,7 @@
 // Wei Chen - OneHot
 // 2018-11-07
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 class OneHot(
     // name, type
@@ -11,7 +11,7 @@ class OneHot(
     // name, category (null for number)
     var decodeTable: Array[(String, String)] = Array[(String, String)]()
 ) {
-    def encode(data: Array[Array[String]]): Array[Array[Double]] = {
+    def encode(data: Array[Array[String]]): Array[Array[Double]] = try {
         if(data.head.size == table.size) {
             // Pre-process
             data.foreach { row =>
@@ -39,9 +39,12 @@ class OneHot(
                 }
             }
         } else null
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        null
     }
 
-    def decode(data: Array[Array[Double]]): Array[Array[String]] = {
+    def decode(data: Array[Array[Double]]): Array[Array[String]] = try {
         if(decodeTable.size == data.head.size) {
             data.map { row =>
                 row.zip(decodeTable).flatMap { case (value, (name, cname)) =>
@@ -51,5 +54,8 @@ class OneHot(
                 }
             }
         } else null
+    } catch { case e: Exception =>
+        Console.err.println(e)
+        null
     }
 }

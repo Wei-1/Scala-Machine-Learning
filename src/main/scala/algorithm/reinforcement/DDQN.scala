@@ -1,7 +1,7 @@
-// Wei Chen - Double Deep Q Network
+// Wei Chen - Dueling Deep Q Network
 // 2017-10-07
 
-package com.interplanetarytech.algorithm
+package com.scalaml.algorithm
 
 // nextstate, reward, end = simulator(state, action)
 class DDQN(
@@ -16,9 +16,11 @@ class DDQN(
 ) {
 
     val nn1 = new NeuralNetwork()
-    nn1.config(initparas.size +: layer_neurons :+ actnumber, _batchSize = batchsize_number)
+    nn1.config(initparas.size +: layer_neurons :+ actnumber,
+        _batchSize = batchsize_number, _gradientClipping = true)
     val nn2 = new NeuralNetwork()
-    nn2.config(initparas.size +: layer_neurons :+ actnumber, _batchSize = batchsize_number)
+    nn2.config(initparas.size +: layer_neurons :+ actnumber,
+        _batchSize = batchsize_number, _gradientClipping = true)
     val ex1 = new Exp(nn2)
     val ex2 = new Exp(nn1)
 
@@ -66,7 +68,7 @@ class DDQN(
             }
             ex1.add(paras, q_s2) // nn.train(Array(paras), Array(q_s), batchsize_number, lr)
             ex2.add(paras, q_s1) // nn.train(Array(paras), Array(q_s), batchsize_number, lr)
-            Math.max(q_s1.max, q_s2.max)
+            (q_s1.max + q_s2.max) / 2
         }
         val bestAct: Int = nn1.predictOne(paras).zipWithIndex.maxBy(_._1)._2
     }

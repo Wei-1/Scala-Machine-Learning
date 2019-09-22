@@ -2,8 +2,8 @@
 // 2017-09-01
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.algorithm.DQN
+import com.scalaml.TestData._
+import com.scalaml.algorithm.DQN
 
 class DQNSuite extends FunSuite {
 

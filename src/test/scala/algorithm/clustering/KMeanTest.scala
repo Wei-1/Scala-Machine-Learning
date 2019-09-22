@@ -2,9 +2,9 @@
 // 2016-06-04
 
 import org.scalatest.FunSuite
-import com.interplanetarytech.TestData._
-import com.interplanetarytech.general.MatrixFunc._
-import com.interplanetarytech.algorithm.KMean
+import com.scalaml.TestData._
+import com.scalaml.general.MatrixFunc._
+import com.scalaml.algorithm.KMean
 
 class KMeanSuite extends FunSuite {
 
@@ -28,5 +28,10 @@ class KMeanSuite extends FunSuite {
         assert(km.config(Map("k" -> 2, "iter" -> 100)))
         val result = km.cluster(UNLABELED_LARGE_DATA)
         assert(!arrayequal(result, LABEL_LARGE_DATA))
+    }
+
+    test("KMean Test : Invalid Config") {
+        assert(km.clear())
+        assert(!km.config(Map("k" -> "test")))
     }
 }

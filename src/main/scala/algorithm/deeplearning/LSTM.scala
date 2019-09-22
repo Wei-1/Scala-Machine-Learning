@@ -1,7 +1,7 @@
 // Wei Chen - 2017-01-16
-package com.interplanetarytech.algorithm
 
-import com.interplanetarytech.general.MatrixFunc._
+package com.scalaml.algorithm
+import com.scalaml.general.MatrixFunc._
 
 class LstmParam(val mem_cell_ct: Int, val x_dim: Int) {
     val concat_len = x_dim + mem_cell_ct
@@ -178,7 +178,6 @@ class LstmNetwork(val param: LstmParam) {
             return loss
         } else {
             System.err.println("Y_LIST_SIZE != X_LIST_SIZE")
-            System.exit(1)
             return 0
         }
     }
