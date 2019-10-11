@@ -2,8 +2,16 @@
 
 Branch | Status | CodeCov
 -|-|-
-[master](https://github.com/wei-1/scala-machine-learning/tree/master) | [![Build Status](https://travis-ci.org/Wei-1/Scala-Machine-Learning.svg?branch=master)](https://travis-ci.org/Wei-1/Scala-Machine-Learning) | [![Codecov](https://codecov.io/gh/wei-1/scala-machine-learning/branch/master/graph/badge.svg)](https://codecov.io/gh/wei-1/scala-machine-learning)
-[develop](https://github.com/wei-1/scala-machine-learning/tree/develop) | [![Build Status](https://travis-ci.org/Wei-1/Scala-Machine-Learning.svg?branch=develop)](https://travis-ci.org/Wei-1/Scala-Machine-Learning) | [![Codecov](https://codecov.io/gh/wei-1/scala-machine-learning/branch/develop/graph/badge.svg)](https://codecov.io/gh/wei-1/scala-machine-learning)
+[master](https://github.com/wei-1/scala-machine-learning/tree/master) | [![Build Status](https://travis-ci.org/Wei-1/Scala-Machine-Learning-from-Scratch
+.svg?branch=master)](https://travis-ci.org/Wei-1/Scala-Machine-Learning-from-Scratch
+) | [![Codecov](https://codecov.io/gh/wei-1/scala-machine-learning-from-scratch
+/branch/master/graph/badge.svg)](https://codecov.io/gh/wei-1/scala-machine-learning)
+[develop](https://github.com/wei-1/scala-machine-learning-from-scratch
+/tree/develop) | [![Build Status](https://travis-ci.org/Wei-1/Scala-Machine-Learning-from-Scratch
+.svg?branch=develop)](https://travis-ci.org/Wei-1/Scala-Machine-Learning-from-Scratch
+) | [![Codecov](https://codecov.io/gh/wei-1/scala-machine-learning-from-scratch
+/branch/develop/graph/badge.svg)](https://codecov.io/gh/wei-1/scala-machine-learning-from-scratch
+)
 
 
 ## Light Weight Scala Machine Learning Library
