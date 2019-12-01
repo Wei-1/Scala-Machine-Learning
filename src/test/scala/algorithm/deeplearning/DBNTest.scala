@@ -1,12 +1,12 @@
 // Wei Chen - Deep Belief Network Test
 // 2016-11-23
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.DBN
+import org.scalatest.funsuite.AnyFunSuite
 
-class DBNSuite extends FunSuite {
+class DBNSuite extends AnyFunSuite {
 
     val learning_rate: Double = 0.1
     val limit: Int = 200

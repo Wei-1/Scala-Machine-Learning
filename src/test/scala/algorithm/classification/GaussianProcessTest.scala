@@ -1,12 +1,12 @@
 // Wei Chen - Gaussian Process Test
 // 2016-11-24
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.GaussianProcess
+import org.scalatest.funsuite.AnyFunSuite
 
-class GaussianProcessSuite extends FunSuite {
+class GaussianProcessSuite extends AnyFunSuite {
 
     val gp = new GaussianProcess()
 

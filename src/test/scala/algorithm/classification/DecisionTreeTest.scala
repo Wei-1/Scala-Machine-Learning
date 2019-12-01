@@ -1,12 +1,12 @@
 // Wei Chen - Decision Tree Test
 // 2016-11-24
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.DecisionTree
+import org.scalatest.funsuite.AnyFunSuite
 
-class DecisionTreeSuite extends FunSuite {
+class DecisionTreeSuite extends AnyFunSuite {
 
     val dtree = new DecisionTree()
     

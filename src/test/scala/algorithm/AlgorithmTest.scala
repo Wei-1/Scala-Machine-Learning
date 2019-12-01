@@ -1,10 +1,10 @@
 // Wei Chen - Algorithm Trait Test
 // 2019-07-19
 
-import org.scalatest.FunSuite
 import com.scalaml.algorithm.Algorithm
+import org.scalatest.funsuite.AnyFunSuite
 
-class AlgorithmSuite extends FunSuite {
+class AlgorithmSuite extends AnyFunSuite {
 
     test("Algorithm Test : Create Sample Sub Trait") {
 

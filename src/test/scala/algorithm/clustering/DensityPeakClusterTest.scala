@@ -1,12 +1,12 @@
 // Wei Chen - Density Peak Cluster Test
 // 2016-06-03
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.DensityPeakCluster
+import org.scalatest.funsuite.AnyFunSuite
 
-class DensityPeakClusterSuite extends FunSuite {
+class DensityPeakClusterSuite extends AnyFunSuite {
 
     val dpc = new DensityPeakCluster()
     test("DensityPeakCluster Test : Clustering Tiny Data") {

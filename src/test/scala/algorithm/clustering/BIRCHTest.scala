@@ -1,12 +1,12 @@
 // Wei Chen - BIRCH Test
 // 2016-06-04
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.BIRCH
+import org.scalatest.funsuite.AnyFunSuite
 
-class BIRCHSuite extends FunSuite {
+class BIRCHSuite extends AnyFunSuite {
 
     val birch = new BIRCH()
     test("BIRCH Test : Clustering Tiny Data") {

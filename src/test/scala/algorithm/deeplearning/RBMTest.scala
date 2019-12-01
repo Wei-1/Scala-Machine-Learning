@@ -1,12 +1,12 @@
 // Wei Chen - Restricted Boltzmann Machine Test
 // 2016-11-20
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.RBM
+import org.scalatest.funsuite.AnyFunSuite
 
-class RBMSuite extends FunSuite {
+class RBMSuite extends AnyFunSuite {
 
     val learning_rate: Double = 0.1
     val limit: Int = 100

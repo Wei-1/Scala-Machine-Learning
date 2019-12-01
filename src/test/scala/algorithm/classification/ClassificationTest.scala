@@ -1,10 +1,10 @@
 // Wei Chen - Classification Trait Test
 // 2019-07-19
 
-import org.scalatest.FunSuite
 import com.scalaml.algorithm.Classification
+import org.scalatest.funsuite.AnyFunSuite
 
-class ClassificationSuite extends FunSuite {
+class ClassificationSuite extends AnyFunSuite {
 
     test("Classification Test : Create Sample Algo") {
 

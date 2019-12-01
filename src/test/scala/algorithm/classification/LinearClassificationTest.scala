@@ -1,12 +1,12 @@
 // Wei Chen - Linear Classification Test
 // 2016-06-04
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.LinearClassification
+import org.scalatest.funsuite.AnyFunSuite
 
-class LinearClassificationSuite extends FunSuite {
+class LinearClassificationSuite extends AnyFunSuite {
 
     val linearC = new LinearClassification()
     
