@@ -1,11 +1,11 @@
 // Wei Chen - Gene Algorithm Test
 // 2017-07-22
 
-import org.scalatest.FunSuite
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.GeneAlgorithm
+import org.scalatest.funsuite.AnyFunSuite
 
-class GeneAlgorithmSuite extends FunSuite {
+class GeneAlgorithmSuite extends AnyFunSuite {
 
     val ga = new GeneAlgorithm()
 

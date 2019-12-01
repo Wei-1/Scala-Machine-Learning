@@ -1,12 +1,12 @@
 // Wei Chen - HDBSCAN Test
 // 2016-11-12
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.HDBSCAN
+import org.scalatest.funsuite.AnyFunSuite
 
-class HDBSCANSuite extends FunSuite {
+class HDBSCANSuite extends AnyFunSuite {
 
     val hdbscan = new HDBSCAN()
     test("HDBSCAN Test : Clustering Tiny Data") {

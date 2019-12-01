@@ -1,10 +1,10 @@
 // Wei Chen - Regression Trait Test
 // 2019-07-19
 
-import org.scalatest.FunSuite
 import com.scalaml.algorithm.Regression
+import org.scalatest.funsuite.AnyFunSuite
 
-class RegressionSuite extends FunSuite {
+class RegressionSuite extends AnyFunSuite {
 
     test("Regression Test : Create Sample Algo") {
 

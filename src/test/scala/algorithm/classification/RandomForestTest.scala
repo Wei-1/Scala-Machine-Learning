@@ -1,12 +1,12 @@
 // Wei Chen - Random Forest Test
 // 2016-11-29
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.RandomForest
+import org.scalatest.funsuite.AnyFunSuite
 
-class RandomForestSuite extends FunSuite {
+class RandomForestSuite extends AnyFunSuite {
 
     val rf = new RandomForest()
 

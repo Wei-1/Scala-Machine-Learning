@@ -1,12 +1,12 @@
 // Wei Chen - K Mean Cluster Test
 // 2016-06-04
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.KMean
+import org.scalatest.funsuite.AnyFunSuite
 
-class KMeanSuite extends FunSuite {
+class KMeanSuite extends AnyFunSuite {
 
     val km = new KMean()
     test("KMean Test : Clustering Tiny Data") {

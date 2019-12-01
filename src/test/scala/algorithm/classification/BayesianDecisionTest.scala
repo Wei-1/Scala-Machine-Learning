@@ -1,12 +1,12 @@
 // Wei Chen - Bayesian Decision Test
 // 2016-06-03
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.BayesianDecision
+import org.scalatest.funsuite.AnyFunSuite
 
-class BayesianDecisionSuite extends FunSuite {
+class BayesianDecisionSuite extends AnyFunSuite {
 
     val bayesiandecision = new BayesianDecision()
 

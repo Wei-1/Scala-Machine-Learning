@@ -1,10 +1,10 @@
 // Wei Chen - Clustering Trait Test
 // 2019-07-19
 
-import org.scalatest.FunSuite
 import com.scalaml.algorithm.Clustering
+import org.scalatest.funsuite.AnyFunSuite
 
-class ClusteringSuite extends FunSuite {
+class ClusteringSuite extends AnyFunSuite {
 
     test("Clustering Test : Create Sample Algo") {
 

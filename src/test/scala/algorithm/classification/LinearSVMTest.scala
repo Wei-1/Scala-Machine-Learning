@@ -1,12 +1,12 @@
 // Wei Chen - Linear SVM Test
 // 2016-06-03
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.LinearSVM
+import org.scalatest.funsuite.AnyFunSuite
 
-class LinearSVMSuite extends FunSuite {
+class LinearSVMSuite extends AnyFunSuite {
 
     val linearsvm = new LinearSVM()
     test("LinearSVM Test : Clear") {

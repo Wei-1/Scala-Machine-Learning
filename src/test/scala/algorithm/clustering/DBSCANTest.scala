@@ -1,12 +1,12 @@
 // Wei Chen - DBSCAN Test
 // 2016-11-10
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.DBSCAN
+import org.scalatest.funsuite.AnyFunSuite
 
-class DBSCANSuite extends FunSuite {
+class DBSCANSuite extends AnyFunSuite {
 
     val dbscan = new DBSCAN()
     test("DBSCAN Test : Clustering Tiny Data") {

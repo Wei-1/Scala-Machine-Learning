@@ -1,12 +1,12 @@
 // Wei Chen - Hierarchical Test
 // 2016-11-12
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.Hierarchical
+import org.scalatest.funsuite.AnyFunSuite
 
-class HierarchicalSuite extends FunSuite {
+class HierarchicalSuite extends AnyFunSuite {
 
     val hi = new Hierarchical()
     test("Hierarchical Test : Clustering Tiny Data") {

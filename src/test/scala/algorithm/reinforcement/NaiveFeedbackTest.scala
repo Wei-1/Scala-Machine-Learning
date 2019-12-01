@@ -1,11 +1,11 @@
 // Wei Chen - Naive Feedback Learning Test
 // 2017-07-28
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.algorithm.NaiveFeedback
+import org.scalatest.funsuite.AnyFunSuite
 
-class NaiveFeedbackSuite extends FunSuite {
+class NaiveFeedbackSuite extends AnyFunSuite {
 
     val learning_rate = 0.1
     val scale = 1

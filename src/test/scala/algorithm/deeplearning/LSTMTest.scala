@@ -1,13 +1,13 @@
 // Wei Chen - Deep Belief Network Test
 // 2016-11-23
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.LstmParam
 import com.scalaml.algorithm.LstmNetwork
+import org.scalatest.funsuite.AnyFunSuite
 
-class LSTMSuite extends FunSuite {
+class LSTMSuite extends AnyFunSuite {
 
     val learning_rate: Double = 0.1
 

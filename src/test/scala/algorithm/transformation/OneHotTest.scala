@@ -1,10 +1,10 @@
 // Wei Chen - OneHot
 // 2018-11-08
 
-import org.scalatest.FunSuite
 import com.scalaml.algorithm.OneHot
+import org.scalatest.funsuite.AnyFunSuite
 
-class OneHotSuite extends FunSuite {
+class OneHotSuite extends AnyFunSuite {
 
     val table = Array(("key", "category"), ("value", "number"))
     val data = Array(Array("A", "1.1"), Array("B", "1.2"))

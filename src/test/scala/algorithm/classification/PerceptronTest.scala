@@ -1,12 +1,12 @@
 // Wei Chen - Perceptron Test
 // 2016-06-04
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.Perceptron
+import org.scalatest.funsuite.AnyFunSuite
 
-class PerceptronSuite extends FunSuite {
+class PerceptronSuite extends AnyFunSuite {
 
     val perceptron = new Perceptron()
 
