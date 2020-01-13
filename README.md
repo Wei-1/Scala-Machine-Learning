@@ -117,7 +117,15 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 ## TODO
 
+- [ ] Extreme Learning Machine - Classification
+
+- [ ] Polarize Experience Replay - Deep Reinforcement Learning
+
+- [ ] Rainbow - Deep Reinforcement Learning
+
 - [ ] Alpha-go Zero (MCTS-NN) - Deep Reinforcement Learning
+
+- [ ] Neural Architect Search (NAS) - Neural Network & Deep Learning
 
 
 ## Installation Process
