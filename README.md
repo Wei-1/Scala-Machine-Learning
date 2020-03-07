@@ -86,6 +86,8 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 - [x] Monte Carlo Tree Search (MCTS) [[Code]](src/main/scala/algorithm/optimization/MCTS.scala) [[Usage]](src/test/scala/algorithm/optimization/MCTSTest.scala)
 
+- [x] Epsilon Greedy Search [[Code]](src/main/scala/algorithm/optimization/EpsilonGreedy.scala) [[Usage]](src/test/scala/algorithm/optimization/EpsilonGreedyTest.scala)
+
 ### Reinforcement Learning :
 
 - [x] Naive Feedback [[Code]](src/main/scala/algorithm/reinforcement/NaiveFeedback.scala) [[Usage]](src/test/scala/algorithm/reinforcement/NaiveFeedbackTest.scala)
