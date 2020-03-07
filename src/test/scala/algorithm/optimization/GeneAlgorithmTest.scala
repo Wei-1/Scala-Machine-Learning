@@ -22,6 +22,7 @@ class GeneAlgorithmSuite extends AnyFunSuite {
 
     val generationsize: Int = 100
     val elitesize: Int = 3
+    val generationcount: Int = 10
 
     test("GeneAlgorithm Test : Initial") {
         assert(ga.seeds == null)
@@ -35,6 +36,18 @@ class GeneAlgorithmSuite extends AnyFunSuite {
         assert(ga.seeds.size == generationsize)
 
         val best = ga.evolve(evaluation, breeding, generationsize, elitesize)
+        assert((best.head - 0.7).abs < 0.05)
+    }
+
+    test("GeneAlgorithm Test : Search") {
+        val best = ga.search(
+            evaluation,
+            breeding,
+            generationsize,
+            elitesize,
+            generationcount
+        )
+        assert(ga.seeds.size == generationsize)
         assert((best.head - 0.7).abs < 0.05)
     }
 
