@@ -38,6 +38,8 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 - [x] Random Forest [[Code]](src/main/scala/algorithm/classification/RandomForest.scala) [[Usage]](src/test/scala/algorithm/classification/RandomForestTest.scala)
 
+- [x] Extreme Learning Machine [[Code]](src/main/scala/algorithm/classification/ExtremeLearning.scala) [[Usage]](src/test/scala/algorithm/classification/ExtremeLearningTest.scala)
+
 ### Boost :
 
 - [x] Naive Boost [[Code]](src/main/scala/algorithm/classification/NaiveBoost.scala) [[Usage]](src/test/scala/algorithm/classification/NaiveBoostTest.scala)
@@ -122,8 +124,6 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 
 ## TODO
-
-- [ ] Extreme Learning Machine - Classification
 
 - [ ] Polarize Experience Replay - Deep Reinforcement Learning
 
