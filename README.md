@@ -88,6 +88,8 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 - [x] Epsilon Greedy Search [[Code]](src/main/scala/algorithm/optimization/EpsilonGreedy.scala) [[Usage]](src/test/scala/algorithm/optimization/EpsilonGreedyTest.scala)
 
+- [x] Upper Confidence Bound [[Code]](src/main/scala/algorithm/optimization/UpperConfidenceBound.scala) [[Usage]](src/test/scala/algorithm/optimization/UpperConfidenceBoundTest.scala)
+
 ### Reinforcement Learning :
 
 - [x] Naive Feedback [[Code]](src/main/scala/algorithm/reinforcement/NaiveFeedback.scala) [[Usage]](src/test/scala/algorithm/reinforcement/NaiveFeedbackTest.scala)

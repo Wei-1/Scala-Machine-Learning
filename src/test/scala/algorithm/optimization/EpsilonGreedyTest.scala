@@ -20,11 +20,11 @@ class EpsilonGreedySuite extends AnyFunSuite {
     )
     val epsilon: Double = 0.1
 
-    test("GeneAlgorithm Test : Initial") {
+    test("EpsilonGreedy Test : Initial") {
         assert(eg.currentScores == null)
     }
 
-    test("GeneAlgorithm Test : Search - Start") {
+    test("EpsilonGreedy Test : Search - Start") {
         for (i <- 0 until 1000)
             eg.search(evaluation, choices, null, epsilon)
         assert(eg.currentScores.size == choices.size)
@@ -33,7 +33,7 @@ class EpsilonGreedySuite extends AnyFunSuite {
         assert((best.head - 0.7).abs < 0.05)
     }
 
-    test("GeneAlgorithm Test : Search - Continue") {
+    test("EpsilonGreedy Test : Search - Continue") {
         var scores: Array[Double] = Array(0, 0, 1 / 1.3, 0)
         for (i <- 0 until 1000) {
             eg.search(evaluation, choices, scores, epsilon)

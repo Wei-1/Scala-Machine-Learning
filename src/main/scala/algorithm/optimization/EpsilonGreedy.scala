@@ -16,7 +16,7 @@ class EpsilonGreedy {
         if (scores != null)
             currentScores = scores
         if (currentScores == null)
-            currentScores = new Array[Double](size)
+            currentScores = Array.fill[Double](size)(Double.MinValue)
         if (math.random < epsilon) {
             val randSelect = (math.random * size).toInt
             val value = evaluation(choices(randSelect))
