@@ -28,6 +28,7 @@ class Node(
     var output: Double = 0.0
     /** Error derivative with respect to this node's output. */
     var outputDer: Double = 0.0
+    var rawOutputDer: Double = 0.0
     /** Error derivative with respect to this node's total input. */
     var inputDer: Double = 0.0
     /**
@@ -264,15 +265,17 @@ class NeuralNetwork {
      */
     def backProp(
         targets: Array[Double],
-        errorFunc: ErrorFunction = SQUARE
+        errorFunc: ErrorFunction = SQUARE,
+        _outputWeights: Array[Double] = Array.fill[Double](networkShape.last)(1.0)
     ): Unit = {
-        val outputNodes = network.last
         // The output node is a special case. We use the user-defined error
         // function for the derivative.
-        for((node, target) <- outputNodes.zip(targets)) {
-            node.outputDer = errorFunc.der(node.output, target)
+        for((node, target) <- getOutputNodes.zip(targets)) {
+            node.rawOutputDer = errorFunc.der(node.output, target)
         }
-
+        for((node, weight) <- getOutputNodes.zip(_outputWeights)) {
+            node.outputDer = node.rawOutputDer * weight
+        }
         // Go through the layers backwards.
         for(layerIdx <- network.length - 1 to 1 by -1) {
             val currentLayer = network(layerIdx)
@@ -374,9 +377,13 @@ class NeuralNetwork {
     def clear() = reset(false)
 
     /** Train one inputs to one targets, moved and Modified from Playground. */
-    def trainOne(inputs: Array[Double], targets: Array[Double], errorFunc: ErrorFunction = SQUARE): Unit = {
+    def trainOne(
+        inputs: Array[Double], targets: Array[Double],
+        errorFunc: ErrorFunction = SQUARE,
+        _outputWeights: Array[Double] = Array.fill[Double](networkShape.last)(1.0)
+    ): Unit = {
         forwardProp(inputs)
-        backProp(targets, errorFunc)
+        backProp(targets, errorFunc, _outputWeights)
         if((index - updateIndex + 1) % batchSize == 0) {
             updateIndex = index
             updateWeights()
@@ -388,10 +395,16 @@ class NeuralNetwork {
     def predictOne = forwardProp _
 
     /** Train all data */
-    def train(x: Array[Array[Double]], y: Array[Array[Double]], errorFunc: ErrorFunction = SQUARE, iter: Int = 1, _learningRate: Double = learningRate): Boolean = {
+    def train(
+        x: Array[Array[Double]], y: Array[Array[Double]],
+        errorFunc: ErrorFunction = SQUARE,
+        iter: Int = 1,
+        _learningRate: Double = learningRate,
+        _outputWeights: Array[Double] = Array.fill[Double](networkShape.last)(1.0)
+    ): Boolean = {
         learningRate = _learningRate
         val data = x.zip(y)
-        for(i <- 0 until iter) data.foreach { case (inputs, targets) => trainOne(inputs, targets, errorFunc) }
+        for(i <- 0 until iter) data.foreach { case (inputs, targets) => trainOne(inputs, targets, errorFunc, _outputWeights) }
         true
     }
 
