@@ -108,6 +108,8 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 - [x] Asynchronous Advantage Actor-Critic (A3C) [[Code]](src/main/scala/algorithm/reinforcement/A3C.scala) [[Usage]](src/test/scala/algorithm/reinforcement/A3CTest.scala)
 
+- [x] Prioritized Experience Replay (PER-DQN) [[Code]](src/main/scala/algorithm/reinforcement/PER.scala) [[Usage]](src/test/scala/algorithm/reinforcement/PERTest.scala)
+
 ### Feature Analysis :
 
 - [x] Student-T Test [[Code]](src/main/scala/algorithm/analysis/StudentT.scala) [[Usage]](src/test/scala/algorithm/analysis/StudentTTest.scala)
@@ -124,8 +126,6 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 
 ## TODO
-
-- [ ] Polarize Experience Replay - Deep Reinforcement Learning
 
 - [ ] Rainbow - Deep Reinforcement Learning
 
