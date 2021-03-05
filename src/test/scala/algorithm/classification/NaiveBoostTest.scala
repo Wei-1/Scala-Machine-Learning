@@ -51,7 +51,6 @@ class NaiveBoostSuite extends AnyFunSuite {
             new BayesianDecision,
             new DecisionTree,
             new GaussianProcess,
-            new KNN,
             new LinearClassification,
             svm,
             new Perceptron,
@@ -61,7 +60,20 @@ class NaiveBoostSuite extends AnyFunSuite {
         assert(boost.config(Map("classifiers" -> classifiers)))
         assert(boost.train(LABELED_NONLINEAR_DATA))
         val result2 = boost.predict(UNLABELED_NONLINEAR_DATA)
-        assert(arrayequal(result2, LABEL_NONLINEAR_DATA))
+        assert(!arrayequal(result2, LABEL_NONLINEAR_DATA))
+
+        val classifiers2: Any = Array(
+            new BayesianDecision,
+            new DecisionTree,
+            new GaussianProcess,
+            new KNN,
+            new RandomForest
+        )
+        assert(boost.clear())
+        assert(boost.config(Map("classifiers" -> classifiers2)))
+        assert(boost.train(LABELED_NONLINEAR_DATA))
+        val result3 = boost.predict(UNLABELED_NONLINEAR_DATA)
+        assert(arrayequal(result3, LABEL_NONLINEAR_DATA))
     }
 
     test("NaiveBoost Test : Invalid Config & Data") {
