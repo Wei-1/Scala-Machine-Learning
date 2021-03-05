@@ -13,7 +13,7 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 ## Dev-Environment
 
-- Scala 2.12
+- Scala 2.13
 
 - Sbt 1.2
 
