@@ -130,6 +130,10 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 - [x] Isolation Forest [[Code]](src/main/scala/algorithm/abnormal/IsolationForest.scala) [[Usage]](src/test/scala/algorithm/abnormal/IsolationForestTest.scala)
 
+- [x] Random Cut Tree [[Code]](src/main/scala/algorithm/abnormal/RandomCutTree.scala) [[Usage]](src/test/scala/algorithm/abnormal/RandomCutTreeTest.scala)
+
+- [x] Random Cut Forest [[Code]](src/main/scala/algorithm/abnormal/RandomCutForest.scala) [[Usage]](src/test/scala/algorithm/abnormal/RandomCutForestTest.scala)
+
 
 ## TODO
 
