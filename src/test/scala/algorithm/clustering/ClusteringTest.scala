@@ -11,7 +11,7 @@ class ClusteringSuite extends AnyFunSuite {
         class TestAlgo() extends Clustering {
             val algoname: String = "TestAlgo"
             val version: String = "TestVersion"
-            override def clear: Boolean = true
+            override def clear(): Boolean = true
             override def config(paras: Map[String, Any]): Boolean = true
             override def cluster(data: Array[Array[Double]]): Array[Int] = data.map(_ => 0)
         }

@@ -1,32 +1,32 @@
-// Wei Chen - Regression Trait Test
-// 2019-07-19
+// Wei Chen - Abnormal Trait Test
+// 2022-03-05
 
-import com.scalaml.algorithm.Regression
+import com.scalaml.algorithm.Abnormal
 import org.scalatest.funsuite.AnyFunSuite
 
-class RegressionSuite extends AnyFunSuite {
+class AbnormalSuite extends AnyFunSuite {
 
-    test("Regression Test : Create Sample Algo") {
+    test("Abnormal Test : Create Sample Algo") {
 
-        class TestAlgo() extends Regression {
+        class TestAlgo() extends Abnormal {
             val algoname: String = "TestAlgo"
             val version: String = "TestVersion"
             override def clear(): Boolean = true
             override def config(paras: Map[String, Any]): Boolean = true
-            override def train(data: Array[(Double, Array[Double])]): Boolean = true
-            override def predict(data: Array[Array[Double]]): Array[Double] = data.map(_ => 0.0)
+            override def train(data: Array[Array[Double]]): Boolean = true
+            override def predict(data: Array[Array[Double]]): Array[Double] = data.map(_ => 0)
         }
 
         val ta = new TestAlgo
 
-        assert(ta.algotype == "Regression")
+        assert(ta.algotype == "Abnormal")
         assert(ta.algoname == "TestAlgo")
         assert(ta.version == "TestVersion")
         assert(ta.clear)
         assert(ta.config(Map()))
         assert(ta.train(Array()))
         assert(ta.predict(Array()).size == 0)
-        assert(ta.predict(Array(Array(1.0))).head == 0.0)
+        assert(ta.predict(Array(Array(1))).head == 0)
     }
     
 }

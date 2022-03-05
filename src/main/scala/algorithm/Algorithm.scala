@@ -7,6 +7,6 @@ trait Algorithm {
     val algotype: String
     val algoname: String
     val version: String
-    def clear: Boolean
+    def clear(): Boolean
     def config(paras: Map[String, Any]): Boolean
 }

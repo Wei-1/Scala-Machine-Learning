@@ -124,6 +124,12 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 - [x] One Hot Encoding [[Code]](src/main/scala/algorithm/transformation/OneHot.scala) [[Usage]](src/test/scala/algorithm/transformation/OneHotTest.scala)
 
+### Abnormal Detection :
+
+- [x] Isolation Tree [[Code]](src/main/scala/algorithm/abnormal/IsolationTree.scala) [[Usage]](src/test/scala/algorithm/abnormal/IsolationTreeTest.scala)
+
+- [x] Isolation Forest [[Code]](src/main/scala/algorithm/abnormal/IsolationForest.scala) [[Usage]](src/test/scala/algorithm/abnormal/IsolationForestTest.scala)
+
 
 ## TODO
 
