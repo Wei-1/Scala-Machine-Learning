@@ -1,10 +1,10 @@
 // Wei Chen - Matrix Function Test
 // 2016-06-03
 
-import org.scalatest.FunSuite
 import com.scalaml.general.MatrixFunc._
+import org.scalatest.funsuite.AnyFunSuite
 
-class MatrixFuncSuite extends FunSuite {
+class MatrixFuncSuite extends AnyFunSuite {
     def rint4(x: Double): Double = Math.rint(x * 10000) / 10000
     def arrrint4(x: Array[Double]): Array[Double] = x.map(rint4(_))
     val data: Array[Array[Double]] = Array(

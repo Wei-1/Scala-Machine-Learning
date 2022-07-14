@@ -1,11 +1,11 @@
 // Wei Chen - Minimax Test
 // 2017-07-22
 
-import org.scalatest.FunSuite
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.Minimax
+import org.scalatest.funsuite.AnyFunSuite
 
-class MinimaxSuite extends FunSuite {
+class MinimaxSuite extends AnyFunSuite {
 
     val minimax = new Minimax()
         

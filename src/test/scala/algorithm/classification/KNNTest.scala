@@ -1,12 +1,12 @@
 // Wei Chen - K Nearest Neighborhood Test
 // 2016-06-04
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.KNN
+import org.scalatest.funsuite.AnyFunSuite
 
-class KNNSuite extends FunSuite {
+class KNNSuite extends AnyFunSuite {
 
     val knn = new KNN()
     test("KNN Test : Clear") {

@@ -1,12 +1,12 @@
 // Wei Chen - Weighted Boost Test
 // 2018-09-26
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm._
+import org.scalatest.funsuite.AnyFunSuite
 
-class WeightedBoostSuite extends FunSuite {
+class WeightedBoostSuite extends AnyFunSuite {
 
     val boost = new WeightedBoost()
 

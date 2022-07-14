@@ -24,6 +24,18 @@ class GeneAlgorithm {
             breeding(parents(ai), parents(bi))
         }
         seeds = parents ++ kids
-        return parents.last // return the best
+        parents.last // return the best
+    }
+
+    def search(
+        evaluation: Array[Double] => Double,
+        breeding: (Array[Double], Array[Double]) => Array[Array[Double]],
+        generationsize: Int = 100,
+        elitesize: Int = 3,
+        generationcount: Int = 10
+    ): Array[Double] = {
+        for (i <- 1 until generationcount)
+            evolve(evaluation, breeding, generationsize, elitesize)
+        evolve(evaluation, breeding, generationsize, elitesize)
     }
 }

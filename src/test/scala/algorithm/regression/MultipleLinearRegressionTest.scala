@@ -1,12 +1,12 @@
 // Wei Chen - Multiple Linear Regression Test
 // 2016-06-04
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.MultipleLinearRegression
+import org.scalatest.funsuite.AnyFunSuite
 
-class MultipleLinearRegressionSuite extends FunSuite {
+class MultipleLinearRegressionSuite extends AnyFunSuite {
 
     val mlr = new MultipleLinearRegression()
     

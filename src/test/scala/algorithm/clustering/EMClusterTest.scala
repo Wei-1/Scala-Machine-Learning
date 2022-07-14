@@ -1,12 +1,12 @@
 // Wei Chen - Estimation Maximization Cluster Test
 // 2016-06-04
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.EMCluster
+import org.scalatest.funsuite.AnyFunSuite
 
-class EMClusterSuite extends FunSuite {
+class EMClusterSuite extends AnyFunSuite {
 
     val em = new EMCluster()
     test("EMCluster Test : Clustering Tiny Data") {

@@ -10,7 +10,6 @@ class MultivariateLinearRegression() extends Regression {
     val version: String = "0.1"
 
     var weights = Array[Double]()
-    var bias = Array[Double]()
     var limit = 1000 // for GD
     var lr = 0.01 // for GD
 

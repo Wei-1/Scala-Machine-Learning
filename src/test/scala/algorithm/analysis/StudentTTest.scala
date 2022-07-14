@@ -1,12 +1,12 @@
 // Wei Chen - Student T
 // 2017-07-25
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.StudentT
+import org.scalatest.funsuite.AnyFunSuite
 
-class StudentTSuite extends FunSuite {
+class StudentTSuite extends AnyFunSuite {
 
     val st = new StudentT()
     val arr1 = UNLABELED_LARGE_DATA.map(_.head)

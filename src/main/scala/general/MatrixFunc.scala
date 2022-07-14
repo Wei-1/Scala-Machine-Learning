@@ -244,17 +244,22 @@ package object MatrixFunc {
         m
     }
 
-    def gradientDescent(x: Array[Array[Double]], y: Array[Double],
-        alpha: Double, limit: Int): Array[Double] = {
+    def gradientDescent(
+        x: Array[Array[Double]],
+        y: Array[Double],
+        alpha: Double,
+        limit: Int,
+        initW: Array[Double] = null
+    ): Array[Double] = {
         val xSize = x.head.size
         val ySize = y.size
-        var theta = new Array[Double](xSize)
+        val w = if(initW == null || initW.size == 0) new Array[Double](xSize) else initW
         for(i <- 0 until limit) {
-            val diff = arrayminus(x.map(xi => arraymultiply(xi, theta).sum), y)
+            val diff = arrayminus(x.map(xi => arraymultiply(xi, w).sum), y)
             // val cost = diff.map(d => Math.pow(d, 2)).sum / ySize / 2
             val gradientSum = matrixaccumulate(x.zip(diff).map { case (xi, d) => xi.map(_ * d) })
-            for(j <- 0 until xSize) theta(j) -= gradientSum(j) / ySize * alpha
+            for(j <- 0 until xSize) w(j) -= gradientSum(j) / ySize * alpha
         }
-        theta
+        w
     }
 }

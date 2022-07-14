@@ -1,10 +1,10 @@
 // Wei Chen - Algorithm Trait Test
 // 2019-07-19
 
-import org.scalatest.FunSuite
 import com.scalaml.algorithm.Algorithm
+import org.scalatest.funsuite.AnyFunSuite
 
-class AlgorithmSuite extends FunSuite {
+class AlgorithmSuite extends AnyFunSuite {
 
     test("Algorithm Test : Create Sample Sub Trait") {
 
@@ -16,7 +16,7 @@ class AlgorithmSuite extends FunSuite {
         class TestAlgo() extends TestType {
             val algoname: String = "TestAlgo"
             val version: String = "TestVersion"
-            override def clear: Boolean = true
+            override def clear(): Boolean = true
             override def config(paras: Map[String, Any]): Boolean = true
             override def testfunc(testinput: Int): Boolean = true
         }

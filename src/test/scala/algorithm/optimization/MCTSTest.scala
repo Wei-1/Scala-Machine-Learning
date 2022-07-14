@@ -1,11 +1,11 @@
 // Wei Chen - Monte Carlo Tree Search Test
 // 2017-08-08
 
-import org.scalatest.FunSuite
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.MCTS
+import org.scalatest.funsuite.AnyFunSuite
 
-class MCTSSuite extends FunSuite {
+class MCTSSuite extends AnyFunSuite {
     
     {
         val mcts = new MCTS

@@ -1,11 +1,11 @@
 // Wei Chen - Asynchronous Advantage Actor Critic
 // 2017-10-01
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.algorithm.A3C
+import org.scalatest.funsuite.AnyFunSuite
 
-class A3CSuite extends FunSuite {
+class A3CSuite extends AnyFunSuite {
 
     val scale = 1
     val limit = 10000

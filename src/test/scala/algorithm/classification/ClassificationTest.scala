@@ -1,17 +1,17 @@
 // Wei Chen - Classification Trait Test
 // 2019-07-19
 
-import org.scalatest.FunSuite
 import com.scalaml.algorithm.Classification
+import org.scalatest.funsuite.AnyFunSuite
 
-class ClassificationSuite extends FunSuite {
+class ClassificationSuite extends AnyFunSuite {
 
     test("Classification Test : Create Sample Algo") {
 
         class TestAlgo() extends Classification {
             val algoname: String = "TestAlgo"
             val version: String = "TestVersion"
-            override def clear: Boolean = true
+            override def clear(): Boolean = true
             override def config(paras: Map[String, Any]): Boolean = true
             override def train(data: Array[(Int, Array[Double])]): Boolean = true
             override def predict(data: Array[Array[Double]]): Array[Int] = data.map(_ => 0)

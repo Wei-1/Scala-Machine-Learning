@@ -1,11 +1,11 @@
 // Wei Chen - Q-Learning Test
 // 2017-08-16
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.algorithm.QLearning
+import org.scalatest.funsuite.AnyFunSuite
 
-class QLearningSuite extends FunSuite {
+class QLearningSuite extends AnyFunSuite {
 
     val learning_rate = 0.1
     val scale = 1

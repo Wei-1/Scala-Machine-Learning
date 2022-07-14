@@ -1,12 +1,12 @@
 // Wei Chen - Neural Network Test
 // 2016-11-06
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.BasicNN
+import org.scalatest.funsuite.AnyFunSuite
 
-class BasicNNSuite extends FunSuite {
+class BasicNNSuite extends AnyFunSuite {
 
     val layer_neurons = Array(5, 4, 3)
     val input_column = UNLABELED_LARGE_HIGH_DIM_DATA.head.size

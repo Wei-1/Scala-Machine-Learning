@@ -2,8 +2,8 @@
 
 Branch | Status | CodeCov
 -|-|-
-[master](https://github.com/wei-1/scala-machine-learning/tree/master) | [![Build Status](https://travis-ci.org/Wei-1/Scala-Machine-Learning-from-Scratch.svg?branch=master)](https://travis-ci.org/Wei-1/Scala-Machine-Learning-from-Scratch) | [![codecov](https://codecov.io/gh/Wei-1/Scala-Machine-Learning-from-Scratch/branch/master/graph/badge.svg)](https://codecov.io/gh/Wei-1/Scala-Machine-Learning-from-Scratch)
-[develop](https://github.com/wei-1/scala-machine-learning-from-scratch/tree/develop) | [![Build Status](https://travis-ci.org/Wei-1/Scala-Machine-Learning-from-Scratch.svg?branch=develop)](https://travis-ci.org/Wei-1/Scala-Machine-Learning-from-Scratch) | [![codecov](https://codecov.io/gh/Wei-1/Scala-Machine-Learning-from-Scratch/branch/develop/graph/badge.svg)](https://codecov.io/gh/Wei-1/Scala-Machine-Learning-from-Scratch)
+[master](https://github.com/wei-1/scala-machine-learning/tree/master) | [![Build Status](https://travis-ci.org/Wei-1/Scala-Machine-Learning.svg?branch=master)](https://travis-ci.org/Wei-1/Scala-Machine-Learning) | [![codecov](https://codecov.io/gh/Wei-1/Scala-Machine-Learning/branch/master/graph/badge.svg)](https://codecov.io/gh/Wei-1/Scala-Machine-Learning)
+[develop](https://github.com/wei-1/scala-machine-learning/tree/develop) | [![Build Status](https://travis-ci.org/Wei-1/Scala-Machine-Learning.svg?branch=develop)](https://travis-ci.org/Wei-1/Scala-Machine-Learning) | [![codecov](https://codecov.io/gh/Wei-1/Scala-Machine-Learning/branch/develop/graph/badge.svg)](https://codecov.io/gh/Wei-1/Scala-Machine-Learning)
 
 
 ## Light Weight Scala Machine Learning Library
@@ -13,7 +13,7 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 ## Dev-Environment
 
-- Scala 2.12
+- Scala 2.13
 
 - Sbt 1.2
 
@@ -38,6 +38,8 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 - [x] Random Forest [[Code]](src/main/scala/algorithm/classification/RandomForest.scala) [[Usage]](src/test/scala/algorithm/classification/RandomForestTest.scala)
 
+- [x] Extreme Learning Machine [[Code]](src/main/scala/algorithm/classification/ExtremeLearning.scala) [[Usage]](src/test/scala/algorithm/classification/ExtremeLearningTest.scala)
+
 ### Boost :
 
 - [x] Naive Boost [[Code]](src/main/scala/algorithm/classification/NaiveBoost.scala) [[Usage]](src/test/scala/algorithm/classification/NaiveBoostTest.scala)
@@ -49,6 +51,8 @@ A very light weight Scala machine learning library that provide some basic ML al
 - [x] Multiple Linear Regression [[Code]](src/main/scala/algorithm/regression/MultipleLinearRegression.scala) [[Usage]](src/test/scala/algorithm/regression/MultipleLinearRegressionTest.scala)
 
 - [x] Multivariate Linear Regression - GD [[Code]](src/main/scala/algorithm/regression/MultivariateLinearRegression.scala) [[Usage]](src/test/scala/algorithm/regression/MultivariateLinearRegressionTest.scala)
+
+- [x] Stochastic Gradient Decent [[Code]](src/main/scala/algorithm/regression/MultivariateLinearRegression.scala) [[Usage]](src/test/scala/algorithm/regression/MultivariateLinearRegressionTest.scala)
 
 ### Clustering :
 
@@ -86,6 +90,10 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 - [x] Monte Carlo Tree Search (MCTS) [[Code]](src/main/scala/algorithm/optimization/MCTS.scala) [[Usage]](src/test/scala/algorithm/optimization/MCTSTest.scala)
 
+- [x] Epsilon Greedy Search [[Code]](src/main/scala/algorithm/optimization/EpsilonGreedy.scala) [[Usage]](src/test/scala/algorithm/optimization/EpsilonGreedyTest.scala)
+
+- [x] Upper Confidence Bound [[Code]](src/main/scala/algorithm/optimization/UpperConfidenceBound.scala) [[Usage]](src/test/scala/algorithm/optimization/UpperConfidenceBoundTest.scala)
+
 ### Reinforcement Learning :
 
 - [x] Naive Feedback [[Code]](src/main/scala/algorithm/reinforcement/NaiveFeedback.scala) [[Usage]](src/test/scala/algorithm/reinforcement/NaiveFeedbackTest.scala)
@@ -99,6 +107,8 @@ A very light weight Scala machine learning library that provide some basic ML al
 - [x] Dueling DQN (D-DQN) [[Code]](src/main/scala/algorithm/reinforcement/DDQN.scala) [[Usage]](src/test/scala/algorithm/reinforcement/DDQNTest.scala)
 
 - [x] Asynchronous Advantage Actor-Critic (A3C) [[Code]](src/main/scala/algorithm/reinforcement/A3C.scala) [[Usage]](src/test/scala/algorithm/reinforcement/A3CTest.scala)
+
+- [x] Prioritized Experience Replay (PER-DQN) [[Code]](src/main/scala/algorithm/reinforcement/PER.scala) [[Usage]](src/test/scala/algorithm/reinforcement/PERTest.scala)
 
 ### Feature Analysis :
 
@@ -114,10 +124,24 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 - [x] One Hot Encoding [[Code]](src/main/scala/algorithm/transformation/OneHot.scala) [[Usage]](src/test/scala/algorithm/transformation/OneHotTest.scala)
 
+### Abnormal Detection :
+
+- [x] Isolation Tree [[Code]](src/main/scala/algorithm/abnormal/IsolationTree.scala) [[Usage]](src/test/scala/algorithm/abnormal/IsolationTreeTest.scala)
+
+- [x] Isolation Forest [[Code]](src/main/scala/algorithm/abnormal/IsolationForest.scala) [[Usage]](src/test/scala/algorithm/abnormal/IsolationForestTest.scala)
+
+- [x] Random Cut Tree [[Code]](src/main/scala/algorithm/abnormal/RandomCutTree.scala) [[Usage]](src/test/scala/algorithm/abnormal/RandomCutTreeTest.scala)
+
+- [x] Random Cut Forest [[Code]](src/main/scala/algorithm/abnormal/RandomCutForest.scala) [[Usage]](src/test/scala/algorithm/abnormal/RandomCutForestTest.scala)
+
 
 ## TODO
 
+- [ ] Rainbow - Deep Reinforcement Learning
+
 - [ ] Alpha-go Zero (MCTS-NN) - Deep Reinforcement Learning
+
+- [ ] Neural Architect Search (NAS) - Neural Network & Deep Learning
 
 
 ## Installation Process

@@ -1,10 +1,10 @@
 // Wei Chen - ANOVA
 // 2017-08-30
 
-import org.scalatest.FunSuite
 import com.scalaml.algorithm.ANOVA
+import org.scalatest.funsuite.AnyFunSuite
 
-class ANOVASuite extends FunSuite {
+class ANOVASuite extends AnyFunSuite {
 
     val data = Array(Array(1.1, 1.2), Array(2.1, 2.2))
     val anova = new ANOVA(data)

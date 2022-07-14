@@ -1,13 +1,13 @@
 // Wei Chen - Neural Network Test
 // 2018-11-29
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.NeuralNetwork
 import com.scalaml.algorithm.{TANH, SIGMOID, RELU, LINEAR, SQUARE, L1, L2}
+import org.scalatest.funsuite.AnyFunSuite
 
-class NeuralNetworkSuite extends FunSuite {
+class NeuralNetworkSuite extends AnyFunSuite {
 
     val hidden_layer = Array(5, 4, 3)
     val input_column = UNLABELED_LARGE_HIGH_DIM_DATA.head.size

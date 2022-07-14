@@ -1,12 +1,12 @@
 // Wei Chen - Naive Boost Test
 // 2018-09-26
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm._
+import org.scalatest.funsuite.AnyFunSuite
 
-class NaiveBoostSuite extends FunSuite {
+class NaiveBoostSuite extends AnyFunSuite {
 
     val boost = new NaiveBoost()
 
@@ -51,7 +51,6 @@ class NaiveBoostSuite extends FunSuite {
             new BayesianDecision,
             new DecisionTree,
             new GaussianProcess,
-            new KNN,
             new LinearClassification,
             svm,
             new Perceptron,
@@ -61,7 +60,20 @@ class NaiveBoostSuite extends FunSuite {
         assert(boost.config(Map("classifiers" -> classifiers)))
         assert(boost.train(LABELED_NONLINEAR_DATA))
         val result2 = boost.predict(UNLABELED_NONLINEAR_DATA)
-        assert(arrayequal(result2, LABEL_NONLINEAR_DATA))
+        assert(!arrayequal(result2, LABEL_NONLINEAR_DATA))
+
+        val classifiers2: Any = Array(
+            new BayesianDecision,
+            new DecisionTree,
+            new GaussianProcess,
+            new KNN,
+            new RandomForest
+        )
+        assert(boost.clear())
+        assert(boost.config(Map("classifiers" -> classifiers2)))
+        assert(boost.train(LABELED_NONLINEAR_DATA))
+        val result3 = boost.predict(UNLABELED_NONLINEAR_DATA)
+        assert(arrayequal(result3, LABEL_NONLINEAR_DATA))
     }
 
     test("NaiveBoost Test : Invalid Config & Data") {

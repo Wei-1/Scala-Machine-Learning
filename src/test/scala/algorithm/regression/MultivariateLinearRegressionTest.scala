@@ -1,12 +1,12 @@
 // Wei Chen - Multivariate Linear Regression Test
 // 2016-06-04
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.general.MatrixFunc._
 import com.scalaml.algorithm.MultivariateLinearRegression
+import org.scalatest.funsuite.AnyFunSuite
 
-class MultivariateLinearRegressionSuite extends FunSuite {
+class MultivariateLinearRegressionSuite extends AnyFunSuite {
 
     val mlr = new MultivariateLinearRegression()
     
@@ -19,7 +19,8 @@ class MultivariateLinearRegressionSuite extends FunSuite {
         assert(mlr.config(Map[String, Double]()))
         assert(mlr.train(LABELED_LINEAR_DATA.map(yx => yx._1.toDouble -> yx._2)))
         val result = mlr.predict(UNLABELED_LINEAR_DATA)
-        assert(arraysimilar(result, LABEL_LINEAR_DATA.map(_.toDouble), 0.9))
+        val nResult = result.map(v => if (v > 0) 1.0 else -1.0)
+        assert(arraysimilar(nResult, LABEL_LINEAR_DATA.map(_.toDouble), 0.9))
     }
 
     test("MultivariateLinearRegression Test : Nonlinear Data - WRONG") {
@@ -27,7 +28,7 @@ class MultivariateLinearRegressionSuite extends FunSuite {
         assert(mlr.config(Map[String, Double]()))
         assert(mlr.train(LABELED_NONLINEAR_DATA.map(yx => yx._1.toDouble -> yx._2)))
         val result = mlr.predict(UNLABELED_NONLINEAR_DATA)
-        assert(!arraysimilar(result, LABEL_LINEAR_DATA.map(_.toDouble), 0.45))
+        assert(!arraysimilar(result, LABEL_NONLINEAR_DATA.map(_.toDouble), 0.45))
     }
 
     test("MultivariateLinearRegression Test : Invalid Config & Data") {

@@ -1,11 +1,11 @@
 // Wei Chen - Q Neural Learning Test
 // 2017-08-31
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.algorithm.QNeuralLearning
+import org.scalatest.funsuite.AnyFunSuite
 
-class QNeuralLearningSuite extends FunSuite {
+class QNeuralLearningSuite extends AnyFunSuite {
 
     val learning_rate = 0.1
     val nn_learning_rate = 0.1

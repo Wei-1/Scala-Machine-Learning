@@ -1,9 +1,9 @@
 name := "scalaml-algo"
 
-version := "0.5"
+version := "0.6"
 
-scalaVersion := "2.12.6"
+scalaVersion := "2.13.8"
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.8" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.12" % "test"
 
 assemblyJarName in assembly := name.value + ".jar"

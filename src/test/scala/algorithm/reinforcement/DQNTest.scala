@@ -1,11 +1,11 @@
 // Wei Chen - Deep Q Network
 // 2017-09-01
 
-import org.scalatest.FunSuite
 import com.scalaml.TestData._
 import com.scalaml.algorithm.DQN
+import org.scalatest.funsuite.AnyFunSuite
 
-class DQNSuite extends FunSuite {
+class DQNSuite extends AnyFunSuite {
 
     val learning_rate = 0.1
     val scale = 1
