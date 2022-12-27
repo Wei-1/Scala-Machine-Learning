@@ -46,6 +46,8 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 - [x] Weighted Boost [[Code]](src/main/scala/algorithm/classification/WeightedBoost.scala) [[Usage]](src/test/scala/algorithm/classification/WeightedBoostTest.scala)
 
+- [x] Gradient Boost [[Code]](src/main/scala/algorithm/regression/GradientBoost.scala) [[Usage]](src/test/scala/algorithm/regression/GradientBoostTest.scala)
+
 ### Regression :
 
 - [x] Multiple Linear Regression [[Code]](src/main/scala/algorithm/regression/MultipleLinearRegression.scala) [[Usage]](src/test/scala/algorithm/regression/MultipleLinearRegressionTest.scala)
@@ -53,8 +55,6 @@ A very light weight Scala machine learning library that provide some basic ML al
 - [x] Multivariate Linear Regression - GD [[Code]](src/main/scala/algorithm/regression/MultivariateLinearRegression.scala) [[Usage]](src/test/scala/algorithm/regression/MultivariateLinearRegressionTest.scala)
 
 - [x] Stochastic Gradient Decent [[Code]](src/main/scala/algorithm/regression/MultivariateLinearRegression.scala) [[Usage]](src/test/scala/algorithm/regression/MultivariateLinearRegressionTest.scala)
-
-- [x] Gradient Boost [[Code]](src/main/scala/algorithm/regression/GradientBoost.scala) [[Usage]](src/test/scala/algorithm/regression/GradientBoostTest.scala)
 
 ### Clustering :
 
