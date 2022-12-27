@@ -15,7 +15,7 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 - Scala 2.13
 
-- Sbt 1.2
+- Sbt 2.1
 
 
 ## This package includes
@@ -53,6 +53,8 @@ A very light weight Scala machine learning library that provide some basic ML al
 - [x] Multivariate Linear Regression - GD [[Code]](src/main/scala/algorithm/regression/MultivariateLinearRegression.scala) [[Usage]](src/test/scala/algorithm/regression/MultivariateLinearRegressionTest.scala)
 
 - [x] Stochastic Gradient Decent [[Code]](src/main/scala/algorithm/regression/MultivariateLinearRegression.scala) [[Usage]](src/test/scala/algorithm/regression/MultivariateLinearRegressionTest.scala)
+
+- [x] Gradient Boost [[Code]](src/main/scala/algorithm/regression/GradientBoost.scala) [[Usage]](src/test/scala/algorithm/regression/GradientBoostTest.scala)
 
 ### Clustering :
 

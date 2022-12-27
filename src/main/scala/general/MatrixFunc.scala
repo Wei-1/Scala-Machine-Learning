@@ -34,7 +34,7 @@ package object MatrixFunc {
     def matrixequal(x: Array[Array[Double]], y: Array[Array[Double]]): Boolean =
         x.zip(y).forall(l => l._1.zip(l._2).forall(equalfunc))
     def matrixaccumulate(x: Array[Array[Double]]): Array[Double] =
-        x.reduceLeft((x, y) => (x.zip(y).map(sumfunc)))
+        x.reduceLeft((a1, a2) => (a1.zip(a2).map(sumfunc)))
     def matrixsum(x: Array[Array[Double]], y: Array[Array[Double]]): Array[Array[Double]] =
         x.zip(y).map { case (a1, a2) => a1.zip(a2).map(sumfunc) }
     def matrixminus(x: Array[Array[Double]], y: Array[Array[Double]]): Array[Array[Double]] =

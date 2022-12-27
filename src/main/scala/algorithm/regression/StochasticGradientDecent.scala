@@ -28,7 +28,7 @@ class StochasticGradientDecent() extends Regression {
         false
     }
 
-    // --- Start Multivariate Linear Regression Function ---
+    // --- Start Stochastic Gradient Decent Function ---
     override def train(
         data: Array[(Double, Array[Double])]   // Data Array(yi, xi)
     ): Boolean = try { // Return PData Class
