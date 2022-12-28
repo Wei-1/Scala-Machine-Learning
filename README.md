@@ -56,6 +56,8 @@ A very light weight Scala machine learning library that provide some basic ML al
 
 - [x] Stochastic Gradient Decent [[Code]](src/main/scala/algorithm/regression/MultivariateLinearRegression.scala) [[Usage]](src/test/scala/algorithm/regression/MultivariateLinearRegressionTest.scala)
 
+- [x] Regression Tree [[Code]](src/main/scala/algorithm/regression/RegressionTree.scala) [[Usage]](src/test/scala/algorithm/regression/RegressionTreeTest.scala)
+
 ### Clustering :
 
 - [x] Hierarchical [[Code]](src/main/scala/algorithm/clustering/Hierarchical.scala) [[Usage]](src/test/scala/algorithm/clustering/HierarchicalTest.scala)

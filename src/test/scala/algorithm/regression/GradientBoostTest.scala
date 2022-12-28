@@ -23,7 +23,7 @@ class GradientBoostSuite extends AnyFunSuite {
         assert(arraysimilar(nResult, LABEL_LINEAR_DATA.map(_.toDouble), 0.9))
     }
 
-    test("GradientBoost Test : Nonlinear Data, 1 Linear Model - WRONG") {
+    test("GradientBoost Test : Nonlinear Data, 1 Model - WRONG") {
         assert(gb.clear())
         assert(gb.config(Map[String, Any]()))
         assert(gb.train(LABELED_NONLINEAR_DATA.map(yx => yx._1.toDouble -> yx._2)))
@@ -31,14 +31,12 @@ class GradientBoostSuite extends AnyFunSuite {
         assert(!arraysimilar(result, LABEL_NONLINEAR_DATA.map(_.toDouble), 0.45))
     }
 
-    // More linear regressors will not solve nonlinear problems
-    test("GradientBoost Test : Nonlinear Data, 5 Linear Models - WRONG") {
+    test("GradientBoost Test : Nonlinear Data, 4 Models - WRONG") {
         val regressors: Any = Array(
+            new MultipleLinearRegression,
+            new MultivariateLinearRegression,
             new StochasticGradientDecent,
-            new StochasticGradientDecent,
-            new StochasticGradientDecent,
-            new StochasticGradientDecent,
-            new StochasticGradientDecent
+            new RegressionTree
         )
         assert(gb.clear())
         assert(gb.config(Map("regressors" -> regressors)))

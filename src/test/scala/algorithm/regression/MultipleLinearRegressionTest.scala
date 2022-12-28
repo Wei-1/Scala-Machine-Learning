@@ -27,7 +27,7 @@ class MultipleLinearRegressionSuite extends AnyFunSuite {
         assert(mlr.config(Map[String, Double]()))
         assert(mlr.train(LABELED_NONLINEAR_DATA.map(yx => yx._1.toDouble -> yx._2)))
         val result = mlr.predict(UNLABELED_NONLINEAR_DATA)
-        assert(!arraysimilar(result, LABEL_LINEAR_DATA.map(_.toDouble), 0.45))
+        assert(!arraysimilar(result, LABEL_NONLINEAR_DATA.map(_.toDouble), 0.45))
     }
 
     test("MultipleLinearRegression Test : Invalid Data") {
