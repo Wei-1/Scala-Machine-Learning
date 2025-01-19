@@ -2,7 +2,7 @@ name := "scalaml-algo"
 
 version := "0.6"
 
-scalaVersion := "2.13.15"
+scalaVersion := "2.13.16"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.19" % "test"
 
